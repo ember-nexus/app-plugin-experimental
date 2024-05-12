@@ -1,0 +1,88 @@
+# ======================================================================================================================
+#  This file is managed in a private repo - do not edit it directly
+# ======================================================================================================================
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  Red: Problems
+# ----------------------------------------------------------------------------------------------------------------------
+
+- name: Bug
+  description: Addressing unexpected issues.
+  color: 'FF073A'
+
+- name: Critical
+  description: Urgent, high-priority concerns.
+  color: 'FF073A'
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  Green: Adding stuff to projects
+# ----------------------------------------------------------------------------------------------------------------------
+
+- name: Feature
+  description: Introducing new capabilities.
+  color: '00A550'
+
+- name: Enhancement
+  description: Improving existing functionalities.
+  color: '00A550'
+
+- name: Tests
+  description: Adding or improving tests.
+  color: '00A550'
+
+- name: Documentation
+  description: Documenting project details.
+  color: '00A550'
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  Blue: Categories
+# ----------------------------------------------------------------------------------------------------------------------
+
+- name: Post Release
+  description: Tasks post software release.
+  color: '007BFF'
+
+- name: Dependency Update
+  description: Managing dependency updates.
+  color: '007BFF'
+
+- name: Help Wanted
+  description: Seeking community assistance.
+  color: '007BFF'
+
+- name: Question
+  description: Seeking clarifications or information.
+  color: '007BFF'
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  Gray: Closed without resolving issue itself
+# ----------------------------------------------------------------------------------------------------------------------
+
+- name: Invalid
+  description: Unresolvable or irrelevant issues.
+  color: '67728A'
+
+- name: Won't Fix
+  description: Decided not to address.
+  color: '67728A'
+
+- name: Duplicate
+  description: Identical issues already addressed.
+  color: '67728A'
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  Purple: Security related tasks
+# ----------------------------------------------------------------------------------------------------------------------
+
+- name: Security
+  description: Addressing security-related tasks.
+  color: '6F00FF'
+
+- name: Legal
+  description: Addressing law-related tasks.
+  color: '6F00FF'
