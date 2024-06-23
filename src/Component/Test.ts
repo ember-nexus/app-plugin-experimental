@@ -1,21 +1,18 @@
-import {LitElement, html} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
-// import {GetElementEvent} from "@ember-nexus/web-sdk/dist/BrowserEvent/Element/GetElementEvent";
-// import {Node} from "@ember-nexus/web-sdk/src/Type/Definition/Node";
-// import {Relation} from "@ember-nexus/web-sdk/src/Type/Definition/Relation";
-import * as EmberNexus from "@ember-nexus/web-sdk/dist/ember-nexus-web-sdk";
+import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
+import { validateUuidFromString } from '@ember-nexus/web-sdk/Type/Definition';
+import { LitElement, html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('ember-nexus-test')
 class Test extends LitElement {
-
-  @property({type: String})
+  @property({ type: String })
   id: string;
 
   @state()
   protected _elementName = '-';
 
   firstUpdated() {
-    setTimeout(function(){}, 300);
+    setTimeout(function () {}, 500);
     this.loadData();
   }
 
@@ -26,22 +23,32 @@ class Test extends LitElement {
   }
 
   loadData() {
-    const event = new EmberNexus.BrowserEvent.Element.GetElementEvent(this.id);
+    // const event = new EmberNexus.BrowserEvent.Element.GetElementEvent(
+    //   EmberNexus.Type.Definition.validateUuidFromString(this.id)
+    // );
+    // console.log(EmberNexus.Type.Definition.validateUuidFromString("not an uuid"));
+
+    const event = new GetElementEvent(validateUuidFromString(this.id));
+    console.log(validateUuidFromString('not an uuid'));
+
     this.dispatchEvent(event);
 
-    console.log("load data is executed :D");
+    console.log('load data is executed :D');
     console.log(this.id);
-    console.log("--------------------");
+    console.log('--------------------');
 
     event.getElement()?.then((element) => {
-      this._elementName = element.data?.name ?? 'no name';
+      this._elementName = (element.data?.name as string) ?? 'no name';
       this.requestUpdate('_elementName');
-    })
+    });
   }
 
-  render(){
-    return html`<div style="border: 1px solid black; padding 1em; border-radius: 5px;"><p>id: ${this.id}</p><p>Element name: ${this._elementName}</p></div>`;
+  render() {
+    return html`<div style="border: 1px solid black; padding 1em; border-radius: 5px;">
+      <p>id: ${this.id}</p>
+      <p>Element name: ${this._elementName}</p>
+    </div>`;
   }
 }
 
-export {Test};
+export { Test };

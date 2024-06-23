@@ -1,0 +1,227 @@
+import { Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/web-sdk/Type/Definition';
+import { assign, createMachine } from 'xstate';
+
+interface ElementContext {
+  id: Uuid | null;
+  element: null | Node | Relation;
+  start: null | Node;
+  end: null | Node;
+  error: null | string;
+}
+
+interface UpdateIdEvent {
+  type: 'UPDATE_ID';
+  id: Uuid;
+}
+
+interface ElementLoadedEvent {
+  type: 'ELEMENT_LOADED';
+  element: Node | Relation;
+}
+
+interface StartLoadedEvent {
+  type: 'START_LOADED';
+  element: Node;
+}
+
+interface EndLoadedEvent {
+  type: 'END_LOADED';
+  element: Node;
+}
+
+const singleElementMachine = createMachine<ElementContext>(
+  {
+    id: 'single-element-machine',
+    initial: 'initial',
+    predictableActionArguments: true,
+    context: {
+      id: null,
+      element: null,
+      start: null,
+      end: null,
+      error: null,
+    },
+    states: {
+      initial: {
+        always: [
+          {
+            target: 'beforeLoading',
+            actions: assign({
+              error: null,
+              element: null,
+              start: null,
+              end: null,
+            }),
+          },
+        ],
+      },
+      beforeLoading: {
+        always: [
+          {
+            target: 'loading',
+            guard: 'isValidId',
+          },
+          {
+            target: 'error',
+            actions: assign({
+              error: (context) => `Id ${context.context?.id ?? 'null'} is invalid.`,
+            }),
+          },
+        ],
+      },
+      loading: {
+        on: {
+          UPDATE_ID: {
+            target: 'initial',
+            actions: assign({
+              id: (_context, event: UpdateIdEvent) => event.id,
+            }),
+          },
+          ERROR: {
+            target: 'error',
+            actions: assign({
+              error: (_context, event: ErrorEvent) => event.error,
+            }),
+          },
+        },
+        after: {
+          // 30 seconds
+          30000: {
+            target: 'error',
+            actions: assign({
+              error: 'Experienced timeout while loading data.',
+            }),
+          },
+        },
+        type: 'parallel',
+        states: {
+          element: {
+            initial: 'initial',
+            states: {
+              initial: {
+                on: {
+                  ELEMENT_LOADING_STARTED: {
+                    target: 'loading',
+                  },
+                },
+                entry: ['startLoadingElement'],
+              },
+              loading: {
+                on: {
+                  ELEMENT_LOADED: {
+                    target: 'loaded',
+                    actions: assign({
+                      element: (_context, event: ElementLoadedEvent) => event.element,
+                    }),
+                  },
+                },
+              },
+              loaded: {
+                entry: ['startLoadingStart', 'startLoadingEnd'],
+              },
+            },
+          },
+          start: {
+            initial: 'initial',
+            states: {
+              initial: {
+                on: {
+                  START_LOADING_STARTED: {
+                    target: 'loading',
+                  },
+                },
+              },
+              loading: {
+                on: {
+                  START_LOADED: {
+                    target: 'loaded',
+                    actions: assign({
+                      start: (_context, event: StartLoadedEvent) => event.element,
+                    }),
+                  },
+                },
+              },
+              loaded: {},
+            },
+          },
+          end: {
+            initial: 'initial',
+            states: {
+              initial: {
+                on: {
+                  END_LOADING_STARTED: {
+                    target: 'loading',
+                  },
+                },
+              },
+              loading: {
+                on: {
+                  END_LOADED: {
+                    target: 'loaded',
+                    actions: assign({
+                      end: (_context, event: EndLoadedEvent) => event.element,
+                    }),
+                  },
+                },
+              },
+              loaded: {},
+            },
+          },
+        },
+        always: [
+          {
+            target: 'loaded',
+            cond: 'isEverythingLoaded',
+          },
+        ],
+      },
+      error: {
+        on: {
+          UPDATE_ID: {
+            target: 'initial',
+            actions: assign({
+              id: (_context, event: UpdateIdEvent) => {
+                return event.id;
+              },
+            }),
+          },
+        },
+      },
+      loaded: {
+        on: {
+          UPDATE_ID: {
+            target: 'initial',
+            actions: assign({
+              id: (_context, event: UpdateIdEvent) => event.id,
+            }),
+          },
+        },
+      },
+    },
+  },
+  {
+    guards: {
+      isValidId: (context) => {
+        if (context.context.id == null) {
+          return false;
+        }
+        return context.context.id.match(uuidv4Regex);
+      },
+      isEverythingLoaded: (context) => {
+        let isRelation = false;
+        if (context.context.element != null) {
+          isRelation =
+            Object.prototype.hasOwnProperty.call(context.context.element, 'start') &&
+            Object.prototype.hasOwnProperty.call(context.context.element, 'end');
+        }
+        const res =
+          context.context.element != null &&
+          (!isRelation || (context.context.start != null && context.context.end != null));
+        console.log('is everything loaded?', res, structuredClone(context));
+        return res;
+      },
+    },
+  },
+);
+
+export { ElementContext, UpdateIdEvent, ElementLoadedEvent, StartLoadedEvent, EndLoadedEvent, singleElementMachine };
