@@ -1,18 +1,20 @@
-import {assign, fromPromise, setup} from 'xstate';
-import {Node, Relation, Element, Uuid, uuidv4Regex} from "@ember-nexus/web-sdk/Type/Definition";
-import {GetElementEvent} from "@ember-nexus/web-sdk/BrowserEvent/Element";
+import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
+import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/web-sdk/Type/Definition';
+import { assign, fromPromise, setup } from 'xstate';
 
 export const singleElementMachine = setup({
   actors: {
-    loadElement: fromPromise<Node | Relation, {elementId: Uuid, htmlElement: HTMLElement | DocumentFragment}>(async ({input}) => {
-      const event = new GetElementEvent(input.elementId!);
-      input.htmlElement.dispatchEvent(event);
-      const getElementResult = event.getElement();
-      if (getElementResult == null) {
-        return Promise.reject('unable to get event handled');
-      }
-      return getElementResult;
-    })
+    loadElement: fromPromise<Node | Relation, { elementId: Uuid; htmlElement: HTMLElement | DocumentFragment }>(
+      async ({ input }) => {
+        const event = new GetElementEvent(input.elementId!);
+        input.htmlElement.dispatchEvent(event);
+        const getElementResult = event.getElement();
+        if (getElementResult == null) {
+          return Promise.reject('unable to get event handled');
+        }
+        return getElementResult;
+      },
+    ),
   },
   guards: {
     isValidElementId: ({ context }) => {
@@ -21,112 +23,120 @@ export const singleElementMachine = setup({
       }
       return context.elementId.match(uuidv4Regex) !== null;
     },
+    isElementIdEmpty: ({ context }) => {
+      if (context.elementId == null) {
+        return true;
+      }
+      return context.elementId == '';
+    },
   },
   types: {
     context: {} as {
-      elementId: null | Uuid,
-      element: null | Node | Relation,
-      error: null | string,
-      htmlElement: HTMLElement | DocumentFragment
+      elementId: null | Uuid;
+      element: null | Node | Relation;
+      error: null | string;
+      htmlElement: HTMLElement | DocumentFragment;
     },
     input: {} as {
-      elementId: Uuid,
-      htmlElement: HTMLElement | DocumentFragment
-    }
-  }
+      elementId: Uuid;
+      htmlElement: HTMLElement | DocumentFragment;
+    },
+    events: {} as { type: 'reset'; elementId: Uuid },
+  },
 }).createMachine({
   id: 'single-element-machine',
-  context: ({input}) => ({
+  context: ({ input }) => ({
     elementId: input.elementId,
     element: null,
     error: null,
-    htmlElement: input.htmlElement
+    htmlElement: input.htmlElement,
   }),
   initial: 'Initial',
   states: {
     Initial: {
-      entry: assign({
-        element: null,
-        error: null
-      }),
+      entry: [
+        assign({
+          element: null,
+          error: null,
+        }),
+        assign({
+          elementId: ({ context, event }) => {
+            console.log(context, event);
+            return context.elementId;
+          },
+        }),
+      ],
       always: [
         {
           guard: 'isValidElementId',
           target: 'Loading',
         },
         {
+          guard: 'isElementIdEmpty',
           target: 'Error',
           actions: assign({
-            error: 'Unable to parse element id as uuid.'
-          })
-        }
-      ]
+            error: 'Element id can not be empty.',
+          }),
+        },
+        {
+          target: 'Error',
+          actions: assign({
+            error: 'Unable to parse element id as uuid.',
+          }),
+        },
+      ],
     },
     Loading: {
-      on: {
-        next: 'Loaded',
-        reset: 'Initial',
-        error: 'Error'
-      },
+      // on: {
+      //   reset: {
+      //     actions: assign({
+      //       elementId: ({ event }) => event.elementId,
+      //     }),
+      //     target: 'Initial'
+      //   }
+      // },
       invoke: {
         src: 'loadElement',
         // @ts-expect-error
         input: ({ context }) => ({
           elementId: context.elementId,
-          htmlElement: context.htmlElement
+          htmlElement: context.htmlElement,
         }),
         onDone: {
           target: 'Loaded',
           actions: assign({
-            element: ({ event }) => event.output
-          })
+            element: ({ event }) => event.output,
+          }),
         },
         onError: {
           target: 'Error',
           actions: assign({
-            error: ({ event }) => String(event.error)
-          })
-        }
-      }
-      // entry: [
-      //   {
-      //     type: 'startLoading'
-      //   }
-      // ]
+            error: ({ event }) => String(event.error),
+          }),
+        },
+      },
     },
     Loaded: {
       on: {
-        reset: 'Initial'
-      }
+        reset: {
+          actions: assign({
+            elementId: ({ event }) => event.elementId,
+          }),
+          target: 'Initial',
+        },
+      },
     },
     Error: {
       on: {
-        reset: 'Initial'
-      }
-    }
-  }
+        reset: {
+          actions: assign({
+            elementId: ({ event }) => event.elementId,
+          }),
+          target: 'Initial',
+        },
+      },
+    },
+  },
 });
 
-// const actor = createActor(singleElementMachine, {
-//   input: {
-//     elementId: '7b80b203-2b82-40f5-accd-c7089fe6114e' as Uuid,
-//     htmlElement: global.window.document.getElementById('event-root')!
-//   }
-// });
-//
-// // actor.subscribe({
-// //   complete() {
-// //     console.log('workflow completed', actor.getSnapshot().output);
-// //   }
-// // });
-//
-// actor.subscribe((snapshot) => {
-//   console.log('value:', snapshot.value, 'elementId: ', snapshot.context.elementId, ', element: ', snapshot.context.element, ', error: ', snapshot.context.error);
-// });
-//
-// actor.start();
-//
-// // @ts-expect-error
-// global.window.actor = actor;
-
-export {Element};
+export { Element };

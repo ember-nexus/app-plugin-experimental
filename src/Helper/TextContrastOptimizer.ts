@@ -1,46 +1,46 @@
-import { APCAcontrast, sRGBtoY, fontLookupAPCA} from 'apca-w3';
-import { colorParsley} from 'colorparsley';
+import { APCAcontrast, fontLookupAPCA, sRGBtoY } from 'apca-w3';
+import { colorParsley } from 'colorparsley';
 
-
-type TextColorWeightPair = {
-  textColor: string,
-  textWeight: number
+type FontWeightColor = {
+  fontWeight: number;
+  color: string;
 };
 
-function findBestTextColorWeightPair(backgroundColor: string, textColors: string[], availableTextWeights: number[] = [400, 700], fontSize: number = 16): TextColorWeightPair {
+function findBestFontWeightColor(
+  backgroundColor: string,
+  colors: string[],
+  availableFontWeights: number[] = [400, 700],
+  fontSize: number = 16,
+): FontWeightColor {
   let highestContrast = 0;
-  let textColor: string | null = null;
-  for (let i = 0; i < textColors.length; i++) {
-    const currentContrast = Math.abs(APCAcontrast(sRGBtoY(colorParsley(textColors[i])), sRGBtoY(colorParsley(backgroundColor))));
+  let color: string | null = null;
+  for (let i = 0; i < colors.length; i++) {
+    const currentContrast = Math.abs(
+      APCAcontrast(sRGBtoY(colorParsley(colors[i])), sRGBtoY(colorParsley(backgroundColor))),
+    );
     if (currentContrast > highestContrast) {
       highestContrast = currentContrast;
-      textColor = textColors[i];
+      color = colors[i];
     }
   }
 
   const minFontSizesPerWeight: number[] = fontLookupAPCA(highestContrast).slice(1);
-  let minTextWeight = Math.max(...availableTextWeights);
+  let minFontWeight = Math.max(...availableFontWeights);
   for (let i = 0; i < minFontSizesPerWeight.length; i++) {
     if (minFontSizesPerWeight[i] > fontSize) {
       continue;
     }
-    if (!availableTextWeights.includes(i * 100)) {
+    if (!availableFontWeights.includes(i * 100)) {
       continue;
     }
-    minTextWeight = i * 100;
+    minFontWeight = i * 100;
     break;
   }
 
   return {
-    textColor: textColor as string,
-    textWeight: minTextWeight
+    fontWeight: minFontWeight,
+    color: color as string,
   };
 }
 
-export {findBestTextColorWeightPair, TextColorWeightPair};
-
-// let textColors = ['#000', '#fff'];
-// let backgroundColor = '#f00';
-//
-// const pair = findBestTextColorWeightPair(backgroundColor, textColors);
-// console.log(pair);
+export { findBestFontWeightColor, FontWeightColor };

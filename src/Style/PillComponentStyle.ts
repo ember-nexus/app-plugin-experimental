@@ -1,21 +1,25 @@
 import { css } from 'lit';
 
-const iconComponentStyle = css`
+const pillComponentStyle = css`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400:500:600:700&display=swap');
 
-  .icon-component {
-    width: 2rem;
+  .pill-component {
     height: 2rem;
-    border-radius: 50%;
+    border-radius: 1rem;
     display: flex;
-    justify-content: center;
+    gap: 0.5rem;
     align-items: center;
+    padding-right: 0.5rem;
 
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
 
-    color: #fff;
+    //border: 1px solid gray;
+
+    background-color: #e9e9ed;
+
+    color: #000;
 
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -28,4 +32,4 @@ const iconComponentStyle = css`
   }
 `;
 
-export { iconComponentStyle };
+export { pillComponentStyle };
