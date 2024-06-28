@@ -1,2 +1,4 @@
 export * as Component from './Component';
+export * as Helper from './Helper';
 export * as Machine from './Machine';
+export * as Style from './Style';
