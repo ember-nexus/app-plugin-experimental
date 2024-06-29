@@ -54,18 +54,14 @@ export const singleElementMachine = setup({
   initial: 'Initial',
   states: {
     Initial: {
-      entry: [
-        assign({
-          element: null,
-          error: null,
-        }),
-        assign({
-          elementId: ({ context, event }) => {
-            console.log(context, event);
-            return context.elementId;
-          },
-        }),
-      ],
+      entry: assign({
+        elementId: ({ context, event }) => {
+          console.log('############ -> ', context, event);
+          return context.elementId;
+        },
+        element: null,
+        error: null,
+      }),
       always: [
         {
           guard: 'isValidElementId',

@@ -85,14 +85,10 @@ class EmberNexusDefaultIcon extends LitElement {
 
   updated(changedProperties) {
     if (changedProperties.has('elementId')) {
-      const changedElementId = changedProperties.get('elementId');
-      if (changedElementId !== undefined) {
-        console.log('sending update request with element id ', changedElementId);
-        this.actor.send({
-          type: 'reset',
-          elementId: changedElementId,
-        });
-      }
+      this.actor.send({
+        type: 'reset',
+        elementId: this.elementId as Uuid,
+      });
     }
   }
 
