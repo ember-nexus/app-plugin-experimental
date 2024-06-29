@@ -16,6 +16,12 @@ export const singleElementMachine = setup({
       },
     ),
   },
+  delays: {
+    retryTimeout: ({ context }) => {
+      // exponential backoff with ± 10% random variance
+      return Math.round((1 << context.retryAttempts) * 10 * (Math.random() * 0.2 + 0.9));
+    },
+  },
   guards: {
     isValidElementId: ({ context }) => {
       if (context.elementId == null) {
@@ -29,6 +35,12 @@ export const singleElementMachine = setup({
       }
       return context.elementId == '';
     },
+    shouldAttemptRetry: ({ context }) => {
+      if (context.retryAttempts > 10) {
+        return false;
+      }
+      return context.error == 'unable to get event handled';
+    },
   },
   types: {
     context: {} as {
@@ -36,6 +48,7 @@ export const singleElementMachine = setup({
       element: null | Node | Relation;
       error: null | string;
       htmlElement: HTMLElement | DocumentFragment;
+      retryAttempts: number;
     },
     input: {} as {
       elementId: Uuid;
@@ -50,17 +63,18 @@ export const singleElementMachine = setup({
     element: null,
     error: null,
     htmlElement: input.htmlElement,
+    retryAttempts: 0,
   }),
   initial: 'Initial',
   states: {
     Initial: {
       entry: assign({
-        elementId: ({ context, event }) => {
-          console.log('############ -> ', context, event);
+        elementId: ({ context }) => {
           return context.elementId;
         },
         element: null,
         error: null,
+        retryAttempts: 0,
       }),
       always: [
         {
@@ -93,7 +107,7 @@ export const singleElementMachine = setup({
       // },
       invoke: {
         src: 'loadElement',
-        // @ts-expect-error
+        // @ts-expect-error error description
         input: ({ context }) => ({
           elementId: context.elementId,
           htmlElement: context.htmlElement,
@@ -109,6 +123,21 @@ export const singleElementMachine = setup({
           actions: assign({
             error: ({ event }) => String(event.error),
           }),
+        },
+      },
+    },
+    WaitingForRetry: {
+      after: {
+        retryTimeout: {
+          target: 'Loading',
+        },
+      },
+      on: {
+        reset: {
+          actions: assign({
+            elementId: ({ event }) => event.elementId,
+          }),
+          target: 'Initial',
         },
       },
     },
@@ -130,6 +159,14 @@ export const singleElementMachine = setup({
           }),
           target: 'Initial',
         },
+      },
+      always: {
+        target: 'WaitingForRetry',
+        actions: assign({
+          retryAttempts: ({ context }) => context.retryAttempts + 1,
+          error: null,
+        }),
+        guard: 'shouldAttemptRetry',
       },
     },
   },
