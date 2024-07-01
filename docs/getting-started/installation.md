@@ -9,12 +9,14 @@ Note that the components work only when they are used within the document elemen
 
 #### Plain HTML
 
-```html
+<!-- tabs:start -->
 
-```
+### **HTML**
 
-#### Build system
+[](../examples/manual-installation/index.html ':include :type=code html')
 
-```html
+### **Result**
 
-```
+[](../examples/manual-installation/index.html ':include')
+
+<!-- tabs:end -->

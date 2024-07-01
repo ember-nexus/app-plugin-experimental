@@ -6,7 +6,7 @@ const pillComponentStyle = css`
   .pill-component {
     height: 2rem;
     border-radius: 1rem;
-    display: flex;
+    display: inline-flex;
     gap: 0.5rem;
     align-items: center;
     padding-right: 0.5rem;
