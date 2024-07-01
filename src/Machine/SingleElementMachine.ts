@@ -1,7 +1,8 @@
 import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
 import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/web-sdk/Type/Definition';
 import { assign, fromPromise, setup } from 'xstate';
-import {maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance} from "../Type";
+
+import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type';
 
 export const singleElementMachine = setup({
   actors: {
@@ -20,7 +21,11 @@ export const singleElementMachine = setup({
   delays: {
     retryTimeout: ({ context }) => {
       // exponential backoff with ± 10% random variance
-      return Math.round((1 << context.retryAttempts) * retryTimeoutMinMilliseconds * (Math.random() * 2 * retryTimeoutVariance + 1 - retryTimeoutVariance));
+      return Math.round(
+        (1 << context.retryAttempts) *
+          retryTimeoutMinMilliseconds *
+          (Math.random() * 2 * retryTimeoutVariance + 1 - retryTimeoutVariance),
+      );
     },
   },
   guards: {

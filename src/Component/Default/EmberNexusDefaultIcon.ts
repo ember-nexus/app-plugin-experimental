@@ -4,7 +4,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getShortNameFromElementOrId, getTitleFromElementOrId } from '../../Helper';
+import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
 import { shadowStyle } from '../../Style';
@@ -33,7 +33,7 @@ class EmberNexusDefaultIcon extends LitElement {
     super();
   }
 
-  setupActorSubscription() {
+  setupActorSubscription(): void {
     this.actor.subscribe((snapshot) => {
       this._element = snapshot.context.element;
       this._error = snapshot.context.error;
@@ -51,7 +51,7 @@ class EmberNexusDefaultIcon extends LitElement {
     });
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback();
     this.actor = createActor(singleElementMachine, {
       input: {
@@ -63,12 +63,12 @@ class EmberNexusDefaultIcon extends LitElement {
     this.actor.start();
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.actor.stop();
     super.disconnectedCallback();
   }
 
-  updated(changedProperties) {
+  updated(changedProperties): void {
     if (changedProperties.has('elementId')) {
       this.actor.send({
         type: 'reset',
@@ -77,7 +77,7 @@ class EmberNexusDefaultIcon extends LitElement {
     }
   }
 
-  render() {
+  render(): TemplateResult {
     const textStyles = findBestFontWeightColor(this._color, ['#000', '#fff'], [400, 500, 600, 700]);
 
     const backgroundStyle = {
@@ -87,7 +87,7 @@ class EmberNexusDefaultIcon extends LitElement {
     let title: string;
     if (this._error == null) {
       content = html`<span style="${styleMap(textStyles)}">
-        ${getShortNameFromElementOrId(this.elementId, this._element)}
+        ${getInitialsFromElementOrId(this.elementId, this._element)}
       </span>`;
       title = getTitleFromElementOrId(this.elementId, this._element);
     } else {

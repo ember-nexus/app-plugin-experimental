@@ -1,18 +1,19 @@
 import { Node, Relation, Uuid } from '@ember-nexus/web-sdk/Type/Definition';
 import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { getNameFromElementOrId } from '../../Helper';
+import { findBestFontWeightColor, getFirstNameOrFirstLettersFromIdFromElementOrId } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
 import { shadowStyle } from '../../Style';
-import { pillComponentStyle } from '../../Style';
+import { thumbnailComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
-@customElement('ember-nexus-default-pill')
-class EmberNexusDefaultPill extends LitElement {
-  static styles = [pillComponentStyle, shadowStyle];
+@customElement('ember-nexus-default-thumbnail')
+class EmberNexusDefaultThumbnail extends LitElement {
+  static styles = [thumbnailComponentStyle, shadowStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -77,19 +78,18 @@ class EmberNexusDefaultPill extends LitElement {
   }
 
   render(): TemplateResult {
-    let content: TemplateResult;
-    if (this._error == null) {
-      content = html`<ember-nexus-default-icon element-id="${this.elementId}"></ember-nexus-default-icon
-        ><span> ${getNameFromElementOrId(this.elementId, this._element)} </span>`;
-    } else {
-      content = html`<div class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
-        </svg>
-      </div>`;
-    }
-    return html`<div class="pill-component shadow">${content}</div>`;
+    const textStyles = findBestFontWeightColor(this._color, ['#000', '#fff'], [400, 500, 600, 700]);
+
+    const backgroundStyle = {
+      backgroundColor: this._color,
+    };
+    return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
+      <span class="name" style="${styleMap(textStyles)}"
+        >${getFirstNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element)}</span
+      >
+      <span class="type" style="${styleMap(textStyles)}">${this._element?.type}</span>
+    </div>`;
   }
 }
 
-export { EmberNexusDefaultPill };
+export { EmberNexusDefaultThumbnail };

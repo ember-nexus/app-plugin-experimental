@@ -3,16 +3,13 @@ import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Actor, createActor } from 'xstate';
 
-import { getNameFromElementOrId } from '../../Helper';
-import { getColorFromElementOrId } from '../../Helper/ColorHelper';
+import { getTitleFromElementOrId } from '../../Helper';
 import { singleElementMachine } from '../../Machine';
-import { shadowStyle } from '../../Style';
-import { pillComponentStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+import { inlineTextComponentStyle } from '../../Style';
 
-@customElement('ember-nexus-default-pill')
-class EmberNexusDefaultPill extends LitElement {
-  static styles = [pillComponentStyle, shadowStyle];
+@customElement('ember-nexus-default-inline-text')
+class EmberNexusDefaultInlineText extends LitElement {
+  static styles = [inlineTextComponentStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -22,9 +19,6 @@ class EmberNexusDefaultPill extends LitElement {
 
   @state()
   protected _error: null | string = null;
-
-  @state()
-  protected _color: string = '#000';
 
   protected actor: Actor<typeof singleElementMachine>;
 
@@ -36,16 +30,6 @@ class EmberNexusDefaultPill extends LitElement {
     this.actor.subscribe((snapshot) => {
       this._element = snapshot.context.element;
       this._error = snapshot.context.error;
-      switch (snapshot.value) {
-        case 'Loaded':
-          this._color = getColorFromElementOrId(this.elementId, this._element);
-          break;
-        case 'Error':
-          this._color = colorWarning;
-          break;
-        default:
-          this._color = '#000';
-      }
       this.requestUpdate();
     });
   }
@@ -77,19 +61,12 @@ class EmberNexusDefaultPill extends LitElement {
   }
 
   render(): TemplateResult {
-    let content: TemplateResult;
-    if (this._error == null) {
-      content = html`<ember-nexus-default-icon element-id="${this.elementId}"></ember-nexus-default-icon
-        ><span> ${getNameFromElementOrId(this.elementId, this._element)} </span>`;
-    } else {
-      content = html`<div class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
-        </svg>
-      </div>`;
-    }
-    return html`<div class="pill-component shadow">${content}</div>`;
+    return html`<span class="inline-text-component">
+      <slot name="prefix"></slot>
+      ${getTitleFromElementOrId(this.elementId, this._element)}
+      <slot name="suffix"></slot>
+    </span>`;
   }
 }
 
-export { EmberNexusDefaultPill };
+export { EmberNexusDefaultInlineText };
