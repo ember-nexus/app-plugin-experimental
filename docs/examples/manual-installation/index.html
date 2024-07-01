@@ -27,12 +27,12 @@
   configuration.setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc');
   configuration.setApiHost('https://reference-dataset.ember-nexus.dev');
 
-  // configure event slisteners
+  // configure event listeners
   Container.get(EmberNexusWebSDK.BrowserEvent.BrowserEventHandler)
     .addBrowserEventListeners(document.getElementById('ember-nexus-web-sdk-root'));
 
   // download Experimental App Plugin
-  import * as AppPluginExperimental from "../../../dist/browser/index.js";
+  import * as AppPluginExperimental from "https://cdn.jsdelivr.net/npm/@ember-nexus/app-plugin-experimental@0.0/dist/browser/index.js";
 </script>
 </body>
 </html>
