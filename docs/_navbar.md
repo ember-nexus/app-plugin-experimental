@@ -1,0 +1,2 @@
+- [GitHub](https://github.com/ember-nexus/app-plugin-experimental)
+- [NPM](https://www.npmjs.com/package/@ember-nexus/app-plugin-experimental)

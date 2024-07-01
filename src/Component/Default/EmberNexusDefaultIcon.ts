@@ -59,22 +59,7 @@ class EmberNexusDefaultIcon extends LitElement {
         htmlElement: this.renderRoot,
       },
     });
-
     this.setupActorSubscription();
-
-    this.actor.subscribe((snapshot) => {
-      console.log(
-        'subscribed actor | value:',
-        snapshot.value,
-        'elementId: ',
-        snapshot.context.elementId,
-        ', element: ',
-        snapshot.context.element,
-        ', error: ',
-        snapshot.context.error,
-      );
-    });
-
     this.actor.start();
   }
 

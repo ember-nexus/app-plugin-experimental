@@ -1,6 +1,7 @@
 import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
 import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/web-sdk/Type/Definition';
 import { assign, fromPromise, setup } from 'xstate';
+import {maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance} from "../Type";
 
 export const singleElementMachine = setup({
   actors: {
@@ -10,7 +11,7 @@ export const singleElementMachine = setup({
         input.htmlElement.dispatchEvent(event);
         const getElementResult = event.getElement();
         if (getElementResult == null) {
-          return Promise.reject('unable to get event handled');
+          return Promise.reject('Unable to get Ember Nexus Web SDK events handled.');
         }
         return getElementResult;
       },
@@ -19,7 +20,7 @@ export const singleElementMachine = setup({
   delays: {
     retryTimeout: ({ context }) => {
       // exponential backoff with ± 10% random variance
-      return Math.round((1 << context.retryAttempts) * 10 * (Math.random() * 0.2 + 0.9));
+      return Math.round((1 << context.retryAttempts) * retryTimeoutMinMilliseconds * (Math.random() * 2 * retryTimeoutVariance + 1 - retryTimeoutVariance));
     },
   },
   guards: {
@@ -36,10 +37,10 @@ export const singleElementMachine = setup({
       return context.elementId == '';
     },
     shouldAttemptRetry: ({ context }) => {
-      if (context.retryAttempts > 10) {
+      if (context.retryAttempts > maxRetryAttempts) {
         return false;
       }
-      return context.error == 'unable to get event handled';
+      return context.error == 'Unable to get Ember Nexus Web SDK events handled.';
     },
   },
   types: {
@@ -97,14 +98,6 @@ export const singleElementMachine = setup({
       ],
     },
     Loading: {
-      // on: {
-      //   reset: {
-      //     actions: assign({
-      //       elementId: ({ event }) => event.elementId,
-      //     }),
-      //     target: 'Initial'
-      //   }
-      // },
       invoke: {
         src: 'loadElement',
         // @ts-expect-error error description

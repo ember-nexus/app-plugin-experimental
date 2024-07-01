@@ -5,5 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Add `SingleElementMachine`, which features a stable state machine for basic components. Supports automatic retries.
+- Add `EmberNexusDefaultIcon` and `EmberNexusDefaultPill` web components.
+- Add empty documentation.
+- Add CI (copied from Web SDK).
 ### Changed
 - Change license from GPL (empty repo) to MIT.

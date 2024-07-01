@@ -1,0 +1,13 @@
+- [Home](/)
+- Getting started
+  - [Installation](/getting-started/installation)
+
+- Components
+  - [Overview](/components/overview)
+  - Default
+    - [Default Icon](/components/default/icon)
+    - [Default Pill](/components/default/pill)
+    - [Default Thumbnail](/components/default/thumbnail)
+    - [Default Card](/components/default/card)
+    - [Default Inline Text](/components/default/pill)
+    - [Default Frameless](/components/default/frameless)
