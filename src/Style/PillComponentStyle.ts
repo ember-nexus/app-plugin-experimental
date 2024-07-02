@@ -3,6 +3,10 @@ import { css } from 'lit';
 const pillComponentStyle = css`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400:500:600:700&display=swap');
 
+  * {
+    box-sizing: border-box;
+  }
+
   .pill-component {
     height: 2rem;
     border-radius: 1rem;

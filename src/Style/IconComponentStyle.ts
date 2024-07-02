@@ -3,6 +3,10 @@ import { css } from 'lit';
 const iconComponentStyle = css`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400:500:600:700&display=swap');
 
+  * {
+    box-sizing: border-box;
+  }
+
   .icon-component {
     width: 2rem;
     height: 2rem;

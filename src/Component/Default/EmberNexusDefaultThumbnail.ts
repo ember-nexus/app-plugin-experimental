@@ -4,8 +4,13 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getFirstNameOrFirstLettersFromIdFromElementOrId } from '../../Helper';
+import {
+  findBestFontWeightColor,
+  getNameFromElementOrId,
+  getNameOrFirstLettersFromIdFromElementOrId,
+} from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
+import { getIconForElement } from '../../Helper/IconHelper';
 import { singleElementMachine } from '../../Machine';
 import { shadowStyle } from '../../Style';
 import { thumbnailComponentStyle } from '../../Style';
@@ -83,11 +88,29 @@ class EmberNexusDefaultThumbnail extends LitElement {
     const backgroundStyle = {
       backgroundColor: this._color,
     };
+
+    let icon: TemplateResult | null = null;
+    if (this._element) {
+      const iconStyle = {
+        fill: textStyles.color,
+      };
+      icon = html`<div class="icon" style="${styleMap(iconStyle)}">${getIconForElement(this._element)}</div>`;
+    }
+
     return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
-      <span class="name" style="${styleMap(textStyles)}"
-        >${getFirstNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element)}</span
+      <span
+        class="name"
+        style="${styleMap(textStyles)}"
+        title="${getNameFromElementOrId(this.elementId, this._element)}"
       >
-      <span class="type" style="${styleMap(textStyles)}">${this._element?.type}</span>
+        ${getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element)}
+      </span>
+      <div class="info">
+        ${icon}
+        <span class="type" style="${styleMap(textStyles)}" title="${this._element?.type}">
+          ${this._element?.type}
+        </span>
+      </div>
     </div>`;
   }
 }

@@ -4,8 +4,9 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
+import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrId } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
+import { getIconForElement } from '../../Helper/IconHelper';
 import { singleElementMachine } from '../../Machine';
 import { shadowStyle } from '../../Style';
 import { cardComponentStyle } from '../../Style';
@@ -83,23 +84,34 @@ class EmberNexusDefaultCard extends LitElement {
     const backgroundStyle = {
       backgroundColor: this._color,
     };
-    let content: TemplateResult;
     let title: string;
     if (this._error == null) {
-      content = html`<span style="${styleMap(textStyles)}">
-        ${getInitialsFromElementOrId(this.elementId, this._element)}
-      </span>`;
       title = getTitleFromElementOrId(this.elementId, this._element);
     } else {
-      content = html`<div class="icon">
+      title = this._error;
+    }
+
+    let icon: TemplateResult | null = null;
+    const iconStyle = {
+      fill: textStyles.color,
+    };
+    if (this._element) {
+      icon = html`<span class="icon" style="${styleMap(iconStyle)}">${getIconForElement(this._element)}</span>`;
+    } else {
+      icon = html`<span class="icon" style="${styleMap(iconStyle)}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
         </svg>
-      </div>`;
-      title = this._error;
+      </span>`;
     }
-    return html`<div class="card-component shadow" style="${styleMap(backgroundStyle)}" title="${title}">
-      ${content}
+
+    return html`<div
+      class="card-component shadow"
+      style="${styleMap({ ...backgroundStyle, ...textStyles })}"
+      title="${title}"
+    >
+      <p class="name">${icon} ${getNameFromElementOrId(this.elementId, this._element)}</p>
+      <div class="info">${this._element?.type} ${this.elementId}</div>
     </div>`;
   }
 }

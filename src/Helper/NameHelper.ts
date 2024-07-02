@@ -26,12 +26,12 @@ function getInitialsFromElementOrId(id: string, element: null | Node | Relation)
   return name.toUpperCase().substring(0, initialsLength);
 }
 
-function getFirstNameOrFirstLettersFromIdFromElementOrId(id: string, element: null | Node | Relation): string {
+function getNameOrFirstLettersFromIdFromElementOrId(id: string, element: null | Node | Relation): string {
   const name = element?.data?.name;
   if (!name) {
     return id.substring(0, 3).toUpperCase();
   }
-  return String(name).replace(/\s+/g, ' ').split(' ')[0];
+  return String(name);
 }
 
-export { getNameFromElementOrId, getInitialsFromElementOrId, getFirstNameOrFirstLettersFromIdFromElementOrId };
+export { getNameFromElementOrId, getInitialsFromElementOrId, getNameOrFirstLettersFromIdFromElementOrId };

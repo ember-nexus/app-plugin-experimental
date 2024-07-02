@@ -3,6 +3,10 @@ import { css } from 'lit';
 const inlineTextComponentStyle = css`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400:500:600:700&display=swap');
 
+  * {
+    box-sizing: border-box;
+  }
+
   .inline-text-component {
     display: inline;
     font-family: 'Roboto', sans-serif;
