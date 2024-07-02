@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add `EmberNexusDefaultCard`, `EmberNexusDefaultThumbnail`, `EmberNexusDefaultFrameless` and `EmberNexusDefaultInlineText`, all work in progress.
+- Add first CI tests.
 ### Changed
 - Improve documentation.
 
