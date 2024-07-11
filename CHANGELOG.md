@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add first CI tests.
 ### Changed
 - Improve documentation.
+- Upgrade `@ember-nexus/web-sdk` to version 0.0.59 due to breaking change.
 
 ## 0.0.2 - 2024-07-01
 ### Changed
