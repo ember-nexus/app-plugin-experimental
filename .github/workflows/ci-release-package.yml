@@ -59,7 +59,7 @@ jobs:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
       - name: Update changelog
-        uses: superfaceai/release-changelog-action@v2
+        uses: superfaceai/release-changelog-action@v3
         with:
           path-to-changelog: CHANGELOG.md
           version: ${{ env.NEW_VERSION }}
@@ -118,7 +118,7 @@ jobs:
             -H "Authorization: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}" \
             -d \
             "{
-              \"comment\": \"Release ${{ env.NEW_VERSION }} of ember-nexus/web-sdk\",
+              \"comment\": \"Release ${{ env.NEW_VERSION }} of ember-nexus/app-plugin-experimental\",
               \"hash\": \"${{ env.SHA }}\"
             }"
         env:
