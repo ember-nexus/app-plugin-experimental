@@ -6,4 +6,4 @@ labels: post release task
 
 Open tasks:
 
-- [ ] Upload Originstamp-certificates for the [release {{ env.NEW_VERSION }}](https://github.com/ember-nexus/web-sdk/releases/tag/{{ env.NEW_VERSION }}).
+- [ ] Upload Originstamp-certificates for the [release {{ env.NEW_VERSION }}](https://github.com/ember-nexus/app-plugin-experimental/releases/tag/{{ env.NEW_VERSION }}).
