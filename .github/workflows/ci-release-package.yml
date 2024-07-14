@@ -84,7 +84,7 @@ jobs:
 
       - name: Create local package
         run: |
-          yarn pack --filename "ember-nexus-web-sdk-${{ env.NEW_VERSION }}.tar.gz"
+          yarn pack --filename "ember-nexus-app-plugin-experimental-${{ env.NEW_VERSION }}.tar.gz"
           ls -lah
           pwd
 
@@ -109,7 +109,7 @@ jobs:
           body: ${{ steps.get-changelog.outputs.changelog }}
           prerelease: ${{ startsWith(github.event.inputs.release-type, 'pre') }}
           token: ${{ secrets.RELEASE_TOKEN }}
-          files: ember-nexus-web-sdk-${{ env.NEW_VERSION }}.tar.gz
+          files: ember-nexus-app-plugin-experimental-${{ env.NEW_VERSION }}.tar.gz
 
       - name: Initiate Originstamp certificate
         run: |
