@@ -117,5 +117,6 @@ jobs:
           github-owner: "ember-nexus"
           github-repository: "app-plugin-experimental"
           github-release-tag: ${{ env.NEW_VERSION }}
-          github-token: ${{ secrets.RELEASE_TOKEN }}
-          originstamp-token: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          ORIGINSTAMP_TOKEN: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}
