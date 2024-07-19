@@ -111,22 +111,11 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           files: ember-nexus-app-plugin-experimental-${{ env.NEW_VERSION }}.tar.gz
 
-      - name: Initiate Originstamp certificate
-        run: |
-          curl -X POST "http://api.originstamp.com/v4/timestamp/create" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}" \
-            -d \
-            "{
-              \"comment\": \"Release ${{ env.NEW_VERSION }} of ember-nexus/app-plugin-experimental\",
-              \"hash\": \"${{ env.SHA }}\"
-            }"
-        env:
-          SHA: ${{ github.sha }}
-
-      - uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          NEW_VERSION: ${{ env.NEW_VERSION }}
+      - name: Action Attest
+        uses: ember-nexus/action-attest@0.0.1
         with:
-          filename: .github/ISSUE_TEMPLATE_POST_RELEASE_TASK.md
+          github-owner: "ember-nexus"
+          github-repository: "app-plugin-experimental"
+          github-release-tag: ${{ env.NEW_VERSION }}
+          github-token: ${{ secrets.RELEASE_TOKEN }}
+          originstamp-token: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}
