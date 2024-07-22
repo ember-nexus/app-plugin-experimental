@@ -10,7 +10,6 @@ import {
   getNameOrFirstLettersFromIdFromElementOrId,
 } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
-// import { getIconForElement } from '../../Helper/IconHelper';
 import { singleElementMachine } from '../../Machine';
 import { shadowStyle } from '../../Style';
 import { thumbnailComponentStyle } from '../../Style';
@@ -89,25 +88,24 @@ class EmberNexusDefaultThumbnail extends LitElement {
       backgroundColor: this._color,
     };
 
-    // let icon: TemplateResult | null = null;
-    // if (this._element) {
-    //   const iconStyle = {
-    //     fill: textStyles.color,
-    //   };
-    //   icon = html`<div class="icon" style="${styleMap(iconStyle)}">${getIconForElement(this._element)}</div>`;
-    // }
+    const primaryText = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
+    const primaryTextTitle = getNameFromElementOrId(this.elementId, this._element);
+    let secondaryText = this.actor.getSnapshot().value as string;
+    let secondaryTextTitle = this.actor.getSnapshot().value as string;
+
+    if ((this.actor.getSnapshot().value as string) == 'Loaded') {
+      secondaryText = this._element?.type ?? '';
+      secondaryTextTitle = this._element?.type ?? '';
+    }
+
+    if ((this.actor.getSnapshot().value as string) == 'Error') {
+      secondaryText = 'Error';
+      secondaryTextTitle = this._error ?? '';
+    }
 
     return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
-      <span
-        class="name"
-        style="${styleMap(textStyles)}"
-        title="${getNameFromElementOrId(this.elementId, this._element)}"
-      >
-        ${getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element)}
-      </span>
-      <span class="type" style="${styleMap(textStyles)}" title="${this._element?.type}">
-        ${this._element?.type}
-      </span>
+      <span class="name" style="${styleMap(textStyles)}" title="${primaryTextTitle}"> ${primaryText} </span>
+      <span class="type" style="${styleMap(textStyles)}" title="${secondaryTextTitle}"> ${secondaryText} </span>
     </div>`;
   }
 }

@@ -11,6 +11,7 @@ const thumbnailComponentStyle = css`
     aspect-ratio: 1;
     width: min(100%, 8rem);
     min-width: 4rem;
+    container-type: inline-size;
   }
 
   .thumbnail-component {
@@ -30,6 +31,20 @@ const thumbnailComponentStyle = css`
 
     border-radius: 0.5rem;
     position: relative;
+  }
+
+  @container (width < 6rem) {
+    .thumbnail-component {
+      gap: 0;
+    }
+    .thumbnail-component .name {
+      font-size: 1.25rem;
+      max-width: calc(100% - 0.5rem);
+    }
+    .thumbnail-component .type {
+      font-size: 0.85rem;
+      max-width: calc(100% - 0.5rem);
+    }
   }
 
   .name {

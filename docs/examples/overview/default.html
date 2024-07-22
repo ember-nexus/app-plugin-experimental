@@ -5,6 +5,7 @@
     <style>
         .thumbnail-different-sizes {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
         }
         .thumbnail-different-sizes *:nth-child(1) {
@@ -56,7 +57,7 @@
 </div>
 <script type="module">
   // download Ember Nexus Web SDK
-  import * as EmberNexusWebSDK from "https://cdn.jsdelivr.net/npm/@ember-nexus/web-sdk@0.0/dist/browser/index.js"
+  import * as EmberNexusWebSDK from "https://cdn.jsdelivr.net/npm/@ember-nexus/web-sdk@0.0.60/dist/browser/index.js"
   const Container = EmberNexusWebSDK.Container;
   const configuration = Container.get(EmberNexusWebSDK.Service.WebSdkConfiguration);
 
@@ -69,7 +70,7 @@
     .addBrowserEventListeners(document.getElementById('ember-nexus-web-sdk-root'));
 
   // download Experimental App Plugin
-  import * as AppPluginExperimental from "https://cdn.jsdelivr.net/npm/@ember-nexus/app-plugin-experimental@0.0/dist/browser/index.js";
+  import * as AppPluginExperimental from "https://cdn.jsdelivr.net/npm/@ember-nexus/app-plugin-experimental@0.0.9/dist/browser/index.js";
 </script>
 </body>
 </html>

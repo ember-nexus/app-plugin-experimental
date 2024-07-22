@@ -7,9 +7,15 @@ const iconComponentStyle = css`
     box-sizing: border-box;
   }
 
-  .icon-component {
-    width: 2rem;
+  :host {
+    aspect-ratio: 1;
+    min-height: 1.5rem;
     height: 2rem;
+  }
+
+  .icon-component {
+    height: 100%;
+    aspect-ratio: 1;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -27,8 +33,8 @@ const iconComponentStyle = css`
   }
 
   .icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 75%;
+    height: 75%;
   }
 `;
 
