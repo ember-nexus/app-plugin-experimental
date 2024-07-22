@@ -111,12 +111,12 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           files: ember-nexus-app-plugin-experimental-${{ env.NEW_VERSION }}.tar.gz
 
-      - name: Action Attest
-        uses: ember-nexus/action-attest@0.0.2
-        with:
-          github-owner: "ember-nexus"
-          github-repository: "app-plugin-experimental"
-          github-release-tag: ${{ env.NEW_VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          ORIGINSTAMP_TOKEN: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}
+#      - name: Action Attest
+#        uses: ember-nexus/action-attest@0.0.2
+#        with:
+#          github-owner: "ember-nexus"
+#          github-repository: "app-plugin-experimental"
+#          github-release-tag: ${{ env.NEW_VERSION }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+#          ORIGINSTAMP_TOKEN: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}
