@@ -10,7 +10,7 @@ import {
   getNameOrFirstLettersFromIdFromElementOrId,
 } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
-import { getIconForElement } from '../../Helper/IconHelper';
+// import { getIconForElement } from '../../Helper/IconHelper';
 import { singleElementMachine } from '../../Machine';
 import { shadowStyle } from '../../Style';
 import { thumbnailComponentStyle } from '../../Style';
@@ -89,13 +89,13 @@ class EmberNexusDefaultThumbnail extends LitElement {
       backgroundColor: this._color,
     };
 
-    let icon: TemplateResult | null = null;
-    if (this._element) {
-      const iconStyle = {
-        fill: textStyles.color,
-      };
-      icon = html`<div class="icon" style="${styleMap(iconStyle)}">${getIconForElement(this._element)}</div>`;
-    }
+    // let icon: TemplateResult | null = null;
+    // if (this._element) {
+    //   const iconStyle = {
+    //     fill: textStyles.color,
+    //   };
+    //   icon = html`<div class="icon" style="${styleMap(iconStyle)}">${getIconForElement(this._element)}</div>`;
+    // }
 
     return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
       <span
@@ -105,12 +105,9 @@ class EmberNexusDefaultThumbnail extends LitElement {
       >
         ${getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element)}
       </span>
-      <div class="info">
-        ${icon}
-        <span class="type" style="${styleMap(textStyles)}" title="${this._element?.type}">
-          ${this._element?.type}
-        </span>
-      </div>
+      <span class="type" style="${styleMap(textStyles)}" title="${this._element?.type}">
+        ${this._element?.type}
+      </span>
     </div>`;
   }
 }

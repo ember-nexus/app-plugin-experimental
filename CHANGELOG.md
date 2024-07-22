@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Use `ember-nexus/action-attest` instead of custom curl commands for Originstamp integration, closes #47.
+- Make `ember-nexus-default-thumbnail` more dynamic in its size.
 
 ## 0.0.8 - 2024-07-14
 ### Fixed

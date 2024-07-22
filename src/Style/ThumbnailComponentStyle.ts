@@ -7,13 +7,19 @@ const thumbnailComponentStyle = css`
     box-sizing: border-box;
   }
 
+  :host {
+    aspect-ratio: 1;
+    width: min(100%, 8rem);
+    min-width: 4rem;
+  }
+
   .thumbnail-component {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 8rem;
-    height: 8rem;
+    width: 100%;
+    aspect-ratio: 1;
     gap: 0.5rem;
 
     font-family: 'Roboto', sans-serif;
@@ -23,6 +29,7 @@ const thumbnailComponentStyle = css`
     color: #fff;
 
     border-radius: 0.5rem;
+    position: relative;
   }
 
   .name {
@@ -30,13 +37,7 @@ const thumbnailComponentStyle = css`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 7rem;
-  }
-
-  .info {
-    display: flex;
-    gap: 0.5rem;
-    max-width: 7rem;
+    max-width: calc(100% - 1rem);
   }
 
   .type {
@@ -44,14 +45,7 @@ const thumbnailComponentStyle = css`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 7rem;
-  }
-
-  .icon {
-    display: block;
-    width: 1.5rem;
-    height: 1.5rem;
-    flex-shrink: 0;
+    max-width: calc(100% - 1rem);
   }
 `;
 
