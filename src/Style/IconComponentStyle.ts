@@ -11,6 +11,7 @@ const iconComponentStyle = css`
     aspect-ratio: 1;
     min-height: 1.5rem;
     height: 2rem;
+    container-type: size;
   }
 
   .icon-component {
@@ -22,19 +23,23 @@ const iconComponentStyle = css`
     align-items: center;
 
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-
-    color: #fff;
 
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
   }
 
-  .icon {
+  .svg-icon {
     width: 75%;
     height: 75%;
+  }
+
+  .svg-icon > svg {
+    display: block;
+  }
+
+  .text-icon {
+    font-size: 50cqh;
   }
 `;
 

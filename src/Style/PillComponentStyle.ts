@@ -7,21 +7,27 @@ const pillComponentStyle = css`
     box-sizing: border-box;
   }
 
+  :host {
+    min-height: 1em;
+    height: 2em;
+  }
+
   .pill-component {
-    height: 2rem;
-    border-radius: 1rem;
+    height: 100%;
+    border-radius: 10000px;
     display: inline-flex;
-    gap: 0.5rem;
+    gap: 0.5em;
     align-items: center;
-    padding-right: 0.5rem;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
 
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-size: 1rem;
 
     //border: 1px solid gray;
+    border: 2px solid #e9e9ed;
 
-    background-color: #e9e9ed;
+    background-color: #fff;
 
     color: #000;
 
@@ -30,9 +36,23 @@ const pillComponentStyle = css`
     user-select: none;
   }
 
-  .icon {
-    width: 1.5rem;
-    height: 1.5rem;
+  .pill-component.has-icon {
+    padding-left: 0;
+  }
+
+  .content {
+    font-size: 1em;
+    text-wrap: nowrap;
+  }
+
+  .svg-icon {
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 0.25em;
+  }
+
+  .svg-icon > svg {
+    display: block;
   }
 `;
 

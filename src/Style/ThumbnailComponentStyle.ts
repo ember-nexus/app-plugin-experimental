@@ -11,7 +11,7 @@ const thumbnailComponentStyle = css`
     aspect-ratio: 1;
     width: min(100%, 8rem);
     min-width: 4rem;
-    container-type: inline-size;
+    container-type: size;
   }
 
   .thumbnail-component {

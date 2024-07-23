@@ -86,12 +86,12 @@ class EmberNexusDefaultIcon extends LitElement {
     let content: TemplateResult;
     let title: string;
     if (this._error == null) {
-      content = html`<span style="${styleMap(textStyles)}">
+      content = html`<span class="text-icon" style="${styleMap(textStyles)}">
         ${getInitialsFromElementOrId(this.elementId, this._element)}
       </span>`;
       title = getTitleFromElementOrId(this.elementId, this._element);
     } else {
-      content = html`<div class="icon">
+      content = html`<div class="svg-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
         </svg>

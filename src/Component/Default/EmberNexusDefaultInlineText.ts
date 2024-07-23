@@ -3,7 +3,7 @@ import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Actor, createActor } from 'xstate';
 
-import { getTitleFromElementOrId } from '../../Helper';
+import { getNameOrFirstLettersFromIdFromElementOrId, getTitleFromElementOrId } from '../../Helper';
 import { singleElementMachine } from '../../Machine';
 import { inlineTextComponentStyle } from '../../Style';
 
@@ -61,9 +61,20 @@ class EmberNexusDefaultInlineText extends LitElement {
   }
 
   render(): TemplateResult {
+    let content: string;
+    switch (this.actor.getSnapshot().value) {
+      case 'Loaded':
+        content = getTitleFromElementOrId(this.elementId, this._element);
+        break;
+      case 'Error':
+        content = '[' + this._error + ']';
+        break;
+      default:
+        content = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
+    }
     return html`<span class="inline-text-component">
       <slot name="prefix"></slot>
-      ${getTitleFromElementOrId(this.elementId, this._element)}
+      ${content}
       <slot name="suffix"></slot>
     </span>`;
   }
