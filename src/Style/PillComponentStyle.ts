@@ -1,8 +1,6 @@
 import { css } from 'lit';
 
 const pillComponentStyle = css`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400:500:600:700&display=swap');
-
   * {
     box-sizing: border-box;
   }
@@ -21,7 +19,6 @@ const pillComponentStyle = css`
     padding-right: 0.5em;
     padding-left: 0.5em;
 
-    font-family: 'Roboto', sans-serif;
     font-weight: 400;
 
     //border: 1px solid gray;

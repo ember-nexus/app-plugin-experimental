@@ -7,12 +7,12 @@ import { Actor, createActor } from 'xstate';
 import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { framelessComponentStyle } from '../../Style';
+import { fontStyle, framelessComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-frameless')
 class EmberNexusDefaultFrameless extends LitElement {
-  static styles = [framelessComponentStyle];
+  static styles = [framelessComponentStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -97,7 +97,7 @@ class EmberNexusDefaultFrameless extends LitElement {
       </div>`;
       title = this._error;
     }
-    return html`<div class="frameless-component" style="${styleMap(backgroundStyle)}" title="${title}">
+    return html`<div class="frameless-component font-sans" style="${styleMap(backgroundStyle)}" title="${title}">
       ${content}
     </div>`;
   }

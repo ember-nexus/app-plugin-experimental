@@ -11,13 +11,13 @@ import {
 } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { shadowStyle } from '../../Style';
+import { fontStyle, shadowStyle } from '../../Style';
 import { thumbnailComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-thumbnail')
 class EmberNexusDefaultThumbnail extends LitElement {
-  static styles = [thumbnailComponentStyle, shadowStyle];
+  static styles = [thumbnailComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -104,8 +104,10 @@ class EmberNexusDefaultThumbnail extends LitElement {
     }
 
     return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
-      <span class="name" style="${styleMap(textStyles)}" title="${primaryTextTitle}"> ${primaryText} </span>
-      <span class="type" style="${styleMap(textStyles)}" title="${secondaryTextTitle}"> ${secondaryText} </span>
+      <span class="name font-sans" style="${styleMap(textStyles)}" title="${primaryTextTitle}"> ${primaryText} </span>
+      <span class="type font-sans" style="${styleMap(textStyles)}" title="${secondaryTextTitle}">
+        ${secondaryText}
+      </span>
     </div>`;
   }
 }

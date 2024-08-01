@@ -11,13 +11,13 @@ import {
 } from '../../Helper';
 import { getColorFromElement, getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { shadowStyle } from '../../Style';
+import { fontStyle, shadowStyle } from '../../Style';
 import { pillComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-pill')
 class EmberNexusDefaultPill extends LitElement {
-  static styles = [pillComponentStyle, shadowStyle];
+  static styles = [pillComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -112,7 +112,7 @@ class EmberNexusDefaultPill extends LitElement {
 
     return html`<div class="pill-component shadow ${icon ? 'has-icon' : ''}" style="${styleMap(colorStyle)}">
       ${icon}
-      <span class="content" style="${styleMap(textStyles)}">${content}</span>
+      <span class="content font-sans" style="${styleMap(textStyles)}">${content}</span>
     </div>`;
   }
 }

@@ -1,8 +1,6 @@
 import { css } from 'lit';
 
 const cardComponentStyle = css`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400:500:600:700&display=swap');
-
   * {
     box-sizing: border-box;
   }
@@ -17,7 +15,6 @@ const cardComponentStyle = css`
     align-items: stretch;
     width: 100%;
 
-    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
 

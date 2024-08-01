@@ -8,13 +8,12 @@ import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrI
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { getIconForElement } from '../../Helper/IconHelper';
 import { singleElementMachine } from '../../Machine';
-import { shadowStyle } from '../../Style';
-import { cardComponentStyle } from '../../Style';
+import { cardComponentStyle, fontStyle, shadowStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-card')
 class EmberNexusDefaultCard extends LitElement {
-  static styles = [cardComponentStyle, shadowStyle];
+  static styles = [cardComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -110,8 +109,8 @@ class EmberNexusDefaultCard extends LitElement {
       style="${styleMap({ ...backgroundStyle, ...textStyles })}"
       title="${title}"
     >
-      <p class="name">${icon} ${getNameFromElementOrId(this.elementId, this._element)}</p>
-      <div class="info">${this._element?.type} ${this.elementId}</div>
+      <p class="name font-sans">${icon} ${getNameFromElementOrId(this.elementId, this._element)}</p>
+      <div class="info font-sans">${this._element?.type} ${this.elementId}</div>
     </div>`;
   }
 }

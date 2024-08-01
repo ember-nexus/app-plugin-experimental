@@ -7,13 +7,13 @@ import { Actor, createActor } from 'xstate';
 import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
 import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { shadowStyle } from '../../Style';
+import { fontStyle, shadowStyle } from '../../Style';
 import { iconComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-icon')
 class EmberNexusDefaultIcon extends LitElement {
-  static styles = [iconComponentStyle, shadowStyle];
+  static styles = [iconComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -86,7 +86,7 @@ class EmberNexusDefaultIcon extends LitElement {
     let content: TemplateResult;
     let title: string;
     if (this._error == null) {
-      content = html`<span class="text-icon" style="${styleMap(textStyles)}">
+      content = html`<span class="text-icon font-sans" style="${styleMap(textStyles)}">
         ${getInitialsFromElementOrId(this.elementId, this._element)}
       </span>`;
       title = getTitleFromElementOrId(this.elementId, this._element);
