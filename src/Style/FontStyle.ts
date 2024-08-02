@@ -5,7 +5,7 @@ const fontStyle = css`
     font-family: var(--font-sans, 'Roboto'), sans-serif;
   }
   .font-serif {
-    font-family: var(--font-serif, 'Roboto'), serif;
+    font-family: var(--font-serif, 'Noto Serif'), serif;
   }
   .font-mono {
     font-family: var(--font-mono, 'Roboto Mono'), monospace;

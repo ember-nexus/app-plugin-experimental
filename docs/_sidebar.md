@@ -1,6 +1,7 @@
 - [Home](/)
 - Getting started
   - [Installation](/getting-started/installation)
+  - [Customization](/getting-started/customization)
 
 - Components
   - [Overview](/components/overview)

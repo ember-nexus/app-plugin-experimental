@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customization</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        #ember-nexus-web-sdk-root {
+            --font-sans: 'Space Grotesk';
+            --font-serif: 'Merriweather';
+            --font-mono: 'IBM Plex Mono';
+        }
+    </style>
+</head>
+<body>
+<div id="ember-nexus-web-sdk-root">
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin:2rem;">
+        <ember-nexus-default-icon element-id="6b8341ca-851a-4e98-8194-e57b87d30519"></ember-nexus-default-icon>
+        <ember-nexus-default-pill element-id="6b8341ca-851a-4e98-8194-e57b87d30519"></ember-nexus-default-pill>
+        <ember-nexus-default-inline-text element-id="6b8341ca-851a-4e98-8194-e57b87d30519"></ember-nexus-default-inline-text>
+        <ember-nexus-default-thumbnail element-id="6b8341ca-851a-4e98-8194-e57b87d30519"></ember-nexus-default-thumbnail>
+        <div style="max-width: 400px;">
+            <ember-nexus-default-card element-id="6b8341ca-851a-4e98-8194-e57b87d30519"></ember-nexus-default-card>
+        </div>
+        <ember-nexus-default-frameless element-id="6b8341ca-851a-4e98-8194-e57b87d30519"></ember-nexus-default-frameless>
+    </div>
+</div>
+<script type="module">
+  // download Ember Nexus Web SDK
+  import * as EmberNexusWebSDK from "https://cdn.jsdelivr.net/npm/@ember-nexus/web-sdk@0.0/dist/browser/index.js"
+  const Container = EmberNexusWebSDK.Container;
+  const configuration = Container.get(EmberNexusWebSDK.Service.WebSdkConfiguration);
+
+  // configure API
+  configuration.setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc');
+  configuration.setApiHost('https://reference-dataset.ember-nexus.dev');
+
+  // configure event listeners
+  Container.get(EmberNexusWebSDK.BrowserEvent.BrowserEventHandler)
+    .addBrowserEventListeners(document.getElementById('ember-nexus-web-sdk-root'));
+
+  // download Experimental App Plugin
+  import * as AppPluginExperimental from "https://cdn.jsdelivr.net/npm/@ember-nexus/app-plugin-experimental@0.0.11/dist/browser/index.js";
+</script>
+</body>
+</html>
