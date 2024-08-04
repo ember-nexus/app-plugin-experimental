@@ -18,11 +18,11 @@ Some aspects of the Web Components provided by this library can be customized:
 
 <!-- tabs:start -->
 
-#### **Result**
+### **Result**
 
 [](../examples/customization/index.html ':include')
 
-#### **HTML**
+### **HTML**
 
 [](../examples/customization/index.html ':include :type=code html')
 
