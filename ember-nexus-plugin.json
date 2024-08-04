@@ -1,0 +1,59 @@
+{
+  "id": "ember-nexus/app-plugin-experimental",
+  "name": "Experimental",
+  "description": "Collection of experimental components.",
+  "i18n": {
+    "ar": {
+      "name": "تجريبي",
+      "description": "مجموعة من المكونات التجريبية."
+    },
+    "de": {
+      "name": "Experimental",
+      "description": "Sammlung experimenteller Komponenten."
+    },
+    "en": {
+      "name": "Experimental",
+      "description": "Collection of experimental components."
+    },
+    "es": {
+      "name": "Experimental",
+      "description": "Colección de componentes experimentales."
+    },
+    "fr": {
+      "name": "Expérimental",
+      "description": "Collection de composants expérimentaux."
+    },
+    "hi": {
+      "name": "प्रयोगात्मक",
+      "description": "प्रयोगात्मक घटकों का संग्रह."
+    },
+    "it": {
+      "name": "Sperimentale",
+      "description": "Raccolta di componenti sperimentali."
+    },
+    "ja": {
+      "name": "実験的",
+      "description": "実験コンポーネントのコレクション。"
+    },
+    "ko": {
+      "name": "실험적",
+      "description": "실험적 구성요소의 수집."
+    },
+    "no": {
+      "name": "Eksperimentell",
+      "description": "Samling av eksperimentelle komponenter."
+    },
+    "ru": {
+      "name": "Экспериментальный",
+      "description": "Коллекция экспериментальных компонентов."
+    },
+    "sw": {
+      "name": "Majaribio",
+      "description": "Mkusanyiko wa vipengele vya majaribio."
+    },
+    "zh-CN": {
+      "name": "实验",
+      "description": "实验组件的收集。"
+    }
+  }
+}
