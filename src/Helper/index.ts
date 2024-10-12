@@ -1,3 +1,3 @@
-export * from './TextContrastOptimizer';
-export * from './TitleHelper';
-export * from './NameHelper';
+export * from './TextContrastOptimizer.js';
+export * from './TitleHelper.js';
+export * from './NameHelper.js';

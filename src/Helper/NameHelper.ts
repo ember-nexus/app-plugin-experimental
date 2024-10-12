@@ -1,6 +1,6 @@
 import { Node, Relation } from '@ember-nexus/web-sdk/Type/Definition';
 
-import { initialsLength, nameMaxLength } from '../Type';
+import { initialsLength, nameMaxLength } from '../Type/index.js';
 
 function getNameFromElementOrId(id: string, element: null | Node | Relation): string {
   const name = element?.data?.name;

@@ -7,8 +7,8 @@ import { getNameOrFirstLettersFromIdFromElementOrId, getTitleFromElementOrId } f
 import { singleElementMachine } from '../../Machine/index.js';
 import { inlineTextComponentStyle } from '../../Style/index.js';
 
-@customElement('ember-nexus-default-inline-text')
-class EmberNexusDefaultInlineText extends LitElement {
+@customElement('ember-nexus-tag-inline-text')
+class EmberNexusTagInlineText extends LitElement {
   static styles = [inlineTextComponentStyle];
 
   @property({ type: String, attribute: 'element-id' })
@@ -80,4 +80,4 @@ class EmberNexusDefaultInlineText extends LitElement {
   }
 }
 
-export { EmberNexusDefaultInlineText };
+export { EmberNexusTagInlineText };

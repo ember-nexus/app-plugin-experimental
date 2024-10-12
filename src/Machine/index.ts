@@ -1,1 +1,1 @@
-export * from './SingleElementMachine';
+export * from './SingleElementMachine.js';

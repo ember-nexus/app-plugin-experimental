@@ -5,19 +5,15 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
 import { getColorFromElementOrId } from '../../Helper/ColorHelper.js';
-import {
-  findBestFontWeightColor,
-  getNameFromElementOrId,
-  getNameOrFirstLettersFromIdFromElementOrId,
-} from '../../Helper/index.js';
+import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper/index.js';
 import { singleElementMachine } from '../../Machine/index.js';
 import { fontStyle, shadowStyle } from '../../Style/index.js';
-import { thumbnailComponentStyle } from '../../Style/index.js';
+import { iconComponentStyle } from '../../Style/index.js';
 import { colorWarning } from '../../Type/index.js';
 
-@customElement('ember-nexus-default-thumbnail')
-class EmberNexusDefaultThumbnail extends LitElement {
-  static styles = [thumbnailComponentStyle, shadowStyle, fontStyle];
+@customElement('ember-nexus-tag-icon')
+class EmberNexusTagIcon extends LitElement {
+  static styles = [iconComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -87,29 +83,25 @@ class EmberNexusDefaultThumbnail extends LitElement {
     const backgroundStyle = {
       backgroundColor: this._color,
     };
-
-    const primaryText = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
-    const primaryTextTitle = getNameFromElementOrId(this.elementId, this._element);
-    let secondaryText = this.actor.getSnapshot().value as string;
-    let secondaryTextTitle = this.actor.getSnapshot().value as string;
-
-    if ((this.actor.getSnapshot().value as string) === 'Loaded') {
-      secondaryText = this._element?.type ?? '';
-      secondaryTextTitle = this._element?.type ?? '';
+    let content: TemplateResult;
+    let title: string;
+    if (this._error === null) {
+      content = html`<span class="text-icon font-sans" style="${styleMap(textStyles)}">
+        ${getInitialsFromElementOrId(this.elementId, this._element)}
+      </span>`;
+      title = getTitleFromElementOrId(this.elementId, this._element);
+    } else {
+      content = html`<div class="svg-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
+        </svg>
+      </div>`;
+      title = this._error;
     }
-
-    if ((this.actor.getSnapshot().value as string) === 'Error') {
-      secondaryText = 'Error';
-      secondaryTextTitle = this._error ?? '';
-    }
-
-    return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
-      <span class="name font-sans" style="${styleMap(textStyles)}" title="${primaryTextTitle}"> ${primaryText} </span>
-      <span class="type font-sans" style="${styleMap(textStyles)}" title="${secondaryTextTitle}">
-        ${secondaryText}
-      </span>
+    return html`<div class="icon-component shadow" style="${styleMap(backgroundStyle)}" title="${title}">
+      ${content}
     </div>`;
   }
 }
 
-export { EmberNexusDefaultThumbnail };
+export { EmberNexusTagIcon };

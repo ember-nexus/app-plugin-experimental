@@ -15,8 +15,8 @@ import { fontStyle, shadowStyle } from '../../Style/index.js';
 import { thumbnailComponentStyle } from '../../Style/index.js';
 import { colorWarning } from '../../Type/index.js';
 
-@customElement('ember-nexus-default-thumbnail')
-class EmberNexusDefaultThumbnail extends LitElement {
+@customElement('ember-nexus-tag-thumbnail')
+class EmberNexusTagThumbnail extends LitElement {
   static styles = [thumbnailComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
@@ -112,4 +112,4 @@ class EmberNexusDefaultThumbnail extends LitElement {
   }
 }
 
-export { EmberNexusDefaultThumbnail };
+export { EmberNexusTagThumbnail };

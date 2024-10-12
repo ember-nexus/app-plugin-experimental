@@ -2,16 +2,16 @@ import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
 import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/web-sdk/Type/Definition';
 import { assign, fromPromise, setup } from 'xstate';
 
-import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type';
+import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type/index.js';
 
 export const singleElementMachine = setup({
   actors: {
     loadElement: fromPromise<Node | Relation, { elementId: Uuid; htmlElement: HTMLElement | DocumentFragment }>(
-      async ({ input }) => {
+      ({ input }) => {
         const event = new GetElementEvent(input.elementId!);
         input.htmlElement.dispatchEvent(event);
         const getElementResult = event.getElement();
-        if (getElementResult == null) {
+        if (getElementResult === null) {
           return Promise.reject('Unable to get Ember Nexus Web SDK events handled.');
         }
         return getElementResult;
@@ -30,22 +30,22 @@ export const singleElementMachine = setup({
   },
   guards: {
     isValidElementId: ({ context }) => {
-      if (context.elementId == null) {
+      if (context.elementId === null) {
         return false;
       }
       return context.elementId.match(uuidv4Regex) !== null;
     },
     isElementIdEmpty: ({ context }) => {
-      if (context.elementId == null) {
+      if (context.elementId === null) {
         return true;
       }
-      return context.elementId == '';
+      return context.elementId === '';
     },
     shouldAttemptRetry: ({ context }) => {
       if (context.retryAttempts > maxRetryAttempts) {
         return false;
       }
-      return context.error == 'Unable to get Ember Nexus Web SDK events handled.';
+      return context.error === 'Unable to get Ember Nexus Web SDK events handled.';
     },
   },
   types: {

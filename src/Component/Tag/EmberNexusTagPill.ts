@@ -4,7 +4,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { getColorFromElementOrId } from '../../Helper/ColorHelper.js';
+import { getColorFromElement, getColorFromElementOrId } from '../../Helper/ColorHelper.js';
 import {
   findBestFontWeightColor,
   getNameFromElementOrId,
@@ -12,12 +12,12 @@ import {
 } from '../../Helper/index.js';
 import { singleElementMachine } from '../../Machine/index.js';
 import { fontStyle, shadowStyle } from '../../Style/index.js';
-import { thumbnailComponentStyle } from '../../Style/index.js';
+import { pillComponentStyle } from '../../Style/index.js';
 import { colorWarning } from '../../Type/index.js';
 
-@customElement('ember-nexus-default-thumbnail')
-class EmberNexusDefaultThumbnail extends LitElement {
-  static styles = [thumbnailComponentStyle, shadowStyle, fontStyle];
+@customElement('ember-nexus-tag-pill')
+class EmberNexusTagPill extends LitElement {
+  static styles = [pillComponentStyle, shadowStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -29,7 +29,10 @@ class EmberNexusDefaultThumbnail extends LitElement {
   protected _error: null | string = null;
 
   @state()
-  protected _color: string = '#000';
+  protected _borderColor: string = '#000';
+
+  @state()
+  protected _backgroundColor: string = '#fff';
 
   protected actor: Actor<typeof singleElementMachine>;
 
@@ -43,13 +46,16 @@ class EmberNexusDefaultThumbnail extends LitElement {
       this._error = snapshot.context.error;
       switch (snapshot.value) {
         case 'Loaded':
-          this._color = getColorFromElementOrId(this.elementId, this._element);
+          this._borderColor = getColorFromElementOrId(this.elementId, this._element);
+          this._backgroundColor = getColorFromElement(this._element) ?? '#fff';
           break;
         case 'Error':
-          this._color = colorWarning;
+          this._borderColor = colorWarning;
+          this._backgroundColor = colorWarning;
           break;
         default:
-          this._color = '#000';
+          this._borderColor = '#000';
+          this._backgroundColor = '#fff';
       }
       this.requestUpdate();
     });
@@ -82,34 +88,33 @@ class EmberNexusDefaultThumbnail extends LitElement {
   }
 
   render(): TemplateResult {
-    const textStyles = findBestFontWeightColor(this._color, ['#000', '#fff'], [400, 500, 600, 700]);
-
-    const backgroundStyle = {
-      backgroundColor: this._color,
+    let content: string;
+    let icon: TemplateResult | null = null;
+    if (this._error === null) {
+      if (this.actor.getSnapshot().value !== 'Loaded') {
+        content = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
+      } else {
+        content = getNameFromElementOrId(this.elementId, this._element);
+      }
+    } else {
+      content = 'Error';
+      icon = html`<div class="svg-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
+        </svg>
+      </div>`;
+    }
+    const colorStyle = {
+      backgroundColor: this._backgroundColor,
+      borderColor: this._borderColor,
     };
+    const textStyles = findBestFontWeightColor(this._backgroundColor, ['#000', '#fff'], [400, 500, 600, 700]);
 
-    const primaryText = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
-    const primaryTextTitle = getNameFromElementOrId(this.elementId, this._element);
-    let secondaryText = this.actor.getSnapshot().value as string;
-    let secondaryTextTitle = this.actor.getSnapshot().value as string;
-
-    if ((this.actor.getSnapshot().value as string) === 'Loaded') {
-      secondaryText = this._element?.type ?? '';
-      secondaryTextTitle = this._element?.type ?? '';
-    }
-
-    if ((this.actor.getSnapshot().value as string) === 'Error') {
-      secondaryText = 'Error';
-      secondaryTextTitle = this._error ?? '';
-    }
-
-    return html`<div class="thumbnail-component shadow" style="${styleMap(backgroundStyle)}">
-      <span class="name font-sans" style="${styleMap(textStyles)}" title="${primaryTextTitle}"> ${primaryText} </span>
-      <span class="type font-sans" style="${styleMap(textStyles)}" title="${secondaryTextTitle}">
-        ${secondaryText}
-      </span>
+    return html`<div class="pill-component shadow ${icon ? 'has-icon' : ''}" style="${styleMap(colorStyle)}">
+      ${icon}
+      <span class="content font-sans" style="${styleMap(textStyles)}">${content}</span>
     </div>`;
   }
 }
 
-export { EmberNexusDefaultThumbnail };
+export { EmberNexusTagPill };

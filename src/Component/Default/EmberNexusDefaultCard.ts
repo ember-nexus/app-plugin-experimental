@@ -4,12 +4,12 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrId } from '../../Helper';
-import { getColorFromElementOrId } from '../../Helper/ColorHelper';
-import { getIconForElement } from '../../Helper/IconHelper';
-import { singleElementMachine } from '../../Machine';
-import { cardComponentStyle, fontStyle, shadowStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+import { getColorFromElementOrId } from '../../Helper/ColorHelper.js';
+import { getIconForElement } from '../../Helper/IconHelper.js';
+import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrId } from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { cardComponentStyle, fontStyle, shadowStyle } from '../../Style/index.js';
+import { colorWarning } from '../../Type/index.js';
 
 @customElement('ember-nexus-default-card')
 class EmberNexusDefaultCard extends LitElement {
@@ -84,7 +84,7 @@ class EmberNexusDefaultCard extends LitElement {
       backgroundColor: this._color,
     };
     let title: string;
-    if (this._error == null) {
+    if (this._error === null) {
       title = getTitleFromElementOrId(this.elementId, this._element);
     } else {
       title = this._error;
