@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add support for i18n.
+- Integrate Storybook and visual regression tests, closes #52.
 ### Changed
 - Improve documentation.
 ### Fixed

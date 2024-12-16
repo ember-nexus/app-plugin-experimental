@@ -7,9 +7,10 @@ const iconComponentStyle = css`
 
   :host {
     aspect-ratio: 1;
-    min-height: 1.5rem;
-    height: 2rem;
+    min-height: 1.5em;
+    height: 2em;
     container-type: size;
+    display: inline-block;
   }
 
   .icon-component {
