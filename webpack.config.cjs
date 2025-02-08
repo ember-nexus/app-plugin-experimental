@@ -1,5 +1,6 @@
 const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   entry: './src/index.ts',
@@ -18,6 +19,32 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.css$/,
+        oneOf: [
+          {
+            resourceQuery: /style/,
+            use: [ 'style-loader', 'css-loader' ],
+          },
+          {
+            type: 'asset/source',
+          },
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name]-[hash][ext]'
+        }
+      },
+      {
+        test: /\.(svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'vector/[name]-[hash][ext]'
+        }
+      },
     ],
   },
   resolve: {
@@ -35,7 +62,8 @@ module.exports = {
     clean: true,
     library: {
       type: 'module'
-    }
+    },
+    hashDigestLength: 12
   },
   devtool: "source-map",
   performance: {
@@ -54,6 +82,9 @@ module.exports = {
         },
         extractComments: false,
       }),
+      new CssMinimizerPlugin()
     ],
   },
+  plugins: [
+  ]
 };
