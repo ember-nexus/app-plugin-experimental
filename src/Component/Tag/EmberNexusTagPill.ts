@@ -4,16 +4,16 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
+import { getColorFromElement, getColorFromElementOrId } from '../../Helper/ColorHelper.js';
 import {
   findBestFontWeightColor,
   getNameFromElementOrId,
   getNameOrFirstLettersFromIdFromElementOrId,
-} from '../../Helper';
-import { getColorFromElement, getColorFromElementOrId } from '../../Helper/ColorHelper';
-import { singleElementMachine } from '../../Machine';
-import { fontStyle, shadowStyle } from '../../Style';
-import { pillComponentStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+} from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { fontStyle, shadowStyle } from '../../Style/index.js';
+import { pillComponentStyle } from '../../Style/index.js';
+import { colorWarning } from '../../Type/index.js';
 
 @customElement('ember-nexus-tag-pill')
 class EmberNexusTagPill extends LitElement {

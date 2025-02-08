@@ -1,12 +1,11 @@
-import { LitElement, TemplateResult, html, css } from 'lit';
-import { customElement} from 'lit/decorators.js';
-import {Actor, createActor} from "xstate";
-import {toolbarMachine} from "./ToolbarMachine";
+import { LitElement, TemplateResult, css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { Actor, createActor } from 'xstate';
 
+import { toolbarMachine } from './ToolbarMachine.js';
 
 @customElement('ember-nexus-toolbar')
 class EmberNexusToolbar extends LitElement {
-
   static styles = css`
     * {
       box-sizing: border-box;
@@ -21,7 +20,7 @@ class EmberNexusToolbar extends LitElement {
     }
 
     .toolbar-style {
-      background-color: #FBFBFE;
+      background-color: #fbfbfe;
       padding: 0.5rem;
       border: 2px solid lime;
       border-radius: 0.25rem;
@@ -85,8 +84,6 @@ class EmberNexusToolbar extends LitElement {
 
   protected actor: Actor<typeof toolbarMachine>;
 
-
-
   setupActorSubscription(): void {
     this.actor.subscribe((snapshot) => {
       console.log('snapshot', snapshot);
@@ -98,19 +95,23 @@ class EmberNexusToolbar extends LitElement {
     super.connectedCallback();
   }
 
-  firstUpdated() {
+  firstUpdated(): void {
     this.actor = createActor(toolbarMachine, {
       input: {
         toolbarMeasureContainer: this.renderRoot.querySelectorAll('.toolbar-measure-container')[0] as HTMLElement,
-        toolbarMeasureContainerContent: this.renderRoot.querySelectorAll('.toolbar-measure-container-content')[0] as HTMLElement,
-        toolbarDropdownButton: this.renderRoot.querySelectorAll('.toolbar-dropdown-button-measure > .toolbar-dropdown-button')[0] as HTMLElement
+        toolbarMeasureContainerContent: this.renderRoot.querySelectorAll(
+          '.toolbar-measure-container-content',
+        )[0] as HTMLElement,
+        toolbarDropdownButton: this.renderRoot.querySelectorAll(
+          '.toolbar-dropdown-button-measure > .toolbar-dropdown-button',
+        )[0] as HTMLElement,
       },
     });
     this.setupActorSubscription();
     this.actor.start();
 
     this.resizeObserver = new ResizeObserver(() => {
-      this.actor.send({'type': 'layoutUpdate'});
+      this.actor.send({ type: 'layoutUpdate' });
     });
 
     this.resizeObserver.observe(this.renderRoot.querySelectorAll('.toolbar-measure-container')[0]);
@@ -158,22 +159,45 @@ class EmberNexusToolbar extends LitElement {
   // }
 
   render(): TemplateResult {
-    const itemData = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    const itemData = [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
+    ];
 
-    let toolbarMeasureContainerContentItems: TemplateResult[] = [];
-    let toolbarVisibleContainerItems: TemplateResult[] = [];
-    let toolbarDropdownContainerItems: TemplateResult[] = [];
+    const toolbarMeasureContainerContentItems: TemplateResult[] = [];
+    const toolbarVisibleContainerItems: TemplateResult[] = [];
+    const toolbarDropdownContainerItems: TemplateResult[] = [];
 
     const context = this.actor?.getSnapshot().context;
 
     // let numberOfItemsVisibleInToolbarContainer = 8;
     for (let i = 0; i < itemData.length; i++) {
       const rawItem = html`
-        <ember-nexus-toolbar-item
-          color="lime"
-          label="${itemData[i]}"
-        >
-        </ember-nexus-toolbar-item>
+        <ember-nexus-toolbar-item color="lime" label="${itemData[i]}"> </ember-nexus-toolbar-item>
       `;
 
       const toolbarItem = html`<div class="toolbar-item">${rawItem}</div>`;
@@ -190,9 +214,7 @@ class EmberNexusToolbar extends LitElement {
     let dropdownButtonTemplate: TemplateResult | null = html`
       <div class="toolbar-dropdown-button">
         +
-        <div class="toolbar-dropdown-content">
-          ${toolbarDropdownContainerItems}
-        </div>
+        <div class="toolbar-dropdown-content">${toolbarDropdownContainerItems}</div>
       </div>
     `;
     const dropdownButtonTemplateMeasure = dropdownButtonTemplate;
@@ -201,28 +223,21 @@ class EmberNexusToolbar extends LitElement {
     }
 
     return html`<div class="toolbar-style">
+      toolbar v2 :D
 
       <div class="toolbar toolbar-horizontal">
+        <div class="toolbar-container toolbar-measure-container-content hidden">
+          ${toolbarMeasureContainerContentItems}
+        </div>
 
-      <div class="toolbar-container toolbar-measure-container-content hidden">
-        ${toolbarMeasureContainerContentItems}
+        <div class="toolbar-container toolbar-measure-container hidden"></div>
+
+        <div class="toolbar-dropdown-button-measure hidden">${dropdownButtonTemplateMeasure}</div>
+
+        <div class="toolbar-container toolbar-visible-container">${toolbarVisibleContainerItems}</div>
+
+        ${dropdownButtonTemplate}
       </div>
-
-      <div class="toolbar-container toolbar-measure-container hidden">
-      </div>
-
-      <div class="toolbar-dropdown-button-measure hidden">
-        ${dropdownButtonTemplateMeasure}
-      </div>
-
-      <div class="toolbar-container toolbar-visible-container">
-        ${toolbarVisibleContainerItems}
-      </div>
-
-      ${dropdownButtonTemplate}
-
-      </div>
-
     </div>`;
   }
 }

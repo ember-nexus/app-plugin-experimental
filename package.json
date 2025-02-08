@@ -24,6 +24,9 @@
   },
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",
+  "browserslist": [
+    "last 1 years and not dead"
+  ],
   "dependencies": {
     "@ember-nexus/uix": "^0.0.4",
     "@ember-nexus/web-sdk": "^0.1",

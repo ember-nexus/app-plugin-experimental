@@ -1,6 +1,5 @@
 import { assign, setup } from 'xstate';
 
-
 export const toolbarMachine = setup({
   types: {
     context: {} as {
@@ -34,40 +33,37 @@ export const toolbarMachine = setup({
       entry: assign({
         maxToolbarWidth: ({ context }) => {
           return context.toolbarMeasureContainer.getBoundingClientRect().width;
-        }
+        },
       }),
       always: [
         {
           target: 'CalculateLayout',
-        }
+        },
       ],
     },
     CalculateLayout: {
       entry: assign(({ context }) => {
-        console.log("calculating layout...");
+        console.log('calculating layout...');
         console.log(context);
-
 
         // const maxToolbarWidth = context.maxToolbarWidth;
         const maxToolbarWidth = context.toolbarMeasureContainer.getBoundingClientRect().width;
         const dropdownButtonWidth = context.toolbarDropdownButton.getBoundingClientRect().width;
         const toolbarMeasureContainerContentOffsetLeft = context.toolbarMeasureContainer.getBoundingClientRect().left;
 
-
         let numberOfVisibleElementsWithoutDropdownButton = 0;
         let numberOfVisibleElementsWithDropdownButton = 0;
-        let toolbarMeasureContainerContentItems = context.toolbarMeasureContainerContent.querySelectorAll('.toolbar-item');
+        const toolbarMeasureContainerContentItems =
+          context.toolbarMeasureContainerContent.querySelectorAll('.toolbar-item');
         for (let i = 0; i < toolbarMeasureContainerContentItems.length; i++) {
           const item = toolbarMeasureContainerContentItems[i];
           const itemBoundingBox = item.getBoundingClientRect();
-          const isItemVisibleWithoutDropdownButton = (
+          const isItemVisibleWithoutDropdownButton =
             itemBoundingBox.left >= toolbarMeasureContainerContentOffsetLeft &&
-            itemBoundingBox.right <= toolbarMeasureContainerContentOffsetLeft + maxToolbarWidth
-          );
-          const isItemVisibleWithDropdownButton = (
+            itemBoundingBox.right <= toolbarMeasureContainerContentOffsetLeft + maxToolbarWidth;
+          const isItemVisibleWithDropdownButton =
             itemBoundingBox.left >= toolbarMeasureContainerContentOffsetLeft &&
-            itemBoundingBox.right <= toolbarMeasureContainerContentOffsetLeft + maxToolbarWidth - dropdownButtonWidth
-          );
+            itemBoundingBox.right <= toolbarMeasureContainerContentOffsetLeft + maxToolbarWidth - dropdownButtonWidth;
           // console.log(item);
           // console.log(itemBoundingBox);
           if (isItemVisibleWithoutDropdownButton) {
@@ -125,7 +121,7 @@ export const toolbarMachine = setup({
       always: [
         {
           target: 'LayoutCalculated',
-        }
+        },
       ],
     },
     LayoutCalculated: {
@@ -134,6 +130,6 @@ export const toolbarMachine = setup({
           target: 'CalculateLayout',
         },
       },
-    }
+    },
   },
 });

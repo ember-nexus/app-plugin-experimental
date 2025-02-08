@@ -1,3 +1,3 @@
-export * as Default from './Default';
-export * as Tag from './Tag';
-export * from './MockElementDataProvider';
+export * as Default from './Default/index.js';
+export * as Tag from './Tag/index.js';
+export * from './MockElementDataProvider.js';

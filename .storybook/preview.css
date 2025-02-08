@@ -27,6 +27,11 @@
     max-width: 100%;
 }
 
+.flex-height {
+    height: 20rem;
+    max-height: 50vh;
+}
+
 #root-inner {
     min-width: 8rem;
 }
