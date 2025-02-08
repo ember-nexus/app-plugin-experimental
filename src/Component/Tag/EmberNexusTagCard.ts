@@ -1,19 +1,21 @@
+import CardStyle from '@ember-nexus/uix/Style/Component/CardStyle.css';
 import { Node, Relation, Uuid } from '@ember-nexus/web-sdk/Type/Definition';
-import { LitElement, TemplateResult, html } from 'lit';
+import { format } from 'date-fns';
+import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { getColorFromElementOrId } from '../../Helper/ColorHelper.js';
-import { getIconForElement } from '../../Helper/IconHelper.js';
-import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrId } from '../../Helper/index.js';
-import { singleElementMachine } from '../../Machine/index.js';
-import { cardComponentStyle, fontStyle, shadowStyle } from '../../Style/index.js';
-import { colorWarning } from '../../Type/index.js';
+import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrId } from '../../Helper';
+import { getColorFromElementOrId } from '../../Helper/ColorHelper';
+import { getIconForElement } from '../../Helper/IconHelper';
+import { singleElementMachine } from '../../Machine';
+import { tmpStyle } from '../../Style';
+import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-tag-card')
 class EmberNexusTagCard extends LitElement {
-  static styles = [cardComponentStyle, shadowStyle, fontStyle];
+  static styles = [unsafeCSS(CardStyle), tmpStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -84,7 +86,7 @@ class EmberNexusTagCard extends LitElement {
       backgroundColor: this._color,
     };
     let title: string;
-    if (this._error === null) {
+    if (this._error == null) {
       title = getTitleFromElementOrId(this.elementId, this._element);
     } else {
       title = this._error;
@@ -104,13 +106,39 @@ class EmberNexusTagCard extends LitElement {
       </span>`;
     }
 
-    return html`<div
-      class="card-component shadow"
-      style="${styleMap({ ...backgroundStyle, ...textStyles })}"
-      title="${title}"
-    >
-      <p class="name font-sans">${icon} ${getNameFromElementOrId(this.elementId, this._element)}</p>
-      <div class="info font-sans">${this._element?.type} ${this.elementId}</div>
+    let description = '';
+    if (this._element) {
+      if ('description' in this._element.data) {
+        description = this._element.data.description as string;
+      }
+    }
+
+    let createdString: null | string = null;
+    if (this._element?.data.created) {
+      if (this._element?.data.created instanceof Date) {
+        createdString = `created on ${format(this._element?.data.created as Date, 'yyyy-MM-dd')}`;
+      }
+    }
+
+    let updatedString: null | string = null;
+    if (this._element?.data.updated) {
+      if (this._element?.data.updated instanceof Date) {
+        updatedString = `updated on ${format(this._element?.data.updated as Date, 'yyyy-MM-dd')}`;
+      }
+    }
+
+    return html`<div class="card" style="${styleMap({ ...backgroundStyle, ...textStyles })}" title="${title}">
+      <div class="title">
+        ${icon}
+        <p class="name font-sans">${getNameFromElementOrId(this.elementId, this._element)}</p>
+      </div>
+      <div class="info font-sans">
+        <p><span class="font-mono">${this.elementId}</span> <span>${this._element?.type}</span></p>
+        <p><span>${createdString}</span> <span>${updatedString}</span></p>
+      </div>
+      <div class="description font-sans">
+        <p>${description}</p>
+      </div>
     </div>`;
   }
 }

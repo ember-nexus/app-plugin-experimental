@@ -4,20 +4,15 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import {
-  findBestFontWeightColor,
-  getNameFromElementOrId,
-  getNameOrFirstLettersFromIdFromElementOrId,
-} from '../../Helper';
-import { getColorFromElement, getColorFromElementOrId } from '../../Helper/ColorHelper';
+import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
+import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { fontStyle, shadowStyle } from '../../Style';
-import { pillComponentStyle } from '../../Style';
+import { fontStyle, framelessComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
-@customElement('ember-nexus-tag-pill')
-class EmberNexusTagPill extends LitElement {
-  static styles = [pillComponentStyle, shadowStyle, fontStyle];
+@customElement('ember-nexus-tag-frameless')
+class EmberNexusTagFrameless extends LitElement {
+  static styles = [framelessComponentStyle, fontStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -29,10 +24,7 @@ class EmberNexusTagPill extends LitElement {
   protected _error: null | string = null;
 
   @state()
-  protected _borderColor: string = '#000';
-
-  @state()
-  protected _backgroundColor: string = '#fff';
+  protected _color: string = '#000';
 
   protected actor: Actor<typeof singleElementMachine>;
 
@@ -46,16 +38,13 @@ class EmberNexusTagPill extends LitElement {
       this._error = snapshot.context.error;
       switch (snapshot.value) {
         case 'Loaded':
-          this._borderColor = getColorFromElementOrId(this.elementId, this._element);
-          this._backgroundColor = getColorFromElement(this._element) ?? '#fff';
+          this._color = getColorFromElementOrId(this.elementId, this._element);
           break;
         case 'Error':
-          this._borderColor = colorWarning;
-          this._backgroundColor = colorWarning;
+          this._color = colorWarning;
           break;
         default:
-          this._borderColor = '#000';
-          this._backgroundColor = '#fff';
+          this._color = '#000';
       }
       this.requestUpdate();
     });
@@ -88,33 +77,30 @@ class EmberNexusTagPill extends LitElement {
   }
 
   render(): TemplateResult {
-    let content: string;
-    let icon: TemplateResult | null = null;
-    if (this._error === null) {
-      if (this.actor.getSnapshot().value !== 'Loaded') {
-        content = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
-      } else {
-        content = getNameFromElementOrId(this.elementId, this._element);
-      }
+    const textStyles = findBestFontWeightColor(this._color, ['#000', '#fff'], [400, 500, 600, 700]);
+
+    const backgroundStyle = {
+      backgroundColor: this._color,
+    };
+    let content: TemplateResult;
+    let title: string;
+    if (this._error == null) {
+      content = html`<span style="${styleMap(textStyles)}">
+        ${getInitialsFromElementOrId(this.elementId, this._element)}
+      </span>`;
+      title = getTitleFromElementOrId(this.elementId, this._element);
     } else {
-      content = 'Error';
-      icon = html`<div class="svg-icon">
+      content = html`<div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
         </svg>
       </div>`;
+      title = this._error;
     }
-    const colorStyle = {
-      backgroundColor: this._backgroundColor,
-      borderColor: this._borderColor,
-    };
-    const textStyles = findBestFontWeightColor(this._backgroundColor, ['#000', '#fff'], [400, 500, 600, 700]);
-
-    return html`<div class="pill-component shadow ${icon ? 'has-icon' : ''}" style="${styleMap(colorStyle)}">
-      ${icon}
-      <span class="content font-sans" style="${styleMap(textStyles)}">${content}</span>
+    return html`<div class="frameless-component font-sans" style="${styleMap(backgroundStyle)}" title="${title}">
+      ${content}
     </div>`;
   }
 }
 
-export { EmberNexusTagPill };
+export { EmberNexusTagFrameless };
