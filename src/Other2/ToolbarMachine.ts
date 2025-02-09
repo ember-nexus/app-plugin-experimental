@@ -39,9 +39,6 @@ export const toolbarMachine = setup({
     },
     CalculateLayout: {
       entry: assign(({ context }) => {
-        console.log('calculating layout...');
-        console.log(context);
-
         const measurementToolbarBoundingBox = context.measurementToolbar.getBoundingClientRect();
         const measurementToolbarItemsBoundingBox = context.measurementToolbarItems.getBoundingClientRect();
         const measurementToolbarItemsChildren = context.measurementToolbarItems.querySelectorAll('.toolbar-items > *');
@@ -57,13 +54,11 @@ export const toolbarMachine = setup({
           }
         }
         if (areAllItemsVisible) {
-          console.log('no dropdown required');
           return {
             renderDropdown: false,
             numberOfItemsVisibleInToolbarContainer: measurementToolbarItemsChildren.length,
           };
         }
-        console.log('dropdown required');
 
         const itemPlaceholderBoundingBox = context.measurementToolbar
           .querySelectorAll('.toolbar-items-placeholder')[0]
@@ -77,8 +72,6 @@ export const toolbarMachine = setup({
             ? itemPlaceholderBoundingBox.right
             : itemPlaceholderBoundingBox.bottom) + 0.1;
 
-        console.log('bounding box', start, end);
-
         let numberOfVisibleItems = 0;
 
         for (let i = 0; i < measurementToolbarItemsChildren.length; i++) {
@@ -88,14 +81,11 @@ export const toolbarMachine = setup({
           const childBoundingBoxEnd =
             context.orientation === 'horizontal' ? childBoundingBox.right : childBoundingBox.bottom;
           const childIsVisible = childBoundingBoxStart >= start && childBoundingBoxEnd <= end;
-          console.log(measurementToolbarItemsChildren[i], childBoundingBoxStart, childBoundingBoxEnd, childIsVisible);
           if (!childIsVisible) {
             break;
           }
           numberOfVisibleItems += 1;
         }
-
-        console.log('number of visible items', numberOfVisibleItems);
 
         return {
           renderDropdown: true,

@@ -12,6 +12,8 @@ import tseslint from "@eslint/js";
 import jest from "eslint-plugin-jest";
 import pluginPromise from 'eslint-plugin-promise';
 import compat from "eslint-plugin-compat";
+import {configs as litConfigs} from 'eslint-plugin-lit';
+import {configs as wcConfigs} from 'eslint-plugin-wc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +28,8 @@ export default [
     ignores: ["dist/*", "**/*.js"],
   },
   pluginPromise.configs['flat/recommended'],
+  litConfigs['flat/recommended'],
+  wcConfigs['flat/recommended'],
   compat.configs["flat/recommended"],
   ...flatCompat.plugins('require-extensions'),
   ...flatCompat.extends(
@@ -68,6 +72,9 @@ export default [
           project: "./tsconfig.json",
         },
       },
+      "wc": {
+        "elementBaseClasses": ["LitElement"]
+      }
     },
     rules: {
       ...js.configs.recommended.rules,

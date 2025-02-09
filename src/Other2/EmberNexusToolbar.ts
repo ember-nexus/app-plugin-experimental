@@ -16,8 +16,8 @@ class EmberNexusToolbar extends LitElement {
       display: flex;
       justify-content: flex-end;
       align-items: stretch;
-      padding: 0.5rem;
-      gap: 0.5rem;
+      padding: 0.25rem;
+      gap: 0.25rem;
       background-color: #f0f0f4;
       border-radius: 0.25rem;
     }
@@ -51,7 +51,7 @@ class EmberNexusToolbar extends LitElement {
 
     .toolbar-items {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.25rem;
       align-items: center;
     }
     .toolbar-items > * {
@@ -131,8 +131,7 @@ class EmberNexusToolbar extends LitElement {
   protected actor: Actor<typeof toolbarMachine>;
 
   setupActorSubscription(): void {
-    this.actor.subscribe((snapshot) => {
-      console.log('snapshot', snapshot);
+    this.actor.subscribe(() => {
       this.requestUpdate();
     });
   }
@@ -208,7 +207,7 @@ class EmberNexusToolbar extends LitElement {
     const context = this.actor?.getSnapshot().context;
 
     const allToolbarItems: TemplateResult[] = itemData.map(
-      (item) => html` <ember-nexus-toolbar-item2 label="${item}"> </ember-nexus-toolbar-item2> `,
+      (item) => html`<ember-nexus-toolbar-item2 label="${item}"> </ember-nexus-toolbar-item2> `,
     );
     const visibleToolbarItems: TemplateResult[] = allToolbarItems.slice(
       0,

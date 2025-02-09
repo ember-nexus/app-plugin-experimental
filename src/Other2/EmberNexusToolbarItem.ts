@@ -9,11 +9,14 @@ class EmberNexusToolbarItem extends LitElement {
     }
 
     .toolbar-item {
-      min-width: 1rem;
-      min-height: 1rem;
-      padding: 0.5rem;
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.25rem;
       border-radius: 0.25rem;
       background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   `;
 
