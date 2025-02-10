@@ -39,3 +39,13 @@
 #storybook-root {
     max-width: 100%;
 }
+
+:root {
+    --toolbar-item-border-radius: 0.25rem;
+    --toolbar-item-background-color: #fff;
+    --toolbar-gap: 0.25rem;
+    --toolbar-padding: 0.25rem;
+    --toolbar-border-radius: 0.25rem;
+    --toolbar-background-color: #f0f0f4;
+    --toolbar-dropdown-background-color: #333;
+}

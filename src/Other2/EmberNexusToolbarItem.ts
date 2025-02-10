@@ -12,8 +12,8 @@ class EmberNexusToolbarItem extends LitElement {
       min-width: 2rem;
       min-height: 2rem;
       padding: 0.25rem;
-      border-radius: 0.25rem;
-      background-color: #fff;
+      border-radius: var(--toolbar-item-border-radius, 0.25rem);
+      background-color: var(--toolbar-item-background-color, #fff);
       display: flex;
       justify-content: center;
       align-items: center;

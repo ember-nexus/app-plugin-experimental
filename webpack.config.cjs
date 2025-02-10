@@ -40,10 +40,7 @@ module.exports = {
       },
       {
         test: /\.(svg)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'vector/[name]-[hash][ext]'
-        }
+        type: 'asset/source'
       },
     ],
   },

@@ -55,7 +55,7 @@ export const toolbarMachine = setup({
         }
         if (areAllItemsVisible) {
           return {
-            renderDropdown: false,
+            isDropdownRequired: false,
             numberOfItemsVisibleInToolbarContainer: measurementToolbarItemsChildren.length,
           };
         }
@@ -88,7 +88,7 @@ export const toolbarMachine = setup({
         }
 
         return {
-          renderDropdown: true,
+          isDropdownRequired: true,
           numberOfItemsVisibleInToolbarContainer: numberOfVisibleItems,
         };
       }),

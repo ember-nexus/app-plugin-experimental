@@ -1,6 +1,10 @@
 import { LitElement, TemplateResult, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Actor, createActor } from 'xstate';
+import {computePosition, offset, shift, autoPlacement, Placement, arrow, size} from '@floating-ui/dom';
+import mdiDotsHorizontal from '@mdi/svg/svg/dots-horizontal.svg'
+import mdiDotsVertical from '@mdi/svg/svg/dots-vertical.svg'
+import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 
 import { toolbarMachine } from './ToolbarMachine.js';
 
@@ -16,10 +20,10 @@ class EmberNexusToolbar extends LitElement {
       display: flex;
       justify-content: flex-end;
       align-items: stretch;
-      padding: 0.25rem;
-      gap: 0.25rem;
-      background-color: #f0f0f4;
-      border-radius: 0.25rem;
+      padding: var(--toolbar-padding, 0.25rem);
+      gap: var(--toolbar-gap, 0.25rem);
+      background-color: var(--toolbar-background-color, #f0f0f4);
+      border-radius: var(--toolbar-border-radius, 0.25rem);
     }
     .root.toolbar.horizontal {
       width: 100%;
@@ -51,7 +55,7 @@ class EmberNexusToolbar extends LitElement {
 
     .toolbar-items {
       display: flex;
-      gap: 0.25rem;
+      gap: var(--toolbar-gap, 0.25rem);
       align-items: center;
     }
     .toolbar-items > * {
@@ -61,16 +65,57 @@ class EmberNexusToolbar extends LitElement {
     .dropdown-button {
       min-width: 2rem;
       min-height: 2rem;
-      background-color: #fff;
+      background-color: var(--toolbar-item-background-color, #fff);
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 0.25rem;
+      border-radius: var(--toolbar-item-border-radius, 0.25rem);
       position: relative;
     }
 
+    .icon > svg {
+      width: 1.2rem;
+      height: auto;
+      display: block;
+    }
+
     .dropdown-menu {
-      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .arrow {
+      position: absolute;
+      background: var(--toolbar-dropdown-background-color, #333);
+      width: 0.5rem;
+      height: 0.5rem;
+      transform: rotate(45deg);
+    }
+
+    .dropdown-menu-content {
+      position: relative;
+      min-width: 8rem;
+      max-width: 15rem;
+      max-height: 20rem;
+      padding: 0.25rem 0;
+      background-color: var(--toolbar-dropdown-background-color, #333);
+      border-radius: 0.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dropdown-menu-items {
+      flex-grow: 1;
+      overflow-y: auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      max-height: 100%;
+      height: 100%;
+      padding: 0 0.25rem;
     }
 
     .measurement-root {
@@ -174,6 +219,65 @@ class EmberNexusToolbar extends LitElement {
     super.disconnectedCallback();
   }
 
+  updated() {
+    const context = this.actor?.getSnapshot().context;
+    if (context?.isDropdownRequired) {
+
+      const dropdownButton = this.renderRoot.querySelectorAll('.root.toolbar > .dropdown-button')[0] as HTMLElement;
+      const dropdownMenu = this.renderRoot.querySelectorAll('.dropdown-menu')[0] as HTMLElement;
+      const arrowElement = this.renderRoot.querySelectorAll('.arrow')[0] as HTMLElement;
+
+      console.log(dropdownButton, dropdownMenu);
+
+      const allowedPlacements: Placement[] = this.orientation === 'horizontal' ? ['top', 'bottom'] : ['left', 'right'];
+
+      computePosition(
+        dropdownButton,
+        dropdownMenu,
+        {
+          middleware: [
+            offset(15),
+            shift(),
+            autoPlacement({
+              allowedPlacements: allowedPlacements,
+            }),
+            arrow({element: arrowElement}),
+            size({
+              apply({availableWidth, availableHeight, elements}) {
+                // Change styles, e.g.
+                Object.assign(elements.floating.style, {
+                  maxWidth: `${Math.max(0, availableWidth)}px`,
+                  maxHeight: `${Math.max(0, availableHeight)}px`,
+                });
+              },
+            }),
+          ]
+        }
+      ).then(({x, y, placement, middlewareData}) => {
+        Object.assign(dropdownMenu.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+        if (middlewareData.arrow) {
+          const staticSide = {
+            top: 'bottom',
+            right: 'left',
+            bottom: 'top',
+            left: 'right',
+          }[placement.split('-')[0]] as string;
+          const {x, y} = middlewareData.arrow;
+
+          Object.assign(arrowElement.style, {
+            left: x != null ? `${x}px` : '',
+            top: y != null ? `${y}px` : '',
+            [staticSide]: '-0.25rem',
+          });
+        }
+      });
+
+    }
+  }
+
   render(): TemplateResult {
     const itemData = [
       'A',
@@ -186,22 +290,22 @@ class EmberNexusToolbar extends LitElement {
       'H',
       'I',
       'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
+      // 'K',
+      // 'L',
+      // 'M',
+      // 'N',
+      // 'O',
+      // 'P',
+      // 'Q',
+      // 'R',
+      // 'S',
+      // 'T',
+      // 'U',
+      // 'V',
+      // 'W',
+      // 'X',
+      // 'Y',
+      // 'Z',
     ];
 
     const context = this.actor?.getSnapshot().context;
@@ -217,17 +321,32 @@ class EmberNexusToolbar extends LitElement {
       context?.numberOfItemsVisibleInToolbarContainer ?? 0,
     );
 
+    const dropdownButtonIcon = this.orientation === 'horizontal' ? mdiDotsHorizontal : mdiDotsVertical;
+
+
     const dropdownButton = html`
       <div class="dropdown-button">
-        <div class="icon">+</div>
-        <div class="dropdown-menu">${dropdownMenuItems}</div>
+        <div class="icon">${unsafeSVG(dropdownButtonIcon)}</div>
       </div>
     `;
+
+    const visibleDropdownButton = context?.isDropdownRequired ? dropdownButton : null;
+    const dropdownMenu = context?.isDropdownRequired ? html`
+      <div class="dropdown-menu">
+        <div class="arrow"></div>
+        <div class="dropdown-menu-content">
+          <div class="dropdown-menu-items">
+            ${dropdownMenuItems}
+          </div>
+        </div>
+      </div>
+    `: null;
 
     return html`
       <div class="root toolbar ${this.orientation ?? 'horizontal'} ${this.alignment ?? 'end'}">
         <div class="toolbar-items">${visibleToolbarItems}</div>
-        ${dropdownButton}
+        ${visibleDropdownButton}
+        ${dropdownMenu}
         <div class="measurement-root">
           <div class="toolbar ${this.orientation ?? 'horizontal'} ${this.alignment ?? 'end'} measurement-toolbar">
             <div class="toolbar-items-placeholder"></div>
