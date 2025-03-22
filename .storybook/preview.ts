@@ -30,13 +30,23 @@ const preview: Preview = {
       }
     },
     layout: 'centered',
+    backgrounds: {
+      values: [
+        { name: 'Light', value: '#FBFBFE' },
+        { name: 'Dark', value: '#1A1A1A' },
+        { name: 'Menu', value: '#F0F0F4' },
+      ],
+      default: 'Light',
+    },
   },
   decorators: [
     withThemeByClassName<WebComponentsRenderer>({
       themes: {
-        light: '',
+        light: 'light',
         dark: 'dark',
-        'high contrast': 'high-contrast'
+        'high contrast': 'high-contrast',
+        forest: 'forest',
+        sand: 'sand'
       },
       defaultTheme: 'light',
     }),

@@ -49,3 +49,41 @@
     --toolbar-background-color: #f0f0f4;
     --toolbar-dropdown-background-color: #333;
 }
+
+html.light {
+    --background-color: #ffffff;
+    --toolbar-background-color: #f0f0f4;
+    --toolbar-item-background-color: #fff;
+    --toolbar-dropdown-background-color: #333;
+}
+
+html.dark {
+    --background-color: #1A1A1A;
+    --toolbar-background-color: #007BFF;
+    --toolbar-item-background-color: #5B5B66;
+    --toolbar-dropdown-background-color: #FF073A;
+}
+
+html.forest {
+    --background-color: #4B5945;
+    --toolbar-background-color: #66785F;
+    --toolbar-item-background-color: #fff;
+    --toolbar-dropdown-background-color: #91AC8F;
+    --toolbar-gap: 3px;
+    --toolbar-padding: 3px;
+    --toolbar-border-radius: 3px;
+    --toolbar-item-border-radius: 3px;
+}
+
+html.sand {
+    --background-color: #A59D84;
+    --toolbar-background-color: #C1BAA1;
+    --toolbar-item-background-color: #fff;
+    --toolbar-dropdown-background-color: #D7D3BF;
+    --toolbar-gap: 3px;
+    --toolbar-padding: 3px;
+}
+
+html body.sb-show-main {
+    background-color: var(--background-color) !important;
+}
