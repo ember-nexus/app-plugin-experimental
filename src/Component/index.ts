@@ -1,2 +1,2 @@
-export * as Default from './Default';
-export * from './MockElementDataProvider';
+export * as Default from './Default/index.js';
+export * from './MockElementDataProvider.js';

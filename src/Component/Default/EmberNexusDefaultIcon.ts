@@ -9,10 +9,10 @@ import {
   getColorFromElementOrId,
   getInitialsFromElementOrId,
   getTitleFromElementOrId,
-} from '../../Helper';
-import { singleElementMachine } from '../../Machine';
-import { fontStyle, iconComponentStyle, shadowStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+} from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { fontStyle, iconComponentStyle, shadowStyle } from '../../Style/index.js';
+import { colorWarning } from '../../Type/index.js';
 
 @customElement('ember-nexus-default-icon')
 class EmberNexusDefaultIcon extends LitElement {
@@ -88,7 +88,7 @@ class EmberNexusDefaultIcon extends LitElement {
     };
     let content: TemplateResult;
     let title: string;
-    if (this._error == null) {
+    if (this._error === null) {
       content = html`<span class="text-icon font-sans" style="${styleMap(textStyles)}">
         ${getInitialsFromElementOrId(this.elementId, this._element)}
       </span>`;

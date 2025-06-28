@@ -14,11 +14,11 @@ class EmberNexusMockElementDataProvider extends LitElement {
   }
 
   handleGetElementEvent(event: any): void {
-    if (event.getElementId() != this.elementId) {
+    if (event.getElementId() !== this.elementId) {
       return;
     }
     const elementRawData = JSON.parse(this.elementData);
-    elementRawData['id'] = this.elementId;
+    elementRawData.id = this.elementId;
     event.setElement(elementRawData);
     event.stopPropagation();
   }

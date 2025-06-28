@@ -1,7 +1,7 @@
 import { Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/app-core/Type/Definition';
 import { assign, fromPromise, setup } from 'xstate';
 
-import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type';
+import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type/index.js';
 
 const singleElementMachine = setup({
   actors: {
@@ -10,7 +10,7 @@ const singleElementMachine = setup({
         const event = new CustomEvent(input.elementId!) as any;
         input.htmlElement.dispatchEvent(event);
         const getElementResult = event.getElement();
-        if (getElementResult == null) {
+        if (getElementResult === null) {
           return Promise.reject('Unable to get Ember Nexus Web SDK events handled.');
         }
         return getElementResult;
@@ -29,22 +29,22 @@ const singleElementMachine = setup({
   },
   guards: {
     isValidElementId: ({ context }) => {
-      if (context.elementId == null) {
+      if (context.elementId === null) {
         return false;
       }
       return context.elementId.match(uuidv4Regex) !== null;
     },
     isElementIdEmpty: ({ context }) => {
-      if (context.elementId == null) {
+      if (context.elementId === null) {
         return true;
       }
-      return context.elementId == '';
+      return context.elementId === '';
     },
     shouldAttemptRetry: ({ context }) => {
       if (context.retryAttempts > maxRetryAttempts) {
         return false;
       }
-      return context.error == 'Unable to get Ember Nexus Web SDK events handled.';
+      return context.error === 'Unable to get Ember Nexus Web SDK events handled.';
     },
   },
   types: {

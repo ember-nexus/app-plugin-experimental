@@ -1,14 +1,18 @@
-import {AnyStateMachine, createActor} from "xstate";
-import {Constructor, LifecycleCapableWebComponent} from "../Type/Definition";
+import { AnyStateMachine, createActor } from 'xstate';
 
-function withStateMachine(machine: AnyStateMachine) {
-  return function <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase) {
+import { Constructor, LifecycleCapableWebComponent } from '../Type/Definition/index.js';
+
+/* eslint @typescript-eslint/no-explicit-any: "off" */
+function withStateMachine(
+  machine: AnyStateMachine,
+): <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase) => any {
+  return function <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase): any {
     return class extends Base {
       actor = createActor(machine);
       state = this.actor.getSnapshot();
       send = this.actor.send;
 
-      connectedCallback() {
+      connectedCallback(): void {
         super.connectedCallback?.();
 
         this.actor.subscribe((snapshot) => {
@@ -19,7 +23,7 @@ function withStateMachine(machine: AnyStateMachine) {
         this.actor.start();
       }
 
-      disconnectedCallback() {
+      disconnectedCallback(): void {
         super.disconnectedCallback?.();
         this.actor.stop();
       }
@@ -27,4 +31,4 @@ function withStateMachine(machine: AnyStateMachine) {
   };
 }
 
-export {withStateMachine};
+export { withStateMachine };

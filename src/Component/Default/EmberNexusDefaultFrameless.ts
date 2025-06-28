@@ -4,11 +4,11 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
-import { getColorFromElementOrId } from '../../Helper/ColorHelper';
-import { singleElementMachine } from '../../Machine';
-import { fontStyle, framelessComponentStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+import { getColorFromElementOrId } from '../../Helper/ColorHelper.js';
+import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { fontStyle, framelessComponentStyle } from '../../Style/index.js';
+import { colorWarning } from '../../Type/index.js';
 
 @customElement('ember-nexus-default-frameless')
 class EmberNexusDefaultFrameless extends LitElement {
@@ -84,7 +84,7 @@ class EmberNexusDefaultFrameless extends LitElement {
     };
     let content: TemplateResult;
     let title: string;
-    if (this._error == null) {
+    if (this._error === null) {
       content = html`<span style="${styleMap(textStyles)}">
         ${getInitialsFromElementOrId(this.elementId, this._element)}
       </span>`;

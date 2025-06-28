@@ -9,10 +9,10 @@ import {
   getColorFromElementOrId,
   getNameFromElementOrId,
   getNameOrFirstLettersFromIdFromElementOrId,
-} from '../../Helper';
-import { singleElementMachine } from '../../Machine';
-import { fontStyle, shadowStyle, thumbnailComponentStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+} from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { fontStyle, shadowStyle, thumbnailComponentStyle } from '../../Style/index.js';
+import { colorWarning } from '../../Type/index.js';
 
 @customElement('ember-nexus-default-thumbnail')
 class EmberNexusDefaultThumbnail extends LitElement {
@@ -92,12 +92,12 @@ class EmberNexusDefaultThumbnail extends LitElement {
     let secondaryText = this.actor.getSnapshot().value as string;
     let secondaryTextTitle = this.actor.getSnapshot().value as string;
 
-    if ((this.actor.getSnapshot().value as string) == 'Loaded') {
+    if ((this.actor.getSnapshot().value as string) === 'Loaded') {
       secondaryText = this._element?.type ?? '';
       secondaryTextTitle = this._element?.type ?? '';
     }
 
-    if ((this.actor.getSnapshot().value as string) == 'Error') {
+    if ((this.actor.getSnapshot().value as string) === 'Error') {
       secondaryText = 'Error';
       secondaryTextTitle = this._error ?? '';
     }

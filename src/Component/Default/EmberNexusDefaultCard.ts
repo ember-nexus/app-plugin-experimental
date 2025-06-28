@@ -1,14 +1,10 @@
-import {html, LitElement, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import { ServiceResolver } from '@ember-nexus/app-core/Service';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-import {tmpStyle} from '../../Style';
-import {ServiceResolver} from "@ember-nexus/app-core/Service";
-import {withStateMachine, withDescription} from "../../Decorator";
-import {toggleMachine} from "../../Machine";
-
-
-
-
+import { withDescription, withStateMachine } from '../../Decorator/index.js';
+import { toggleMachine } from '../../Machine/index.js';
+import { tmpStyle } from '../../Style/index.js';
 
 @customElement('ember-nexus-default-card')
 @withDescription('decorator injected description :D')
@@ -23,7 +19,7 @@ class EmberNexusDefaultCard extends LitElement {
 
   serviceResolver!: ServiceResolver;
 
-  @property({type: String, attribute: 'element-id'})
+  @property({ type: String, attribute: 'element-id' })
   elementId: string;
 
   constructor() {
@@ -42,13 +38,11 @@ class EmberNexusDefaultCard extends LitElement {
         </div>
         <div class="description font-sans">
           <p>${this.description}</p>
-          <button @click=${() => this.send({ type: 'TOGGLE' })}>
-            State: ${this.state?.value}
-          </button>
+          <button @click=${(): void => this.send({ type: 'TOGGLE' })}>State: ${this.state?.value}</button>
         </div>
       </div>
     `;
   }
 }
 
-export {EmberNexusDefaultCard};
+export { EmberNexusDefaultCard };

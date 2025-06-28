@@ -1,9 +1,9 @@
-import {createMachine} from "xstate";
+import { createMachine } from 'xstate';
 
 const toggleMachine = createMachine({
   id: 'toggle',
   types: {} as {
-    context: {};
+    context: object;
     events: { type: 'TOGGLE' };
   },
   initial: 'off',
@@ -13,4 +13,4 @@ const toggleMachine = createMachine({
   },
 });
 
-export {toggleMachine};
+export { toggleMachine };

@@ -9,7 +9,7 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        exclude: [/node_modules/],
+        exclude: [/node_modules/, /\.d\.ts$/],
         use: [
           {
             loader: 'ts-loader',
@@ -48,7 +48,10 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    extensionAlias: {
+      '.js': ['.js', '.ts'],
+    }
   },
   experiments: {
     outputModule: true,
@@ -81,7 +84,5 @@ module.exports = {
       }),
       new CssMinimizerPlugin()
     ],
-  },
-  plugins: [
-  ]
+  }
 };

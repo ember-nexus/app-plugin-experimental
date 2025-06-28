@@ -1,2 +1,2 @@
-export * from './toggleMachine';
-export * from './singleElementMachine';
+export * from './singleElementMachine.js';
+export * from './toggleMachine.js';

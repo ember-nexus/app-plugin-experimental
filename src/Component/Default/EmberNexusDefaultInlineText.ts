@@ -3,9 +3,9 @@ import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Actor, createActor } from 'xstate';
 
-import { getNameOrFirstLettersFromIdFromElementOrId, getTitleFromElementOrId } from '../../Helper';
-import { singleElementMachine } from '../../Machine';
-import { inlineTextComponentStyle } from '../../Style';
+import { getNameOrFirstLettersFromIdFromElementOrId, getTitleFromElementOrId } from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { inlineTextComponentStyle } from '../../Style/index.js';
 
 @customElement('ember-nexus-default-inline-text')
 class EmberNexusDefaultInlineText extends LitElement {

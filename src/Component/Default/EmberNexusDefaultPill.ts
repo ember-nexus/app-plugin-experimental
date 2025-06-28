@@ -10,10 +10,10 @@ import {
   getColorFromElementOrId,
   getNameFromElementOrId,
   getNameOrFirstLettersFromIdFromElementOrId,
-} from '../../Helper';
-import { singleElementMachine } from '../../Machine';
-import { fontStyle, pillComponentStyle, shadowStyle } from '../../Style';
-import { colorWarning } from '../../Type';
+} from '../../Helper/index.js';
+import { singleElementMachine } from '../../Machine/index.js';
+import { fontStyle, pillComponentStyle, shadowStyle } from '../../Style/index.js';
+import { colorWarning } from '../../Type/index.js';
 
 @customElement('ember-nexus-default-pill')
 class EmberNexusDefaultPill extends LitElement {
@@ -90,7 +90,7 @@ class EmberNexusDefaultPill extends LitElement {
   render(): TemplateResult {
     let content: string;
     let icon: TemplateResult | null = null;
-    if (this._error == null) {
+    if (this._error === null) {
       if (this.actor.getSnapshot().value !== 'Loaded') {
         content = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
       } else {

@@ -1,2 +1,2 @@
 export * from './Constants.js';
-export * as Definition from './Definition';
+export * as Definition from './Definition/index.js';
