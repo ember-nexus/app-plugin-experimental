@@ -1,4 +1,4 @@
-import { Node, Relation } from '@ember-nexus/web-sdk/Type/Definition';
+import { Node, Relation } from '@ember-nexus/app-core/Type/Definition';
 
 import { getNameFromElementOrId } from './NameHelper';
 import { titleTypeMaxLength } from '../Type';

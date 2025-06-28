@@ -1,4 +1,3 @@
-import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
 import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
@@ -14,7 +13,7 @@ class EmberNexusMockElementDataProvider extends LitElement {
     super();
   }
 
-  handleGetElementEvent(event: GetElementEvent): void {
+  handleGetElementEvent(event: any): void {
     if (event.getElementId() != this.elementId) {
       return;
     }

@@ -1,4 +1,4 @@
-import { Node, Relation } from '@ember-nexus/web-sdk/Type/Definition';
+import { Node, Relation } from '@ember-nexus/app-core/Type/Definition';
 
 import { initialsLength, nameMaxLength } from '../Type';
 

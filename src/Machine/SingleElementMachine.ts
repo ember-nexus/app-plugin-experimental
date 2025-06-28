@@ -1,5 +1,4 @@
-import { GetElementEvent } from '@ember-nexus/web-sdk/BrowserEvent/Element';
-import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/web-sdk/Type/Definition';
+import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/app-core/Type/Definition';
 import { assign, fromPromise, setup } from 'xstate';
 
 import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type';
@@ -8,7 +7,7 @@ export const singleElementMachine = setup({
   actors: {
     loadElement: fromPromise<Node | Relation, { elementId: Uuid; htmlElement: HTMLElement | DocumentFragment }>(
       async ({ input }) => {
-        const event = new GetElementEvent(input.elementId!);
+        const event = new CustomEvent(input.elementId!) as any;
         input.htmlElement.dispatchEvent(event);
         const getElementResult = event.getElement();
         if (getElementResult == null) {

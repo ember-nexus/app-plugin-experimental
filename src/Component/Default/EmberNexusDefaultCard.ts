@@ -1,9 +1,8 @@
-import CardStyle from '@ember-nexus/uix/Style/Component/CardStyle.css';
-import { Node, Relation, Uuid } from '@ember-nexus/web-sdk/Type/Definition';
-import { format } from 'date-fns';
-import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
+import { Node, Relation, Uuid } from '@ember-nexus/app-core/Type/Definition';
+import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { DateTime } from 'luxon';
 import { Actor, createActor } from 'xstate';
 
 import {
@@ -19,7 +18,7 @@ import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-card')
 class EmberNexusDefaultCard extends LitElement {
-  static styles = [unsafeCSS(CardStyle), tmpStyle];
+  static styles = [tmpStyle];
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
@@ -120,14 +119,14 @@ class EmberNexusDefaultCard extends LitElement {
     let createdString: null | string = null;
     if (this._element?.data.created) {
       if (this._element?.data.created instanceof Date) {
-        createdString = `created on ${format(this._element?.data.created as Date, 'yyyy-MM-dd')}`;
+        createdString = `created on ${DateTime.fromJSDate(this._element?.data.created as Date).toFormat('yyyy-MM-dd')}`;
       }
     }
 
     let updatedString: null | string = null;
     if (this._element?.data.updated) {
       if (this._element?.data.updated instanceof Date) {
-        updatedString = `updated on ${format(this._element?.data.updated as Date, 'yyyy-MM-dd')}`;
+        updatedString = `updated on ${DateTime.fromJSDate(this._element?.data.updated as Date).toFormat('yyyy-MM-dd')}`;
       }
     }
 

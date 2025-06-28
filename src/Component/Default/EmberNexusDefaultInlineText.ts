@@ -1,4 +1,4 @@
-import { Node, Relation, Uuid } from '@ember-nexus/web-sdk/Type/Definition';
+import { Node, Relation, Uuid } from '@ember-nexus/app-core/Type/Definition';
 import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Actor, createActor } from 'xstate';

@@ -1,4 +1,4 @@
-import { Node, Relation } from '@ember-nexus/web-sdk/Type/Definition';
+import { Node, Relation } from '@ember-nexus/app-core/Type/Definition';
 import ColorHash from 'color-hash';
 
 function getColorFromElementOrId(id: string, element: null | Node | Relation): string {
