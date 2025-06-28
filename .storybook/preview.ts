@@ -3,22 +3,17 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 
 import * as tmp from '../dist/browser/index';
 console.log(tmp);
-
-
-import * as EmberNexus from '@ember-nexus/web-sdk';
 import './style.css?style';
 import './preview.css?style';
 import {init} from '@ember-nexus/app-core';
-
-const WebSdkConfiguration = EmberNexus.Service.WebSdkConfiguration;
-const container = EmberNexus.Container;
-container.get(WebSdkConfiguration).setApiHost('https://reference-dataset.ember-nexus.dev');
-container.get(WebSdkConfiguration).setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc' as EmberNexus.Type.Definition.Token);
-container.get(EmberNexus.BrowserEvent.BrowserEventHandler).addBrowserEventListeners(document.body as HTMLElement);
-console.log(document.body);
+import {ApiConfiguration} from "@ember-nexus/app-core/Service";
 
 const serviceResolver = init(document.body);
 (window as any).serviceResolver = serviceResolver;
+
+const apiConfiguration = serviceResolver.getServiceOrFail<ApiConfiguration>(ApiConfiguration.identifier);
+apiConfiguration.setApiHost('https://reference-dataset.ember-nexus.dev');
+apiConfiguration.setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc' as any);
 
 const preview: Preview = {
   parameters: {
