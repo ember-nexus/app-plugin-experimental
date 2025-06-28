@@ -3,62 +3,11 @@ import {customElement, property} from 'lit/decorators.js';
 
 import {tmpStyle} from '../../Style';
 import {ServiceResolver} from "@ember-nexus/app-core/Service";
-import { createActor, AnyStateMachine, createMachine } from 'xstate';
+import {withStateMachine, withDescription} from "../../Decorator";
+import {toggleMachine} from "../../Machine";
 
-type Constructor<T = {}> = new (...args: any[]) => T;
 
-export function withDescription(description: string) {
-  return function <TBase extends Constructor>(Base: TBase) {
-    return class extends Base {
-      description = description;
-    };
-  };
-}
 
-interface LifecycleHost {
-  connectedCallback?(): void;
-  disconnectedCallback?(): void;
-  requestUpdate?(...args: any[]): void;
-}
-
-export function withStateMachine(machine: AnyStateMachine) {
-  return function <TBase extends Constructor<LifecycleHost>>(Base: TBase) {
-    return class extends Base {
-      actor = createActor(machine);
-      state = this.actor.getSnapshot();
-      send = this.actor.send;
-
-      connectedCallback() {
-        super.connectedCallback?.();
-
-        this.actor.subscribe((snapshot) => {
-          this.state = snapshot;
-          this.requestUpdate?.();
-        });
-
-        this.actor.start();
-      }
-
-      disconnectedCallback() {
-        super.disconnectedCallback?.();
-        this.actor.stop();
-      }
-    };
-  };
-}
-
-export const toggleMachine = createMachine({
-  id: 'toggle',
-  types: {} as {
-    context: {};
-    events: { type: 'TOGGLE' };
-  },
-  initial: 'off',
-  states: {
-    off: { on: { TOGGLE: 'on' } },
-    on: { on: { TOGGLE: 'off' } },
-  },
-});
 
 
 @customElement('ember-nexus-default-card')

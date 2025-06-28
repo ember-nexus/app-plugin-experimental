@@ -1,9 +1,9 @@
-import { Element, Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/app-core/Type/Definition';
+import { Node, Relation, Uuid, uuidv4Regex } from '@ember-nexus/app-core/Type/Definition';
 import { assign, fromPromise, setup } from 'xstate';
 
 import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type';
 
-export const singleElementMachine = setup({
+const singleElementMachine = setup({
   actors: {
     loadElement: fromPromise<Node | Relation, { elementId: Uuid; htmlElement: HTMLElement | DocumentFragment }>(
       async ({ input }) => {
@@ -169,4 +169,4 @@ export const singleElementMachine = setup({
   },
 });
 
-export { Element };
+export { singleElementMachine };
