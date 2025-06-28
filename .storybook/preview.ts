@@ -8,6 +8,7 @@ console.log(tmp);
 import * as EmberNexus from '@ember-nexus/web-sdk';
 import './style.css?style';
 import './preview.css?style';
+import {init} from '@ember-nexus/app-core';
 
 const WebSdkConfiguration = EmberNexus.Service.WebSdkConfiguration;
 const container = EmberNexus.Container;
@@ -15,6 +16,9 @@ container.get(WebSdkConfiguration).setApiHost('https://reference-dataset.ember-n
 container.get(WebSdkConfiguration).setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc' as EmberNexus.Type.Definition.Token);
 container.get(EmberNexus.BrowserEvent.BrowserEventHandler).addBrowserEventListeners(document.body as HTMLElement);
 console.log(document.body);
+
+const serviceResolver = init(document.body);
+(window as any).serviceResolver = serviceResolver;
 
 const preview: Preview = {
   parameters: {

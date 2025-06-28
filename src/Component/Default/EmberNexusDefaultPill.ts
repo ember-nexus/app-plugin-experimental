@@ -6,13 +6,13 @@ import { Actor, createActor } from 'xstate';
 
 import {
   findBestFontWeightColor,
+  getColorFromElement,
+  getColorFromElementOrId,
   getNameFromElementOrId,
   getNameOrFirstLettersFromIdFromElementOrId,
 } from '../../Helper';
-import { getColorFromElement, getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { fontStyle, shadowStyle } from '../../Style';
-import { pillComponentStyle } from '../../Style';
+import { fontStyle, pillComponentStyle, shadowStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-pill')

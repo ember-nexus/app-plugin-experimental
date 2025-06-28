@@ -4,11 +4,14 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getInitialsFromElementOrId, getTitleFromElementOrId } from '../../Helper';
-import { getColorFromElementOrId } from '../../Helper/ColorHelper';
+import {
+  findBestFontWeightColor,
+  getColorFromElementOrId,
+  getInitialsFromElementOrId,
+  getTitleFromElementOrId,
+} from '../../Helper';
 import { singleElementMachine } from '../../Machine';
-import { fontStyle, shadowStyle } from '../../Style';
-import { iconComponentStyle } from '../../Style';
+import { fontStyle, iconComponentStyle, shadowStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-icon')

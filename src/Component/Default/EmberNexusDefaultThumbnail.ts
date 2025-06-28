@@ -6,13 +6,12 @@ import { Actor, createActor } from 'xstate';
 
 import {
   findBestFontWeightColor,
+  getColorFromElementOrId,
   getNameFromElementOrId,
   getNameOrFirstLettersFromIdFromElementOrId,
 } from '../../Helper';
-import { getColorFromElementOrId } from '../../Helper/ColorHelper';
 import { singleElementMachine } from '../../Machine';
-import { fontStyle, shadowStyle } from '../../Style';
-import { thumbnailComponentStyle } from '../../Style';
+import { fontStyle, shadowStyle, thumbnailComponentStyle } from '../../Style';
 import { colorWarning } from '../../Type';
 
 @customElement('ember-nexus-default-thumbnail')

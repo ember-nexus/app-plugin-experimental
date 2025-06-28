@@ -6,9 +6,13 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { Actor, createActor } from 'xstate';
 
-import { findBestFontWeightColor, getNameFromElementOrId, getTitleFromElementOrId } from '../../Helper';
-import { getColorFromElementOrId } from '../../Helper/ColorHelper';
-import { getIconForElement } from '../../Helper/IconHelper';
+import {
+  findBestFontWeightColor,
+  getColorFromElementOrId,
+  getIconForElement,
+  getNameFromElementOrId,
+  getTitleFromElementOrId,
+} from '../../Helper';
 import { singleElementMachine } from '../../Machine';
 import { tmpStyle } from '../../Style';
 import { colorWarning } from '../../Type';
@@ -138,6 +142,7 @@ class EmberNexusDefaultCard extends LitElement {
       </div>
       <div class="description font-sans">
         <p>${description}</p>
+        <p>blub blab :D</p>
       </div>
     </div>`;
   }

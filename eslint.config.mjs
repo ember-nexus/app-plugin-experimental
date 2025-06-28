@@ -88,5 +88,6 @@ export default [{
                 caseInsensitive: true,
             },
         }],
+        "no-duplicate-imports": "error",
     },
 }];
