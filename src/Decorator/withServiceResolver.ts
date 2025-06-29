@@ -1,31 +1,52 @@
-import { AnyStateMachine, createActor } from 'xstate';
+import { GetServiceResolverEvent } from '@ember-nexus/app-core/BrowserEvent';
+import { ServiceResolver } from '@ember-nexus/app-core/Service';
 
+import { delay } from '../Helper/index.js';
 import { Constructor, LifecycleCapableWebComponent } from '../Type/Definition/index.js';
+import { maxRetryAttempts, retryTimeoutMinMilliseconds, retryTimeoutVariance } from '../Type/index.js';
+
+async function resolveService(element: HTMLElement): Promise<ServiceResolver> {
+  let attempt = 0;
+  while (attempt < maxRetryAttempts) {
+    const getServiceResolverEvent = new GetServiceResolverEvent();
+    element.dispatchEvent(getServiceResolverEvent);
+    const serviceResolver = getServiceResolverEvent.getServiceResolver();
+    if (serviceResolver !== null) {
+      return serviceResolver;
+    }
+
+    const timeToWaitInMilliseconds = Math.round(
+      (1 << attempt) *
+        retryTimeoutMinMilliseconds *
+        (Math.random() * 2 * retryTimeoutVariance + 1 - retryTimeoutVariance),
+    );
+    await delay(timeToWaitInMilliseconds);
+
+    attempt++;
+  }
+
+  // logger service can not be used here, as service resolver is not available -> we can not resolve the logger
+  throw new Error('Service resolution failed after max retries.');
+}
+
+function hasRefreshData(obj: unknown): obj is { refreshData: () => void } {
+  return typeof (obj as any).refreshData === 'function';
+}
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
-function withServiceResolver(
-  machine: AnyStateMachine,
-): <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase) => any {
+function withServiceResolver(): <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase) => any {
   return function <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase): any {
     return class extends Base {
-      actor = createActor(machine);
-      state = this.actor.getSnapshot();
-      send = this.actor.send;
+      serviceResolver: ServiceResolver;
 
       connectedCallback(): void {
         super.connectedCallback?.();
-
-        this.actor.subscribe((snapshot) => {
-          this.state = snapshot;
-          this.requestUpdate?.();
+        resolveService(this).then((serviceResolver: ServiceResolver) => {
+          this.serviceResolver = serviceResolver;
+          if (hasRefreshData(this)) {
+            this.refreshData();
+          }
         });
-
-        this.actor.start();
-      }
-
-      disconnectedCallback(): void {
-        super.disconnectedCallback?.();
-        this.actor.stop();
       }
     };
   };

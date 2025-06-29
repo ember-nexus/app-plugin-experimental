@@ -24,7 +24,7 @@
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",
   "dependencies": {
-    "@ember-nexus/app-core": "^0.0.4",
+    "@ember-nexus/app-core": "^0.0.6",
     "apca-w3": "^0.1.9",
     "color-hash": "^2.0.2",
     "colorparsley": "^0.1.8",
