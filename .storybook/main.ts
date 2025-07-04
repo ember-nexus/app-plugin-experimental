@@ -4,6 +4,7 @@ import projectWebpackConfig from '../webpack.config.cjs';
 
 const config: StorybookConfig = {
   stories: ['../storybook/**/*.mdx', '../storybook/**/*.stories.ts'],
+  staticDirs: [{ from: '../dist/', to: '/dist' }],
   addons: [
     '@storybook/addon-webpack5-compiler-swc',
     '@storybook/addon-essentials',
