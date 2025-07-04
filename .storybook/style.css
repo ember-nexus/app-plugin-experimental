@@ -71,4 +71,7 @@ body {
     --card-border-color: var(--color-border);
     --card-border-style: solid;
     --card-shadow: var(--shadow-2);
+
+    --un-text-opacity: 100%;
+    --un-bg-opacity: 100%;
 }

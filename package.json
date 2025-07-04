@@ -10,7 +10,7 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "rm -rf ./dist && yarn build:esm && yarn build:browser",
-    "build:browser": "webpack --config webpack.config.cjs",
+    "build:browser": "vite build",
     "build:esm": "yarn tsc -b tsconfig.esm.json",
     "cs": "eslint ./src",
     "cs:fix": "eslint ./src --fix",
@@ -34,6 +34,7 @@
     "xstate": "^5.13.1"
   },
   "devDependencies": {
+    "@ameinhardt/unocss-preset-daisy": "^1.1.8",
     "@chromatic-com/storybook": "^3.2.2",
     "@eslint/compat": "^1.1.0",
     "@eslint/eslintrc": "^3.1.0",
@@ -52,12 +53,17 @@
     "@types/sinon": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^7.14",
     "@typescript-eslint/parser": "^7.14",
+    "@unocss/core": "^66.3.2",
+    "@unocss/preset-attributify": "^66.3.2",
+    "@unocss/preset-typography": "^66.3.2",
+    "@unocss/preset-wind4": "^66.3.2",
     "@vitest/coverage-v8": "^3.1.4",
     "@vitest/eslint-plugin": "^1.2.1",
     "@vitest/ui": "^3.1.4",
     "copyfiles": "^2.4.1",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
+    "daisyui": "^5.0.43",
     "eslint": "^9.6",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.5.3",
@@ -91,6 +97,8 @@
     "typedoc-plugin-mdn-links": "^3.1.9",
     "typedoc-theme-hierarchy": "^5.0",
     "typescript": "^5.5",
+    "unocss": "^66.3.2",
+    "vite": "^7.0.0",
     "vitest": "^3.1.4",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"

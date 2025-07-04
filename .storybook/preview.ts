@@ -33,7 +33,7 @@ const preview: Preview = {
   decorators: [
     withThemeByClassName<WebComponentsRenderer>({
       themes: {
-        light: '',
+        light: 'light',
         dark: 'dark',
         'high contrast': 'high-contrast'
       },
