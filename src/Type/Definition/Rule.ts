@@ -1,6 +1,6 @@
 type Rule = {
-  type: 'exact' | 'fuzzy',
-  identifier: string
+  type: 'exact' | 'fuzzy';
+  identifier: string;
 };
 
 export { Rule };

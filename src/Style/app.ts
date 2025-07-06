@@ -1,4 +1,4 @@
-import appStyles from "./app.css?inline";
-import appStylesExposed from "./app.css";
+import appStylesExposed from './app.css';
+import appStyles from './app.css?inline';
 
-export {appStyles, appStylesExposed};
+export { appStyles, appStylesExposed };

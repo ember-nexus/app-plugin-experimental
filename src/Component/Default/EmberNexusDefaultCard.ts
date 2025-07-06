@@ -1,56 +1,53 @@
-import { ApiWrapper, ServiceResolver } from '@ember-nexus/app-core/Service';
-import { Element } from '@ember-nexus/app-core/Type/Definition';
-import {LitElement, TemplateResult, html, unsafeCSS} from 'lit';
+import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { SnapshotFrom } from 'xstate';
 
-import { withDescription, withServiceResolver, withStateMachine } from '../../Decorator/index.js';
-import { toggleMachine } from '../../Machine/index.js';
-import {appStyles} from "../../Style";
+import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
+import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
+import { appStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-default-card')
-@withDescription('decorator injected description :D')
-@withStateMachine(toggleMachine)
-@withServiceResolver()
+@withGetElementMachine()
 class EmberNexusDefaultCard extends LitElement {
   static styles = [unsafeCSS(appStyles)];
 
-  state: any;
-  send: (event: { type: string }) => void;
+  state: SnapshotFrom<typeof getElementMachine>;
 
-  serviceResolver!: ServiceResolver;
+  get stateTag(): getElementMachineTags {
+    return [...this.state.tags][0] as getElementMachineTags;
+  }
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
 
-  element?: Element;
-
-  constructor() {
-    super();
-  }
-
-  async refreshData(): Promise<void> {
-    const apiWrapper = await this.serviceResolver.getServiceOrFail<ApiWrapper>(ApiWrapper.identifier);
-    this.element = await apiWrapper.getElement(this.elementId);
-    this.requestUpdate();
+  renderCardContent(): TemplateResult {
+    switch (this.stateTag) {
+      case getElementMachineTags.Error:
+        return html`
+          <h2 class="card-title">Error: ${this.state.context?.element?.data?.name ?? 'unknown name'}</h2>
+          <p class="font-mono text-xs">${this.state.context?.element?.id ?? this.elementId}</p>
+          <p class="font-mono text-xs">${String(this.state.context?.error)}</p>
+        `;
+      case getElementMachineTags.Loading:
+        return html`
+          <h2 class="card-title">Loading</h2>
+          <p class="font-mono text-xs">${this.state.context?.element?.id ?? this.elementId}</p>
+        `;
+      case getElementMachineTags.Loaded:
+        return html`
+          <h2 class="card-title">
+            ${this.state.context?.element?.data?.name ?? 'unknown name'}
+            <div class="badge badge-sm badge-neutral">${this.state.context?.element?.type ?? 'unknown type'}</div>
+          </h2>
+          <p class="font-mono text-xs">${this.state.context?.element?.id ?? this.elementId}</p>
+        `;
+    }
   }
 
   render(): TemplateResult {
-    console.log(this.element);
-    let created = this.element?.data?.created;
-    created = created ? (created as Date).toISOString() : 'no created date';
     return html`
       <div class="card bg-base-100 w-96 shadow-sm">
-        <div class="card-body p-3">
-          <h2 class="card-title">
-            ${this.element?.data?.name ?? 'no name'}
-            <div class="badge badge-sm badge-neutral">${this.element?.type ?? 'unknown type'}</div>
-          </h2>
-          <p class="font-mono text-xs">${this.element?.id ?? 'no id'}</p>
-          <button
-            class="btn ${this.state?.value === 'on' ? 'btn-success' : 'btn-error'}"
-            @click=${(): void => this.send({ type: 'TOGGLE' })}
-          >State: ${this.state?.value}</button>
-        </div>
+        <div class="card-body p-3">${this.renderCardContent()}</div>
       </div>
     `;
   }

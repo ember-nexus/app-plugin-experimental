@@ -52,4 +52,4 @@ function withServiceResolver(): <TBase extends Constructor<LifecycleCapableWebCo
   };
 }
 
-export { withServiceResolver };
+export { resolveService, withServiceResolver };

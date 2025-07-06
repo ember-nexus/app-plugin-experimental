@@ -1,3 +1,4 @@
+export * from './app.js';
 export * from './CardComponentStyle.js';
 export * from './FontStyle.js';
 export * from './FramelessComponentStyle.js';
@@ -7,4 +8,3 @@ export * from './PillComponentStyle.js';
 export * from './ShadowStyle.js';
 export * from './ThumbnailComponentStyle.js';
 export * from './TmpStyle.js';
-export * from './app.js';
