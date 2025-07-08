@@ -1,10 +1,10 @@
-import {LitElement, TemplateResult, html, unsafeCSS} from 'lit';
+import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { SnapshotFrom } from 'xstate';
 
-import {appStyles} from '../../Style/index.js';
-import {withGetElementMachine} from "../../Decorator/withGetElementMachine";
-import {SnapshotFrom} from "xstate";
-import {getElementMachine, getElementMachineTags} from "../../Machine";
+import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
+import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
+import { appStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-default-inline-text')
 @withGetElementMachine()
@@ -20,19 +20,20 @@ class EmberNexusDefaultInlineText extends LitElement {
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
 
-  renderInlinteTextContent(): TemplateResult {
+  render(): TemplateResult {
     switch (this.stateTag) {
       case getElementMachineTags.Error:
-        return html`${String(this.state.context?.error)}`;
+        return html` <span title="${String(this.state.context?.error)}"> Error </span> `;
       case getElementMachineTags.Loading:
-        return html`Loading`;
+        return html` <span> Loading </span> `;
       case getElementMachineTags.Loaded:
-        return html`${this.state.context?.element?.data?.name ?? this.state.context?.element?.id ?? this.elementId} (${this.state.context?.element?.type ?? 'unknown type'})`;
+        let name = this.state.context?.element?.data?.name;
+        if (!name) {
+          const namePart = (this.state.context?.element?.id ?? this.elementId).slice(0, 8);
+          name = html`<span class="font-mono text-xs">${namePart}</span> (${this.state.context?.element?.type})`;
+        }
+        return html` <span> ${name} </span> `;
     }
-  }
-
-  render(): TemplateResult {
-    return html`<span>${this.renderInlinteTextContent()}</span>`;
   }
 }
 

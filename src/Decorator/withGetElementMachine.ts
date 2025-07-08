@@ -1,6 +1,8 @@
+import { Uuid } from '@ember-nexus/app-core/Type/Definition';
+import { PropertyValues } from '@lit/reactive-element';
 import { ActorRefFrom, SnapshotFrom, createActor } from 'xstate';
 
-import {getElementMachine} from '../Machine/index.js';
+import { getElementMachine } from '../Machine/index.js';
 import { Constructor, ElementCapableWebComponent } from '../Type/Definition/index.js';
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
@@ -34,6 +36,17 @@ function withGetElementMachine(): <TBase extends Constructor<ElementCapableWebCo
       disconnectedCallback(): void {
         super.disconnectedCallback?.();
         this.actor.stop();
+      }
+
+      updated(changedProperties: PropertyValues): void {
+        // @ts-ignore
+        super.updated?.();
+        if (changedProperties.has('elementId')) {
+          this.actor.send({
+            type: 'reset',
+            elementId: this.elementId as Uuid,
+          });
+        }
       }
     };
   };

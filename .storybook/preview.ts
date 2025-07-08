@@ -5,6 +5,7 @@ import * as tmp from '../dist/browser/index';
 console.log(tmp);
 import './style.css?style';
 import './preview.css?style';
+import '../src/Style/app.css';
 import {init} from '@ember-nexus/app-core';
 import {ApiConfiguration} from "@ember-nexus/app-core/Service";
 

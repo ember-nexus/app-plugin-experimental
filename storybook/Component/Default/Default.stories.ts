@@ -7,7 +7,7 @@ const meta: Meta<CustomArgs> = {
   title: 'Component/Default',
   component: 'ember-nexus-default',
   render: ({elementId}) => html`
-    <div class="d-flex flex-column gap-2">
+    <div class="flex flex-col gap-2">
       <ember-nexus-default-card
         element-id="${elementId}"
       >

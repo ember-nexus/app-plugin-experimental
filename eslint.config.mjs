@@ -97,6 +97,7 @@ export default [
           },
         },
       ],
+      'no-case-declarations': 'off',
       'no-console': 'error',
       'no-eq-null': 'error',
       'no-extra-bind': 'error',
