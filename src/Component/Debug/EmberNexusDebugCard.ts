@@ -8,13 +8,13 @@ import { SnapshotFrom } from 'xstate';
 
 import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
-import { appStyles } from '../../Style/index.js';
+import { indexStyles } from '../../Style/index.js';
 import {ShikiJsonHighlighterService} from "../../Service";
 
 @customElement('ember-nexus-debug-card')
 @withGetElementMachine()
 class EmberNexusDebugCard extends LitElement {
-  static styles = [unsafeCSS(appStyles)];
+  static styles = [unsafeCSS(indexStyles)];
 
   state: SnapshotFrom<typeof getElementMachine>;
 
@@ -64,7 +64,7 @@ class EmberNexusDebugCard extends LitElement {
       case getElementMachineTags.Loaded:
         const highlighter = this.state.context?.serviceResolver?.getServiceOrFail<ShikiJsonHighlighterService>(ShikiJsonHighlighterService.identifier);
         console.log('highlighter:');
-        console.log(highlighter);
+        console.log(highlighter?.getShikiHighlighter());
         let description = this.state.context?.element?.data?.description;
         if (description) description = html`<p>${description}</p>`;
         return html`

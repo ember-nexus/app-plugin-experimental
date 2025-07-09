@@ -1,10 +1,3 @@
-export * from './app.js';
-export * from './CardComponentStyle.js';
-export * from './FontStyle.js';
-export * from './FramelessComponentStyle.js';
-export * from './IconComponentStyle.js';
-export * from './InlineTextComponentStyle.js';
-export * from './PillComponentStyle.js';
-export * from './ShadowStyle.js';
-export * from './ThumbnailComponentStyle.js';
-export * from './TmpStyle.js';
+import indexStyles from './index.css?inline';
+
+export {indexStyles};

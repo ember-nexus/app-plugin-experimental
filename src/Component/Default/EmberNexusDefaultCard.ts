@@ -8,12 +8,12 @@ import { SnapshotFrom } from 'xstate';
 
 import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
-import { appStyles } from '../../Style/index.js';
+import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-default-card')
 @withGetElementMachine()
 class EmberNexusDefaultCard extends LitElement {
-  static styles = [unsafeCSS(appStyles)];
+  static styles = [unsafeCSS(indexStyles)];
 
   state: SnapshotFrom<typeof getElementMachine>;
 

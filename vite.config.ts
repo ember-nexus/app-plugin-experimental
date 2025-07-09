@@ -8,11 +8,13 @@ export default {
     sourcemap: true,
     lib: {
       entry: './src/index.ts',
-      formats: ['es', 'cjs']
+      formats: ['cjs']
     },
+    cssCodeSplit: true,
     rollupOptions: {
       input: [
-        resolve(__dirname, './src/index.ts')
+        resolve(__dirname, './src/index.ts'),
+        resolve(__dirname, './src/Style/index.css'),
       ],
       output: {
         entryFileNames: "[name].js",
