@@ -28,7 +28,7 @@ class ShikiJsonHighlighterService {
       langs: [
         languageJson
       ],
-      engine: createOnigurumaEngine(import('shiki/wasm'))
+      engine: createOnigurumaEngine(import('shiki/wasm')),
     });
     return this.highlighterPromise;
   }

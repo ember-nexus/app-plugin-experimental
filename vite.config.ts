@@ -6,6 +6,7 @@ export default {
   build: {
     outDir: 'dist/browser',
     sourcemap: true,
+    minify: 'terser',
     lib: {
       entry: './src/index.ts',
       formats: ['cjs']
@@ -18,6 +19,7 @@ export default {
       ],
       output: {
         entryFileNames: "[name].js",
+        chunkFileNames: '[name].js',
         assetFileNames: `[name].[ext]`
       }
     }
