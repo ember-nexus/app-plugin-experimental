@@ -1,5 +1,4 @@
 export * from './EmberNexusDefaultCard.js';
-export * from './EmberNexusDefaultFrameless.js';
 export * from './EmberNexusDefaultIcon.js';
 export * from './EmberNexusDefaultInlineText.js';
 export * from './EmberNexusDefaultPill.js';

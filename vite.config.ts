@@ -6,6 +6,10 @@ export default {
   build: {
     outDir: 'dist/browser',
     sourcemap: true,
+    lib: {
+      entry: './src/index.ts',
+      formats: ['es', 'cjs']
+    },
     rollupOptions: {
       input: [
         resolve(__dirname, './src/index.ts')
