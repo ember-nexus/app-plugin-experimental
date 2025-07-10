@@ -6,9 +6,9 @@ import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js'
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
 import { indexStyles } from '../../Style/index.js';
 
-@customElement('ember-nexus-default-inline-text')
+@customElement('ember-nexus-task-inline-text')
 @withGetElementMachine()
-class EmberNexusDefaultInlineText extends LitElement {
+class EmberNexusTaskInlineText extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
 
   state: SnapshotFrom<typeof getElementMachine>;
@@ -32,9 +32,9 @@ class EmberNexusDefaultInlineText extends LitElement {
           const namePart = (this.state.context?.element?.id ?? this.elementId).slice(0, 8);
           name = html`<span class="font-mono text-xs">${namePart}</span> (${this.state.context?.element?.type})`;
         }
-        return html` <span>${name}</span> `;
+        return html` <span>Task ${name}</span> `;
     }
   }
 }
 
-export { EmberNexusDefaultInlineText };
+export { EmberNexusTaskInlineText };

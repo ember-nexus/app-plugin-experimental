@@ -1,18 +1,19 @@
+import { ServiceResolver } from '@ember-nexus/app-core/Service';
 import { Color, formatHex8, rgb } from 'culori';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { TriangleAlert } from 'lucide-static';
-import {SnapshotFrom} from 'xstate';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { DirectiveResult } from 'lit/directive.js';
+import { styleMap } from 'lit/directives/style-map.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { UnsafeHTMLDirective } from 'lit-html/directives/unsafe-html.js';
+import { TriangleAlert } from 'lucide-static';
+import { HighlighterCore } from 'shiki';
+import { SnapshotFrom } from 'xstate';
 
 import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
+import { ShikiJsonHighlighterService } from '../../Service/index.js';
 import { indexStyles } from '../../Style/index.js';
-import {ShikiJsonHighlighterService} from "../../Service";
-import {HighlighterCore} from "shiki";
-import {UnsafeHTMLDirective} from "lit-html/directives/unsafe-html.js";
 
 @customElement('ember-nexus-debug-card')
 @withGetElementMachine()
@@ -40,17 +41,17 @@ class EmberNexusDebugCard extends LitElement {
     return styles;
   }
 
+  onServiceResolverLoaded(serviceResolver: ServiceResolver) {
+    const highlighterService = serviceResolver.getServiceOrFail<ShikiJsonHighlighterService>(
+      ShikiJsonHighlighterService.identifier,
+    );
+    highlighterService.getShikiHighlighter().then((highlighter: HighlighterCore) => {
+      this.highlighter = highlighter;
+      this.requestUpdate();
+    });
+  }
+
   render(): TemplateResult {
-    if (!this.highlighter && this.state.context) {
-      const highlighterService = this.state.context?.serviceResolver?.getServiceOrFail<ShikiJsonHighlighterService>(ShikiJsonHighlighterService.identifier);
-      if (highlighterService) {
-        highlighterService.getShikiHighlighter()
-          .then((highlighter: HighlighterCore) => {
-            this.highlighter = highlighter;
-            this.requestUpdate();
-          });
-      }
-    }
     switch (this.stateTag) {
       case getElementMachineTags.Error:
         const errorName = this.state.context?.error?.constructor?.name ?? 'Error';
@@ -77,16 +78,16 @@ class EmberNexusDebugCard extends LitElement {
           </div>
         `;
       case getElementMachineTags.Loaded:
-        let renderedCode : string | TemplateResult | DirectiveResult<typeof UnsafeHTMLDirective> = 'waiting to be rendered';
+        let renderedCode: string | TemplateResult | DirectiveResult<typeof UnsafeHTMLDirective> =
+          'waiting to be rendered';
         if (this.highlighter) {
-          const code = this.highlighter.codeToHtml(
-            JSON.stringify(this.state.context?.element, null, 2),
-            {
-              lang: 'json',
-              theme: 'catppuccin-latte'
-            }
+          const code = this.highlighter.codeToHtml(JSON.stringify(this.state.context?.element, null, 2), {
+            lang: 'json',
+            theme: 'catppuccin-latte',
+          });
+          renderedCode = unsafeHTML(
+            `<div class="text-xs overflow-x-auto p-3 rounded-md" style="background-color:#eff1f5;">${code}</div>`,
           );
-          renderedCode = unsafeHTML(`<div class="text-xs overflow-x-auto p-3 rounded-md" style="background-color:#eff1f5;">${code}</div>`);
         }
         return html`
           <div class="card bg-base-100 w-96 shadow-sm" style="${styleMap({ ...this.calculateColorStyles() })}">

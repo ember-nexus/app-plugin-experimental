@@ -6,9 +6,9 @@ import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js'
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
 import { indexStyles } from '../../Style/index.js';
 
-@customElement('ember-nexus-default-inline-text')
+@customElement('ember-nexus-task-pill')
 @withGetElementMachine()
-class EmberNexusDefaultInlineText extends LitElement {
+class EmberNexusTaskPill extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
 
   state: SnapshotFrom<typeof getElementMachine>;
@@ -23,18 +23,27 @@ class EmberNexusDefaultInlineText extends LitElement {
   render(): TemplateResult {
     switch (this.stateTag) {
       case getElementMachineTags.Error:
-        return html` <span title="${String(this.state.context?.error)}"> Error </span> `;
+        return html`
+          <div
+            class="badge badge-warning font-sans font-semibold rounded-full shadow-sm"
+            title="${String(this.state.context?.error)}"
+          >
+            Error
+          </div>
+        `;
       case getElementMachineTags.Loading:
-        return html` <span> Loading </span> `;
+        return html` <div class="badge badge-primary font-sans font-semibold rounded-full shadow-sm">Loading</div> `;
       case getElementMachineTags.Loaded:
         let name = this.state.context?.element?.data?.name;
         if (!name) {
           const namePart = (this.state.context?.element?.id ?? this.elementId).slice(0, 8);
           name = html`<span class="font-mono text-xs">${namePart}</span> (${this.state.context?.element?.type})`;
         }
-        return html` <span>${name}</span> `;
+        return html`
+          <div class="badge badge-primary font-sans font-semibold rounded-full shadow-sm">Task ${name}</div>
+        `;
     }
   }
 }
 
-export { EmberNexusDefaultInlineText };
+export { EmberNexusTaskPill };

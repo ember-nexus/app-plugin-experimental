@@ -4,15 +4,13 @@ import { html } from 'lit';
 type CustomArgs = { elementId: string };
 
 const meta: Meta<CustomArgs> = {
-  title: 'Component/Default/Card',
-  component: 'ember-nexus-default-card',
+  title: 'Component/Task/Icon',
+  component: 'ember-nexus-task-icon',
   render: ({elementId}) => html`
-    <div class="flex flex-col gap-2">
-      <ember-nexus-default-card
-        element-id="${elementId}"
-      >
-      </ember-nexus-default-card>
-    </div>
+    <ember-nexus-task-icon
+      element-id="${elementId}"
+    >
+    </ember-nexus-task-icon>
   `,
 };
 
@@ -21,6 +19,6 @@ type Story = StoryObj;
 
 export const Default: Story = {
   args: {
-    elementId: '56fda20c-b238-4034-b555-1df47c47e17a',
+    elementId: '976a753d-c47f-4305-a469-6c717eceb87f',
   }
 };

@@ -10,9 +10,18 @@ const enum getElementMachineTags {
   Error = 'ERROR',
 }
 
+type HTMLElementWithOptionalOnServiceResolverLoaded = HTMLElement & {
+  onServiceResolverLoaded?(serviceResolver: ServiceResolver): void;
+};
+
 const getElementMachine = setup({
   actors: {
-    getServiceResolver: fromPromise<ServiceResolver, { htmlElement: HTMLElement }>(({ input }) => {
+    getServiceResolver: fromPromise<
+      ServiceResolver,
+      {
+        htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
+      }
+    >(({ input }) => {
       return resolveService(input.htmlElement);
     }),
     getElement: fromPromise<Node | Relation, { elementId: Uuid; serviceResolver: ServiceResolver }>(({ input }) => {
@@ -28,14 +37,14 @@ const getElementMachine = setup({
   types: {
     context: {} as {
       elementId: null | Uuid;
-      htmlElement: HTMLElement;
+      htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
       element: null | Node | Relation;
       error: null | unknown;
       serviceResolver: null | ServiceResolver;
     },
     input: {} as {
       elementId: Uuid;
-      htmlElement: HTMLElement;
+      htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
     },
     events: {} as { type: 'reset'; elementId: Uuid },
   },
@@ -67,9 +76,14 @@ const getElementMachine = setup({
         }),
         onDone: {
           target: 'ReadyToGetElement',
-          actions: assign({
-            serviceResolver: ({ event }) => event.output,
-          }),
+          actions: [
+            assign({
+              serviceResolver: ({ event }) => event.output,
+            }),
+            ({ context }) => {
+              context.htmlElement.onServiceResolverLoaded?.(context.serviceResolver!);
+            },
+          ],
         },
         onError: {
           target: 'UnrecoverableError',

@@ -4,14 +4,14 @@ import { html } from 'lit';
 type CustomArgs = { elementId: string };
 
 const meta: Meta<CustomArgs> = {
-  title: 'Component/Default/Card',
-  component: 'ember-nexus-default-card',
+  title: 'Component/Task/Card',
+  component: 'ember-nexus-task-card',
   render: ({elementId}) => html`
     <div class="flex flex-col gap-2">
-      <ember-nexus-default-card
+      <ember-nexus-task-card
         element-id="${elementId}"
       >
-      </ember-nexus-default-card>
+      </ember-nexus-task-card>
     </div>
   `,
 };
