@@ -16,13 +16,13 @@
     --color-neutral-content: oklch(92% 0.004 286.32);
 
     --color-info: #036fe3;
-    --color-info-content: #002a8e;
+    --color-info-content: #fff;
     --color-success: #008539;
-    --color-success-content: #003f00;
+    --color-success-content: #fff;
     --color-warning: #ffc835;
-    --color-warning-content: #7f5200;
+    --color-warning-content: #000;
     --color-error: #da294a;
-    --color-error-content: #72000e;
+    --color-error-content: #000;
 
     --radius-selector: 0.5rem;
     --radius-field: 0.25rem;

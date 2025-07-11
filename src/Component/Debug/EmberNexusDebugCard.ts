@@ -57,7 +57,7 @@ class EmberNexusDebugCard extends LitElement {
         const errorName = this.state.context?.error?.constructor?.name ?? 'Error';
         const errorDescription = (this.state.context?.error as Error)?.message ?? String(this.state.context?.error);
         return html`
-          <div class="card bg-base-100 w-96 border-warning border-2 border-solid shadow-sm">
+          <div class="card bg-base-100 w-full border-warning border-2 border-solid shadow-sm">
             <figure class="absolute h-full w-full opacity-25">
               <span class="absolute -bottom-2 -right-4 text-warning text-[96px]">${unsafeHTML(TriangleAlert)}</span>
             </figure>
@@ -70,7 +70,7 @@ class EmberNexusDebugCard extends LitElement {
         `;
       case getElementMachineTags.Loading:
         return html`
-          <div class="card bg-base-100 w-96 shadow-sm">
+          <div class="card bg-base-100 w-full shadow-sm">
             <div class="card-body p-3">
               <h2 class="card-title">Loading</h2>
               <p class="font-mono text-xs">${this.state.context?.element?.id ?? this.elementId}</p>
@@ -90,7 +90,7 @@ class EmberNexusDebugCard extends LitElement {
           );
         }
         return html`
-          <div class="card bg-base-100 w-96 shadow-sm" style="${styleMap({ ...this.calculateColorStyles() })}">
+          <div class="card bg-base-100 w-full shadow-sm" style="${styleMap({ ...this.calculateColorStyles() })}">
             <div class="card-body p-3">
               <h2 class="card-title">
                 ${this.state.context?.element?.data?.name ?? 'unknown name'}
