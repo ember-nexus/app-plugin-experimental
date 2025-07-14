@@ -1,10 +1,10 @@
-import {html, LitElement, TemplateResult, unsafeCSS} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {ActorRefFrom, SnapshotFrom} from 'xstate';
+import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ActorRefFrom, SnapshotFrom } from 'xstate';
 
-import {loginPageMachine, loginPageMachineTags} from '../Machine/Page/index.js';
-import {indexStyles} from '../Style/index.js';
-import {withStateMachine} from "../Decorator";
+import { withStateMachine } from '../Decorator/index.js';
+import { loginPageMachine, loginPageMachineTags } from '../Machine/Page/index.js';
+import { indexStyles } from '../Style/index.js';
 
 @customElement('ember-nexus-page-login')
 @withStateMachine(loginPageMachine)
@@ -46,7 +46,7 @@ class LoginPage extends LitElement {
     console.log('on clear');
     event.preventDefault();
     this.send({
-      type: 'formClear'
+      type: 'formClear',
     });
   }
 
@@ -54,7 +54,7 @@ class LoginPage extends LitElement {
     console.log('on submit');
     event.preventDefault();
     this.send({
-      type: 'formSubmit'
+      type: 'formSubmit',
     });
   }
 
@@ -69,9 +69,7 @@ class LoginPage extends LitElement {
     return html`
       <div class="card bg-base-100 w-full shadow-sm">
         <div class="card-body p-3">
-          <h2 class="card-title">
-            Login
-          </h2>
+          <h2 class="card-title">Login</h2>
           <fieldset class="fieldset">
             <legend class="fieldset-legend">Email or username:</legend>
             <input
@@ -96,13 +94,17 @@ class LoginPage extends LitElement {
           </fieldset>
           <div class="flex gap-2">
             <button
-              class="btn btn-soft btn-neutral basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit ? '' : 'btn-disabled'}"
+              class="btn btn-soft btn-neutral basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
+                ? ''
+                : 'btn-disabled'}"
               @click=${this.onClear}
             >
               Clear
             </button>
             <button
-              class="btn btn-soft btn-success basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit ? '' : 'btn-disabled'}"
+              class="btn btn-soft btn-success basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
+                ? ''
+                : 'btn-disabled'}"
               @click=${this.onSubmit}
             >
               Login
@@ -115,4 +117,4 @@ class LoginPage extends LitElement {
   }
 }
 
-export {LoginPage};
+export { LoginPage };

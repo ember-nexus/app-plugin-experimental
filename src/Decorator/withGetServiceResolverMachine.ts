@@ -4,7 +4,9 @@ import { getServiceResolverMachine } from '../Machine/index.js';
 import { Constructor, LifecycleCapableWebComponent } from '../Type/Definition/index.js';
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
-function withGetServiceResolverMachine(): <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase) => any {
+function withGetServiceResolverMachine(): <TBase extends Constructor<LifecycleCapableWebComponent>>(
+  Base: TBase,
+) => any {
   return function <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase): any {
     return class extends Base {
       actor: ActorRefFrom<typeof getServiceResolverMachine>;

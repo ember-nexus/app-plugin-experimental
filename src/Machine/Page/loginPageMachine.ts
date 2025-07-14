@@ -1,16 +1,16 @@
-import {ApiConfiguration, ApiWrapper, ServiceResolver} from '@ember-nexus/app-core/Service';
-import {Token, UniqueUserIdentifier} from '@ember-nexus/app-core/Type/Definition';
-import {assign, fromPromise, setup} from 'xstate';
+import { ApiConfiguration, ApiWrapper, ServiceResolver } from '@ember-nexus/app-core/Service';
+import { Token, UniqueUserIdentifier } from '@ember-nexus/app-core/Type/Definition';
+import { assign, fromPromise, setup } from 'xstate';
 
-import {resolveService} from '../../Decorator/index.js';
-import {LifecycleCapableWebComponent} from "../../Type/Definition";
+import { resolveService } from '../../Decorator/index.js';
+import { LifecycleCapableWebComponent } from '../../Type/Definition/index.js';
 
 const enum loginPageMachineTags {
   Loading = 'LOADING',
   WaitingForFormEdit = 'WAITING_FOR_FORM_EDIT',
   SubmittingForm = 'SUBMITTING_FORM',
   Error = 'ERROR',
-  LoginSuccessful = 'LOGIN_SUCCESSFUL'
+  LoginSuccessful = 'LOGIN_SUCCESSFUL',
 }
 
 const loginPageMachine = setup({
@@ -20,18 +20,21 @@ const loginPageMachine = setup({
       {
         htmlElement: LifecycleCapableWebComponent;
       }
-    >(({input}) => {
+    >(({ input }) => {
       return resolveService(input.htmlElement);
     }),
-    postToken: fromPromise<Token, {
-      uniqueUserIdentifier: UniqueUserIdentifier,
-      password: string;
-      serviceResolver: ServiceResolver
-    }>(({input}) => {
+    postToken: fromPromise<
+      Token,
+      {
+        uniqueUserIdentifier: UniqueUserIdentifier;
+        password: string;
+        serviceResolver: ServiceResolver;
+      }
+    >(({ input }) => {
       console.log('postToken action');
       const apiWrapper = input.serviceResolver.getServiceOrFail<ApiWrapper>(ApiWrapper.identifier);
       console.log('between');
-      let promise = apiWrapper.postToken(input.uniqueUserIdentifier, input.password);
+      const promise = apiWrapper.postToken(input.uniqueUserIdentifier, input.password);
       console.log(promise);
       return promise;
     }),
@@ -48,13 +51,13 @@ const loginPageMachine = setup({
       htmlElement: LifecycleCapableWebComponent;
     },
     events: {} as
-      { type: 'formClear' } |
-      { type: 'formUpdate'; uniqueUserIdentifier: UniqueUserIdentifier | string; password: string; } |
-      { type: 'formSubmit' },
+      | { type: 'formClear' }
+      | { type: 'formUpdate'; uniqueUserIdentifier: UniqueUserIdentifier | string; password: string }
+      | { type: 'formSubmit' },
   },
 }).createMachine({
   id: 'login-page-machine',
-  context: ({input}) => ({
+  context: ({ input }) => ({
     htmlElement: input.htmlElement,
     uniqueUserIdentifier: '',
     password: '',
@@ -76,21 +79,21 @@ const loginPageMachine = setup({
       tags: [loginPageMachineTags.Loading],
       invoke: {
         src: 'getServiceResolver',
-        input: ({context}) => ({
+        input: ({ context }) => ({
           htmlElement: context.htmlElement,
         }),
         onDone: {
           target: 'WaitingForFormUpdate',
           actions: [
             assign({
-              serviceResolver: ({event}) => event.output,
-            })
+              serviceResolver: ({ event }) => event.output,
+            }),
           ],
         },
         onError: {
           target: 'UnrecoverableError',
           actions: assign({
-            error: ({event}) => event.error,
+            error: ({ event }) => event.error,
           }),
         },
       },
@@ -115,8 +118,8 @@ const loginPageMachine = setup({
         },
         formUpdate: {
           actions: assign({
-            uniqueUserIdentifier: ({event}) => event.uniqueUserIdentifier,
-            password: ({event}) => event.password,
+            uniqueUserIdentifier: ({ event }) => event.uniqueUserIdentifier,
+            password: ({ event }) => event.password,
           }),
           target: 'WaitingForFormUpdate',
         },
@@ -130,14 +133,14 @@ const loginPageMachine = setup({
       invoke: {
         src: 'postToken',
         // @ts-expect-error error description
-        input: ({context}) => ({
+        input: ({ context }) => ({
           serviceResolver: context.serviceResolver,
           uniqueUserIdentifier: context.uniqueUserIdentifier,
           password: context.password,
         }),
         onDone: {
           target: 'LoginSuccessful',
-          actions: ({context, event}) => {
+          actions: ({ context, event }) => {
             console.log('token onDone action');
             const serviceResolver = context.serviceResolver;
             const apiConfiguration = serviceResolver?.getServiceOrFail<ApiConfiguration>(ApiConfiguration.identifier);
@@ -148,13 +151,13 @@ const loginPageMachine = setup({
         onError: {
           target: 'WaitingForFormUpdate',
           actions: assign({
-            error: ({event}) => event.error,
+            error: ({ event }) => event.error,
           }),
         },
       },
     },
     LoginSuccessful: {
-      tags: [loginPageMachineTags.LoginSuccessful]
+      tags: [loginPageMachineTags.LoginSuccessful],
     },
     UnrecoverableError: {
       tags: [loginPageMachineTags.Error],
@@ -162,4 +165,4 @@ const loginPageMachine = setup({
   },
 });
 
-export {loginPageMachine, loginPageMachineTags};
+export { loginPageMachine, loginPageMachineTags };

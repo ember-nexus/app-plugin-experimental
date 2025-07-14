@@ -22,7 +22,7 @@ const getServiceResolverMachine = setup({
       }
     >(({ input }) => {
       return resolveService(input.htmlElement);
-    })
+    }),
   },
   types: {
     context: {} as {
@@ -32,7 +32,7 @@ const getServiceResolverMachine = setup({
     },
     input: {} as {
       htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
-    }
+    },
   },
 }).createMachine({
   id: 'get-service-resolver-machine',
@@ -78,7 +78,7 @@ const getServiceResolverMachine = setup({
       },
     },
     Loaded: {
-      tags: [getServiceResolverMachineTags.Loaded]
+      tags: [getServiceResolverMachineTags.Loaded],
     },
     UnrecoverableError: {
       tags: [getServiceResolverMachineTags.Error],

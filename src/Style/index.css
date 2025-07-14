@@ -65,3 +65,10 @@ svg.lucide {
     container-type: size;
     display: inline-block;
 }
+
+#g6Root,
+#g6Root .g6-background,
+#g6Root canvas {
+    border-bottom-left-radius: var(--radius-box);
+    border-bottom-right-radius: var(--radius-box);
+}
