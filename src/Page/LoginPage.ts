@@ -43,7 +43,6 @@ class LoginPage extends LitElement {
   }
 
   private onClear(event: Event): void {
-    console.log('on clear');
     event.preventDefault();
     this.send({
       type: 'formClear',
@@ -51,7 +50,6 @@ class LoginPage extends LitElement {
   }
 
   private onSubmit(event: Event): void {
-    console.log('on submit');
     event.preventDefault();
     this.send({
       type: 'formSubmit',
@@ -65,6 +63,14 @@ class LoginPage extends LitElement {
         <progress class="progress w-full"></progress>
         <p>Logging in...</p>
       `;
+    }
+    let errorBlock: undefined | TemplateResult;
+    if (this.state.context.error) {
+      let errorMessage = this.state.context.error;
+      if (errorMessage instanceof Error) {
+        errorMessage = errorMessage.message;
+      }
+      errorBlock = html` <p class="text-error">${errorMessage}</p> `;
     }
     return html`
       <div class="card bg-base-100 w-full shadow-sm">
@@ -110,7 +116,7 @@ class LoginPage extends LitElement {
               Login
             </button>
           </div>
-          ${loadingBar}
+          ${errorBlock} ${loadingBar}
         </div>
       </div>
     `;

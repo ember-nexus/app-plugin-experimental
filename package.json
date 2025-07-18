@@ -5,6 +5,7 @@
   "engines": {
     "node": ">= 20.0"
   },
+  "browserslist": ["last 2 years"],
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",

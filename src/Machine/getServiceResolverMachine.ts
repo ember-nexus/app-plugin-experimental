@@ -64,7 +64,7 @@ const getServiceResolverMachine = setup({
             assign({
               serviceResolver: ({ event }) => event.output,
             }),
-            ({ context }) => {
+            ({ context }): void => {
               context.htmlElement.onServiceResolverLoaded?.(context.serviceResolver!);
             },
           ],

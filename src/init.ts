@@ -1,11 +1,11 @@
 import { ServiceResolver } from '@ember-nexus/app-core/Service';
 
-import { G6ThemeService, ShikiJsonHighlighterService } from './Service/index.js';
+import { ShikiJsonHighlighterService } from './Service/index.js';
 
 function init(serviceResolver: ServiceResolver): void {
-  const services = [ShikiJsonHighlighterService, G6ThemeService];
+  const services = [ShikiJsonHighlighterService];
   for (let i = 0; i < services.length; i++) {
-    serviceResolver.setService(services[i].identifier, services[i].constructFromServiceResolver(serviceResolver));
+    serviceResolver.setService(services[i].identifier, services[i].constructFromServiceResolver());
   }
 }
 

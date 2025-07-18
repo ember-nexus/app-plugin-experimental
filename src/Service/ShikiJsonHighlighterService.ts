@@ -1,4 +1,3 @@
-import { ServiceResolver } from '@ember-nexus/app-core/Service';
 import languageJson from '@shikijs/langs/json';
 import themeCatppuccinLatte from '@shikijs/themes/catppuccin-latte';
 import { HighlighterCore } from 'shiki';
@@ -14,7 +13,7 @@ class ShikiJsonHighlighterService {
 
   constructor() {}
 
-  static constructFromServiceResolver(_serviceResolver: ServiceResolver): ShikiJsonHighlighterService {
+  static constructFromServiceResolver(): ShikiJsonHighlighterService {
     return new ShikiJsonHighlighterService();
   }
 

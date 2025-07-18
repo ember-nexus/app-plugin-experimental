@@ -41,7 +41,7 @@ class EmberNexusDebugCard extends LitElement {
     return styles;
   }
 
-  onServiceResolverLoaded(serviceResolver: ServiceResolver) {
+  onServiceResolverLoaded(serviceResolver: ServiceResolver): void {
     const highlighterService = serviceResolver.getServiceOrFail<ShikiJsonHighlighterService>(
       ShikiJsonHighlighterService.identifier,
     );

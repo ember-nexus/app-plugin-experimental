@@ -1,5 +1,4 @@
-import { ExtensionCategory, Graph, register } from '@antv/g6';
-import { light } from '@antv/g6/esm/themes';
+import { Graph } from '@antv/g6';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { query } from 'lit/decorators/query.js';
 import { customElement } from 'lit/decorators.js';
@@ -13,29 +12,14 @@ class GraphCard extends LitElement {
   @query('#g6Root')
   g6Root;
 
-  async delay(ms: number): Promise<void> {
-    return new Promise((res) => setTimeout(res, ms));
+  delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   firstUpdated(): void {
     const { width, height } = this.g6Root.getBoundingClientRect();
     this.delay(500).then(() => {
-      const theme = {
-        ...light,
-        node: {
-          ...light.node,
-          style: {
-            ...light.node?.style,
-            fill: '#f00',
-          },
-        },
-        background: '#ff0', // '#eff1f5'
-      };
-      console.log(theme);
-      register(ExtensionCategory.THEME, 'test', theme);
-
       const graph = new Graph({
-        theme: 'dark',
         container: this.g6Root,
         width: width,
         height: height,
@@ -58,7 +42,7 @@ class GraphCard extends LitElement {
         },
         node: {
           style: {
-            labelText: (d) => String(d.label ?? '-'),
+            labelText: (d): string => String(d.label ?? '-'),
             labelPlacement: 'center',
             labelFill: '#fff',
           },

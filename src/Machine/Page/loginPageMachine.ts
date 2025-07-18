@@ -31,11 +31,8 @@ const loginPageMachine = setup({
         serviceResolver: ServiceResolver;
       }
     >(({ input }) => {
-      console.log('postToken action');
       const apiWrapper = input.serviceResolver.getServiceOrFail<ApiWrapper>(ApiWrapper.identifier);
-      console.log('between');
       const promise = apiWrapper.postToken(input.uniqueUserIdentifier, input.password);
-      console.log(promise);
       return promise;
     }),
   },
@@ -100,9 +97,6 @@ const loginPageMachine = setup({
     },
     WaitingForFormUpdate: {
       tags: [loginPageMachineTags.WaitingForFormEdit],
-      entry: assign({
-        error: null,
-      }),
       on: {
         formClear: {
           actions: [
@@ -110,7 +104,7 @@ const loginPageMachine = setup({
               uniqueUserIdentifier: () => '',
               password: () => '',
             }),
-            ({ context }) => {
+            ({ context }): void => {
               context.htmlElement.requestUpdate?.();
             },
           ],
@@ -130,6 +124,9 @@ const loginPageMachine = setup({
     },
     SubmittingForm: {
       tags: [loginPageMachineTags.SubmittingForm],
+      entry: assign({
+        error: null,
+      }),
       invoke: {
         src: 'postToken',
         // @ts-expect-error error description
@@ -141,11 +138,9 @@ const loginPageMachine = setup({
         onDone: {
           target: 'LoginSuccessful',
           actions: ({ context, event }) => {
-            console.log('token onDone action');
             const serviceResolver = context.serviceResolver;
             const apiConfiguration = serviceResolver?.getServiceOrFail<ApiConfiguration>(ApiConfiguration.identifier);
             apiConfiguration?.setToken(event.output);
-            console.log(`Updated token! :D - new token: ${event.output}`);
           },
         },
         onError: {
