@@ -1,6 +1,8 @@
 import languageJson from '@shikijs/langs/json';
+import themeAndromeeda from '@shikijs/themes/andromeeda';
+import themeCatppuccinFrappe from '@shikijs/themes/catppuccin-frappe';
 import themeCatppuccinLatte from '@shikijs/themes/catppuccin-latte';
-import { HighlighterCore } from 'shiki';
+import { HighlighterCore, ThemeRegistration } from 'shiki';
 import { createHighlighterCore } from 'shiki/core';
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma';
 
@@ -8,6 +10,7 @@ import { ServiceIdentifier } from '../Type/Enum/index.js';
 
 class ShikiJsonHighlighterService {
   static identifier: ServiceIdentifier = ServiceIdentifier.shikiJsonHighlighterService;
+  static defaultTheme: string = 'catppuccin-latte';
 
   private highlighterPromise: HighlighterCore;
 
@@ -17,12 +20,31 @@ class ShikiJsonHighlighterService {
     return new ShikiJsonHighlighterService();
   }
 
+  makeAppThemeAware(theme: ThemeRegistration): ThemeRegistration {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        'editor.background': 'var(--color-base-200)',
+      },
+      tokenColors: [
+        ...(theme.tokenColors ?? []),
+        {
+          settings: {
+            background: 'var(--color-base-200)',
+          },
+        },
+      ],
+    };
+  }
+
   async getShikiHighlighter(): Promise<HighlighterCore> {
     if (this.highlighterPromise) {
       return this.highlighterPromise;
     }
+    const tmp = this.makeAppThemeAware(themeAndromeeda);
     this.highlighterPromise = await createHighlighterCore({
-      themes: [themeCatppuccinLatte],
+      themes: [this.makeAppThemeAware(themeCatppuccinLatte), this.makeAppThemeAware(themeCatppuccinFrappe), tmp],
       langs: [languageJson],
       engine: createOnigurumaEngine(import('shiki/wasm')),
     });

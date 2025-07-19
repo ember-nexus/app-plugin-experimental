@@ -100,7 +100,7 @@ class LoginPage extends LitElement {
           </fieldset>
           <div class="flex gap-2">
             <button
-              class="btn btn-soft btn-neutral basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
+              class="btn btn-soft basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
                 ? ''
                 : 'btn-disabled'}"
               @click=${this.onClear}

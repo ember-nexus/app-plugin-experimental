@@ -10,17 +10,20 @@ import { TriangleAlert } from 'lucide-static';
 import { HighlighterCore } from 'shiki';
 import { SnapshotFrom } from 'xstate';
 
+import { ThemeVariables, withThemeVariables } from '../../Decorator/index.js';
 import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
 import { ShikiJsonHighlighterService } from '../../Service/index.js';
 import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-debug-card')
+@withThemeVariables()
 @withGetElementMachine()
 class EmberNexusDebugCard extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
 
   state: SnapshotFrom<typeof getElementMachine>;
+  themeVariables: ThemeVariables | undefined;
 
   get stateTag(): getElementMachineTags {
     return [...this.state.tags][0] as getElementMachineTags;
@@ -83,11 +86,9 @@ class EmberNexusDebugCard extends LitElement {
         if (this.highlighter) {
           const code = this.highlighter.codeToHtml(JSON.stringify(this.state.context?.element, null, 2), {
             lang: 'json',
-            theme: 'catppuccin-latte',
+            theme: this.themeVariables?.['--shiki-theme'] ?? ShikiJsonHighlighterService.defaultTheme,
           });
-          renderedCode = unsafeHTML(
-            `<div class="text-xs overflow-x-auto p-3 rounded-md" style="background-color:#eff1f5;">${code}</div>`,
-          );
+          renderedCode = unsafeHTML(`<div class="text-xs overflow-x-auto p-3 rounded-md bg-base-200">${code}</div>`);
         }
         return html`
           <div class="card bg-base-100 w-full shadow-sm" style="${styleMap({ ...this.calculateColorStyles() })}">

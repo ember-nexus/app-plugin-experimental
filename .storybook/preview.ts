@@ -1,5 +1,5 @@
 import type {Preview, WebComponentsRenderer} from '@storybook/web-components';
-import {withThemeByClassName} from '@storybook/addon-themes';
+import {withThemeByDataAttribute} from '@storybook/addon-themes';
 
 import './style.css?style';
 import './preview.css?style';
@@ -32,13 +32,15 @@ const preview: Preview = {
     layout: 'centered',
   },
   decorators: [
-    withThemeByClassName<WebComponentsRenderer>({
+    withThemeByDataAttribute<WebComponentsRenderer>({
       themes: {
         light: 'light',
         dark: 'dark',
-        'high contrast': 'high-contrast'
+        emerald: 'emerald',
+        dim: 'dim',
       },
       defaultTheme: 'light',
+      attributeName: 'data-theme',
     }),
   ],
 };

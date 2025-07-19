@@ -6,7 +6,7 @@ const meta: Meta = {
   title: 'Page',
   component: 'ember-nexus-page-login',
   render: () => html`
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 w-md">
       <ember-nexus-page-login>
       </ember-nexus-page-login>
     </div>
