@@ -88,7 +88,9 @@ class EmberNexusDebugCard extends LitElement {
             lang: 'json',
             theme: this.themeVariables?.['--shiki-theme'] ?? ShikiJsonHighlighterService.defaultTheme,
           });
-          renderedCode = unsafeHTML(`<div class="text-xs overflow-x-auto p-3 rounded-md bg-base-200">${code}</div>`);
+          renderedCode = unsafeHTML(
+            `<div class="text-xs overflow-x-auto p-3 rounded-md" style="background-color: var(--color-code-background)">${code}</div>`,
+          );
         }
         return html`
           <div class="card bg-base-100 w-full shadow-sm" style="${styleMap({ ...this.calculateColorStyles() })}">

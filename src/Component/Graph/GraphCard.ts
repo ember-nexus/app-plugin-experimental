@@ -3,11 +3,14 @@ import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { query } from 'lit/decorators/query.js';
 import { customElement } from 'lit/decorators.js';
 
+import { ThemeVariables, withThemeVariables } from '../../Decorator/index.js';
 import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-graph-card')
+@withThemeVariables()
 class GraphCard extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
+  themeVariables: ThemeVariables | undefined;
 
   @query('#g6Root')
   g6Root;
@@ -68,7 +71,7 @@ class GraphCard extends LitElement {
         plugins: [
           {
             type: 'background',
-            backgroundColor: '#eff1f5',
+            backgroundColor: this.themeVariables?.['--color-base-200'] ?? '#eff1f5',
           },
         ],
       });

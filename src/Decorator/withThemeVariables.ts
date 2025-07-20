@@ -1,4 +1,4 @@
-import { Constructor, ElementCapableWebComponent } from '../Type/Definition/index.js';
+import { Constructor, LifecycleCapableWebComponent } from '../Type/Definition/index.js';
 
 const THEME_VARIABLE_KEYS = [
   '--color-base-100',
@@ -49,8 +49,8 @@ function readThemeVariables(element: Element): ThemeVariables {
 }
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
-function withThemeVariables(): <TBase extends Constructor<ElementCapableWebComponent>>(Base: TBase) => any {
-  return function <TBase extends Constructor<ElementCapableWebComponent>>(Base: TBase): any {
+function withThemeVariables(): <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase) => any {
+  return function <TBase extends Constructor<LifecycleCapableWebComponent>>(Base: TBase): any {
     return class extends Base {
       themeVariables: ThemeVariables | undefined = undefined;
 

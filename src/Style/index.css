@@ -40,6 +40,7 @@
     --noise: 0;
 
     --shiki-theme: 'catppuccin-latte';
+    --color-code-background: var(--color-base-200);
 }
 @plugin "daisyui/theme" {
     name: "dark";
@@ -77,16 +78,19 @@
     --noise: 0;
 
     --shiki-theme: 'catppuccin-frappe';
+    --color-code-background: var(--color-base-200);
 }
 @plugin "daisyui/theme" {
     name: "emerald";
     default: true;
     --shiki-theme: 'andromeeda';
+    --color-code-background: 'oklch(0.28036 0.019 264.182)';
 }
 @plugin "daisyui/theme" {
     name: "dim";
     default: true;
     --shiki-theme: 'catppuccin-frappe';
+    --color-code-background: var(--color-base-200);
 }
 
 @theme {

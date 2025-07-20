@@ -25,16 +25,9 @@ class ShikiJsonHighlighterService {
       ...theme,
       colors: {
         ...theme.colors,
-        'editor.background': 'var(--color-base-200)',
+        'editor.background': 'var(--color-code-background)',
       },
-      tokenColors: [
-        ...(theme.tokenColors ?? []),
-        {
-          settings: {
-            background: 'var(--color-base-200)',
-          },
-        },
-      ],
+      tokenColors: theme.tokenColors?.filter((tokenColor) => !('background' in tokenColor.settings)) || [],
     };
   }
 
