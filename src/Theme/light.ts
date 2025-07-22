@@ -1,0 +1,43 @@
+import {Theme} from "../Type/Definition";
+
+const light: Theme = {
+  name: 'light',
+  cssVariables: {
+    'color-base-100': 'oklch(100% 0 0)',
+    'color-base-200': 'oklch(98% 0 0)',
+    'color-base-300': 'oklch(95% 0 0)',
+
+    'color-base-content': 'oklch(21% 0.006 285.885)',
+    'color-primary': '#ff073a',
+    'color-primary-content': '#ffffff',
+    'color-secondary': '#1a1a1a',
+    'color-secondary-content': '#ffffff',
+    'color-accent': 'oklch(77% 0.152 181.912)',
+    'color-accent-content': 'oklch(38% 0.063 188.416)',
+    'color-neutral': 'oklch(14% 0.005 285.823)',
+    'color-neutral-content': 'oklch(92% 0.004 286.32)',
+
+    'color-info': '#036fe3',
+    'color-info-content': '#fff',
+    'color-success': '#008539',
+    'color-success-content': '#fff',
+    'color-warning': '#ffc835',
+    'color-warning-content': '#000',
+    'color-error': '#da294a',
+    'color-error-content': '#000',
+
+    'radius-selector': '0.5rem',
+    'radius-field': '0.25rem',
+    'radius-box': '0.5rem',
+    'size-selector': '0.25rem',
+    'size-field': '0.25rem',
+    'border': '1px',
+    'depth': '1',
+    'noise': '0',
+
+    'color-code-background': 'oklch(98% 0 0)',
+  },
+  'shikiTheme': 'catppuccin-latte',
+};
+
+export {light};

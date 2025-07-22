@@ -1,11 +1,11 @@
-import type {Preview, WebComponentsRenderer} from '@storybook/web-components';
-import {withThemeByDataAttribute} from '@storybook/addon-themes';
+import type {Preview} from '@storybook/web-components';
 
 import './style.css?style';
 import './preview.css?style';
 import {init as appPluginExperimentalInit} from '../dist/browser/index';
 import {init as appCoreInit} from '@ember-nexus/app-core';
 import {ApiConfiguration} from "@ember-nexus/app-core/Service";
+import {withTheme} from "./withTheme.decorator";
 
 const serviceResolver = appCoreInit(document.body);
 (window as any).serviceResolver = serviceResolver;
@@ -15,6 +15,9 @@ apiConfiguration.setApiHost('https://reference-dataset.ember-nexus.dev');
 apiConfiguration.setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc' as any);
 
 appPluginExperimentalInit(serviceResolver);
+
+const themeService = serviceResolver.getServiceOrFail('ember-nexus.app-plugin-experimental.service.theme-service');
+
 
 const preview: Preview = {
   parameters: {
@@ -32,7 +35,7 @@ const preview: Preview = {
     layout: 'centered',
   },
   decorators: [
-    withThemeByDataAttribute<WebComponentsRenderer>({
+    withTheme({
       themes: {
         light: 'light',
         dark: 'dark',
@@ -40,7 +43,7 @@ const preview: Preview = {
         dim: 'dim',
       },
       defaultTheme: 'light',
-      attributeName: 'data-theme',
+      themeService: themeService
     }),
   ],
 };
