@@ -3,6 +3,7 @@ enum ServiceIdentifier {
   propertyExtractorService = 'ember-nexus.app-plugin-experimental.service.property-extractor-service',
   shikiJsonHighlighterService = 'ember-nexus.app-plugin-experimental.service.shiki-json-highlighter-service',
   themeService = 'ember-nexus.app-plugin-experimental.service.theme-service',
+  languageService = 'ember-nexus.app-plugin-experimental.service.language-service',
 }
 
 export { ServiceIdentifier };

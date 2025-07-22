@@ -1,4 +1,4 @@
-import {Theme} from "../Type/Definition";
+import { Theme } from '../Type/Definition/index.js';
 
 const dark: Theme = {
   name: 'dark',
@@ -31,13 +31,13 @@ const dark: Theme = {
     'radius-box': '0.5rem',
     'size-selector': '0.25rem',
     'size-field': '0.25rem',
-    'border': '1px',
-    'depth': '1',
-    'noise': '0',
+    border: '1px',
+    depth: '1',
+    noise: '0',
 
     'color-code-background': 'oklch(23.26% 0.014 253.1)',
   },
-  'shikiTheme': 'catppuccin-frappe',
+  shikiTheme: 'catppuccin-frappe',
 };
 
-export {dark};
+export { dark };

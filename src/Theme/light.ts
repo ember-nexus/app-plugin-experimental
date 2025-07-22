@@ -1,4 +1,4 @@
-import {Theme} from "../Type/Definition";
+import { Theme } from '../Type/Definition/index.js';
 
 const light: Theme = {
   name: 'light',
@@ -31,13 +31,13 @@ const light: Theme = {
     'radius-box': '0.5rem',
     'size-selector': '0.25rem',
     'size-field': '0.25rem',
-    'border': '1px',
-    'depth': '1',
-    'noise': '0',
+    border: '1px',
+    depth: '1',
+    noise: '0',
 
     'color-code-background': 'oklch(98% 0 0)',
   },
-  'shikiTheme': 'catppuccin-latte',
+  shikiTheme: 'catppuccin-latte',
 };
 
-export {light};
+export { light };

@@ -10,12 +10,14 @@ import { TriangleAlert } from 'lucide-static';
 import { HighlighterCore } from 'shiki';
 import { SnapshotFrom } from 'xstate';
 
+import { withUpdateOnThemeChange } from '../../Decorator/index.js';
 import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
 import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
-import {ShikiJsonHighlighterService, ThemeService} from '../../Service/index.js';
+import { ShikiJsonHighlighterService, ThemeService } from '../../Service/index.js';
 import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-debug-card')
+@withUpdateOnThemeChange()
 @withGetElementMachine()
 class EmberNexusDebugCard extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
@@ -83,7 +85,10 @@ class EmberNexusDebugCard extends LitElement {
         if (this.highlighter) {
           const code = this.highlighter.codeToHtml(JSON.stringify(this.state.context?.element, null, 2), {
             lang: 'json',
-            theme: this.state.context.serviceResolver?.getServiceOrFail<ThemeService>(ThemeService.identifier)?.getActiveTheme()?.shikiTheme ?? ShikiJsonHighlighterService.defaultTheme,
+            theme:
+              this.state.context.serviceResolver
+                ?.getServiceOrFail<ThemeService>(ThemeService.identifier)
+                ?.getActiveTheme()?.shikiTheme ?? ShikiJsonHighlighterService.defaultTheme,
           });
           renderedCode = unsafeHTML(
             `<div class="text-xs overflow-x-auto p-3 rounded-md" style="background-color: var(--color-code-background)">${code}</div>`,

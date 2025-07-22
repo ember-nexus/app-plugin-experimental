@@ -2,18 +2,32 @@ import { Graph } from '@antv/g6';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { query } from 'lit/decorators/query.js';
 import { customElement } from 'lit/decorators.js';
+import { SnapshotFrom } from 'xstate';
 
-import { ThemeVariables, withThemeVariables } from '../../Decorator/index.js';
+import {
+  ThemeVariables,
+  withGetServiceResolverMachine,
+  withThemeVariables,
+  withUpdateOnThemeChange,
+} from '../../Decorator/index.js';
+import { getServiceResolverMachine } from '../../Machine/index.js';
+import { ThemeService } from '../../Service/index.js';
 import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-graph-card')
+@withUpdateOnThemeChange()
+@withGetServiceResolverMachine()
 @withThemeVariables()
 class GraphCard extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
   themeVariables: ThemeVariables | undefined;
 
+  state: SnapshotFrom<typeof getServiceResolverMachine>;
+
   @query('#g6Root')
   g6Root;
+
+  graph: Graph;
 
   delay(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -22,7 +36,7 @@ class GraphCard extends LitElement {
   firstUpdated(): void {
     const { width, height } = this.g6Root.getBoundingClientRect();
     this.delay(500).then(() => {
-      const graph = new Graph({
+      this.graph = new Graph({
         container: this.g6Root,
         width: width,
         height: height,
@@ -76,11 +90,17 @@ class GraphCard extends LitElement {
         ],
       });
 
-      graph.render();
+      this.graph.render();
     });
   }
 
   render(): TemplateResult {
+    this.graph?.updatePlugin({
+      key: 'background',
+      backgroundColor:
+        this.state.context?.serviceResolver?.getServiceOrFail<ThemeService>(ThemeService.identifier)?.getActiveTheme()
+          ?.cssVariables['color-base-200'] ?? '#eff1f5',
+    });
     return html`
       <div class="card bg-base-100 w-full shadow-sm">
         <div class="card-body p-3">

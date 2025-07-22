@@ -1,6 +1,9 @@
+import { EventDispatcher, ServiceResolver } from '@ember-nexus/app-core/Service';
+import { Registry } from '@ember-nexus/app-core/Type/Definition';
+
+import { ThemeChangeEvent } from '../Event/index.js';
+import { Theme } from '../Type/Definition/index.js';
 import { ServiceIdentifier } from '../Type/Enum/index.js';
-import {Registry} from "@ember-nexus/app-core/Type/Definition";
-import {Theme} from "../Type/Definition";
 
 class ThemeService {
   static identifier: ServiceIdentifier = ServiceIdentifier.themeService;
@@ -9,17 +12,16 @@ class ThemeService {
   private activeTheme: Theme;
   private styleSheet: CSSStyleSheet;
 
-  constructor() {
+  constructor(private eventDispatcher: EventDispatcher) {
     this.themes = new Registry();
     this.styleSheet = new CSSStyleSheet();
   }
 
-  static constructFromServiceResolver(): ThemeService {
-    return new ThemeService();
+  static constructFromServiceResolver(serviceResolver: ServiceResolver): ThemeService {
+    return new ThemeService(serviceResolver.getServiceOrFail<EventDispatcher>(EventDispatcher.identifier));
   }
 
-  applyTheme(themeIdentifier: string): this
-  {
+  applyTheme(themeIdentifier: string): this {
     const theme = this.themes.getEntry(themeIdentifier);
     if (theme === null) {
       return this;
@@ -31,16 +33,15 @@ class ThemeService {
     const css = `:root {\n${cssVars}\n}`;
 
     this.styleSheet.replaceSync(css);
+    this.eventDispatcher.dispatchEvent(new ThemeChangeEvent(theme.name));
     return this;
   }
 
-  getStyleSheet(): CSSStyleSheet
-  {
+  getStyleSheet(): CSSStyleSheet {
     return this.styleSheet;
   }
 
-  getActiveTheme(): Theme
-  {
+  getActiveTheme(): Theme {
     return this.activeTheme;
   }
 }

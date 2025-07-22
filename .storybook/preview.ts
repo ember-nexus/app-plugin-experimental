@@ -17,6 +17,7 @@ apiConfiguration.setToken('secret-token:PIPeJGUt7c00ENn8a5uDlc' as any);
 appPluginExperimentalInit(serviceResolver);
 
 const themeService = serviceResolver.getServiceOrFail('ember-nexus.app-plugin-experimental.service.theme-service');
+const languageService = serviceResolver.getServiceOrFail('ember-nexus.app-plugin-experimental.service.language-service');
 
 
 const globalTypes = {
@@ -26,10 +27,15 @@ const globalTypes = {
     toolbar: {
       icon: "globe",
       items: [
+        // default language
         { value: "en", right: "EN", title: "English" },
+
+        // core languages
         { value: "de", right: "DE", title: "German" },
         { value: "no", right: "NO", title: "Norwegian" },
         { value: "ko", right: "KO", title: "Korean" },
+
+        // additional languages
         { value: "ar", right: "AR", title: "Arabic" },
         { value: "zh-CN", right: "ZH-CN", title: "Chinese" },
         { value: "fr", right: "FR", title: "French" },
@@ -74,7 +80,8 @@ const preview: Preview = {
     }),
     (story, context) => {
       const { locale } = context.globals;
-      console.log(locale);
+      // @ts-ignore
+      languageService.applyLanguage(locale);
       return story();
     }
   ],
