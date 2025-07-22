@@ -30,9 +30,6 @@ class ThemeService {
       .join('\n');
     const css = `:root {\n${cssVars}\n}`;
 
-    console.log('css:');
-    console.log(css);
-
     this.styleSheet.replaceSync(css);
     return this;
   }

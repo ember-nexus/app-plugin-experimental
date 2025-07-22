@@ -19,6 +19,33 @@ appPluginExperimentalInit(serviceResolver);
 const themeService = serviceResolver.getServiceOrFail('ember-nexus.app-plugin-experimental.service.theme-service');
 
 
+const globalTypes = {
+  locale: {
+    name: "Language",
+    defaultValue: "en",
+    toolbar: {
+      icon: "globe",
+      items: [
+        { value: "en", right: "EN", title: "English" },
+        { value: "de", right: "DE", title: "German" },
+        { value: "no", right: "NO", title: "Norwegian" },
+        { value: "ko", right: "KO", title: "Korean" },
+        { value: "ar", right: "AR", title: "Arabic" },
+        { value: "zh-CN", right: "ZH-CN", title: "Chinese" },
+        { value: "fr", right: "FR", title: "French" },
+        { value: "hi", right: "HI", title: "Hindi" },
+        { value: "it", right: "IT", title: "Italian" },
+        { value: "ja", right: "JA", title: "Japanese" },
+        { value: "ru", right: "RU", title: "Russian" },
+        { value: "es", right: "ES", title: "Spanish" },
+        { value: "sw", right: "SW", title: "Swahili" },
+      ],
+      title: "Language",
+      dynamicTitle: true
+    }
+  }
+};
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -45,7 +72,12 @@ const preview: Preview = {
       defaultTheme: 'light',
       themeService: themeService
     }),
+    (story, context) => {
+      const { locale } = context.globals;
+      console.log(locale);
+      return story();
+    }
   ],
 };
-
+export {globalTypes};
 export default preview;
