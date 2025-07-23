@@ -1,8 +1,21 @@
-import type {Preview} from '@storybook/web-components';
+import type {Preview} from '@storybook/web-components-vite';
 
 import './style.css?style';
 import './preview.css?style';
-import {init as appPluginExperimentalInit} from '../dist/browser/index';
+
+import {init as appPluginExperimentalInit} from '../dist/browser/index.js';
+// import * as appPluginExperimental from '../dist/browser/index.js';
+// console.log(appPluginExperimental);
+
+// import appPluginExperimental = require('../dist/browser/index.js');
+// console.log(appPluginExperimental);
+//
+// const appPluginExperimentalInit = appPluginExperimental.init;
+
+
+// import {init as appPluginExperimentalInit} from '../dist/browser/index';
+
+
 import {init as appCoreInit} from '@ember-nexus/app-core';
 import {ApiConfiguration} from "@ember-nexus/app-core/Service";
 import {withTheme} from "./withTheme.decorator";

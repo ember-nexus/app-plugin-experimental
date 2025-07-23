@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import {ServiceResolver} from "@ember-nexus/app-core/Service";
 import {ElementCache} from "@ember-nexus/app-core/Cache";

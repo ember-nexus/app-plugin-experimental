@@ -9,7 +9,7 @@ export default {
     minify: 'terser',
     lib: {
       entry: './src/index.ts',
-      formats: ['cjs']
+      formats: ['es']
     },
     cssCodeSplit: true,
     rollupOptions: {
