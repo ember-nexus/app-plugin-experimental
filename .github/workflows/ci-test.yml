@@ -48,6 +48,7 @@ jobs:
       - name: Update yarn
         run: |
           corepack enable
+          yarn set version 4.9.2
           yarn install
       - name: Install dependencies
         run: yarn install --dev
