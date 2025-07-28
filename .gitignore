@@ -28,7 +28,6 @@ dist/
 
 # Misc
 .DS_Store
-.yarnrc.yml
 .yarn
 
 *.tgz
