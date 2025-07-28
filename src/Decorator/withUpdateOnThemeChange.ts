@@ -23,7 +23,7 @@ function withUpdateOnThemeChange(): <TBase extends Constructor<ServiceResolverCa
           this.requestUpdate?.();
           return;
         }
-        // @ts-ignore
+        // @ts-expect-error TS2339
         super.onEvent?.();
       }
 

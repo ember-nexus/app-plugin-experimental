@@ -3,7 +3,7 @@ import { Token, UniqueUserIdentifier } from '@ember-nexus/app-core/Type/Definiti
 import { assign, fromPromise, setup } from 'xstate';
 
 import { resolveService } from '../../Decorator/index.js';
-import {LifecycleCapableWebComponent} from "../../Type/Definition";
+import { LifecycleCapableWebComponent } from '../../Type/Definition/index.js';
 
 type HTMLElementWithOptionalOnServiceResolverLoaded = LifecycleCapableWebComponent & {
   onServiceResolverLoaded?(serviceResolver: ServiceResolver): void;

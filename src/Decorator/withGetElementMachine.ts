@@ -39,7 +39,7 @@ function withGetElementMachine(): <TBase extends Constructor<ElementCapableWebCo
       }
 
       updated(changedProperties: PropertyValues): void {
-        // @ts-ignore
+        // @ts-expect-error TS2339
         super.updated?.();
         if (changedProperties.has('elementId')) {
           this.actor.send({

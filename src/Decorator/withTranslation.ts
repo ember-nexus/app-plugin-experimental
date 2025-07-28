@@ -2,13 +2,11 @@ import { EventDispatcher, ServiceResolver } from '@ember-nexus/app-core/Service'
 import { EventInterface } from '@ember-nexus/app-core/Type/Definition';
 
 import { LanguageChangeEvent } from '../Event/index.js';
+import { TranslationService } from '../Service/index.js';
 import { Constructor, TranslationCapableWebComponent } from '../Type/Definition/index.js';
-import {TranslationService} from "../Service";
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
-function withTranslation(): <TBase extends Constructor<TranslationCapableWebComponent>>(
-  Base: TBase,
-) => any {
+function withTranslation(): <TBase extends Constructor<TranslationCapableWebComponent>>(Base: TBase) => any {
   return function <TBase extends Constructor<TranslationCapableWebComponent>>(Base: TBase): any {
     return class extends Base {
       private eventDispatcher: EventDispatcher;
@@ -16,7 +14,9 @@ function withTranslation(): <TBase extends Constructor<TranslationCapableWebComp
       onServiceResolverLoaded(serviceResolver: ServiceResolver): void {
         this.eventDispatcher = serviceResolver.getServiceOrFail<EventDispatcher>(EventDispatcher.identifier);
         this.eventDispatcher.addListener(LanguageChangeEvent.identifier, this);
-        this.i18n = serviceResolver.getServiceOrFail<TranslationService>(TranslationService.identifier).getI18nInstance();
+        this.i18n = serviceResolver
+          .getServiceOrFail<TranslationService>(TranslationService.identifier)
+          .getI18nInstance();
         super.onServiceResolverLoaded?.(serviceResolver);
       }
 
@@ -25,7 +25,7 @@ function withTranslation(): <TBase extends Constructor<TranslationCapableWebComp
           this.requestUpdate?.();
           return;
         }
-        // @ts-ignore
+        // @ts-expect-error TS2339
         super.onEvent?.();
       }
 

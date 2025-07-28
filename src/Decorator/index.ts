@@ -4,5 +4,5 @@ export * from './withGetServiceResolverMachine.js';
 export * from './withServiceResolver.js';
 export * from './withStateMachine.js';
 export * from './withThemeVariables.js';
-export * from './withTranslation';
+export * from './withTranslation.js';
 export * from './withUpdateOnThemeChange.js';

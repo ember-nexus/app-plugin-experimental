@@ -1,7 +1,7 @@
+import { i18n } from 'i18next';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ActorRefFrom, SnapshotFrom } from 'xstate';
-import {i18n} from "i18next";
 
 import { withStateMachine } from '../Decorator/index.js';
 import { withTranslation } from '../Decorator/index.js';
