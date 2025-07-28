@@ -52,6 +52,8 @@ jobs:
           yarn install
       - name: Install dependencies
         run: yarn install
+      - name: WIP test build
+        run: yarn build
       - name: Run syntax linter
         run: yarn cs
 
