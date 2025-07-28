@@ -4,4 +4,5 @@ export * from './LifecycleCapableWebComponent.js';
 export * from './Rule.js';
 export * from './Ruleset.js';
 export * from './ServiceResolverCapableWebComponent.js';
+export * from './TranslationCapableWebComponent.js';
 export * from './Theme.js';

@@ -1,4 +1,11 @@
 {
     "description": "مجموعة من المكونات التجريبية.",
-    "name": "تجريبي"
+    "name": "تجريبي",
+    "page.login.title": "تسجيل الدخول",
+    "page.login.usernameLabel": "البريد الإلكتروني أو اسم المستخدم:",
+    "page.login.passwordLabel": "كلمة المرور:",
+    "page.login.usernamePlaceholder": "اكتب هنا",
+    "page.login.passwordPlaceholder": "اكتب هنا",
+    "page.login.actionClear": "واضح",
+    "page.login.actionLogin": "تسجيل الدخول"
 }

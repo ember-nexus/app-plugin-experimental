@@ -1,4 +1,11 @@
 {
     "description": "Mkusanyiko wa vipengele vya majaribio.",
-    "name": "Majaribio"
+    "name": "Majaribio",
+    "page.login.title": "Ingia",
+    "page.login.usernameLabel": "Barua pepe au jina la mtumiaji:",
+    "page.login.passwordLabel": "Nenosiri:",
+    "page.login.usernamePlaceholder": "Andika hapa",
+    "page.login.passwordPlaceholder": "Andika hapa",
+    "page.login.actionClear": "Wazi",
+    "page.login.actionLogin": "Ingia"
 }

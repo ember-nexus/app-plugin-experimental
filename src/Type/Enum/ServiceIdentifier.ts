@@ -4,6 +4,7 @@ enum ServiceIdentifier {
   shikiJsonHighlighterService = 'ember-nexus.app-plugin-experimental.service.shiki-json-highlighter-service',
   themeService = 'ember-nexus.app-plugin-experimental.service.theme-service',
   languageService = 'ember-nexus.app-plugin-experimental.service.language-service',
+  translationService = 'ember-nexus.app-plugin-experimental.service.translation-service',
 }
 
 export { ServiceIdentifier };

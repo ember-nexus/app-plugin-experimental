@@ -1,4 +1,11 @@
 {
     "description": "Коллекция экспериментальных компонентов.",
-    "name": "Экспериментальный"
+    "name": "Экспериментальный",
+    "page.login.title": "Авторизоваться",
+    "page.login.usernameLabel": "Электронная почта или имя пользователя:",
+    "page.login.passwordLabel": "Пароль:",
+    "page.login.usernamePlaceholder": "Введите здесь",
+    "page.login.passwordPlaceholder": "Введите здесь",
+    "page.login.actionClear": "Прозрачный",
+    "page.login.actionLogin": "Авторизоваться"
 }

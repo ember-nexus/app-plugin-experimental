@@ -1,4 +1,11 @@
 {
     "description": "प्रयोगात्मक घटकों का संग्रह.",
-    "name": "प्रयोगात्मक"
+    "name": "प्रयोगात्मक",
+    "page.login.title": "लॉग इन करें",
+    "page.login.usernameLabel": "ईमेल या उपयोगकर्ता का नाम:",
+    "page.login.passwordLabel": "पासवर्ड:",
+    "page.login.usernamePlaceholder": "यहाँ टाइप करें",
+    "page.login.passwordPlaceholder": "यहाँ टाइप करें",
+    "page.login.actionClear": "स्पष्ट",
+    "page.login.actionLogin": "लॉग इन करें"
 }

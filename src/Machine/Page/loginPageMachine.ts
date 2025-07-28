@@ -3,7 +3,11 @@ import { Token, UniqueUserIdentifier } from '@ember-nexus/app-core/Type/Definiti
 import { assign, fromPromise, setup } from 'xstate';
 
 import { resolveService } from '../../Decorator/index.js';
-import { LifecycleCapableWebComponent } from '../../Type/Definition/index.js';
+import {LifecycleCapableWebComponent} from "../../Type/Definition";
+
+type HTMLElementWithOptionalOnServiceResolverLoaded = LifecycleCapableWebComponent & {
+  onServiceResolverLoaded?(serviceResolver: ServiceResolver): void;
+};
 
 const enum loginPageMachineTags {
   Loading = 'LOADING',
@@ -18,7 +22,7 @@ const loginPageMachine = setup({
     getServiceResolver: fromPromise<
       ServiceResolver,
       {
-        htmlElement: LifecycleCapableWebComponent;
+        htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
       }
     >(({ input }) => {
       return resolveService(input.htmlElement);
@@ -38,14 +42,14 @@ const loginPageMachine = setup({
   },
   types: {
     context: {} as {
-      htmlElement: LifecycleCapableWebComponent;
+      htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
       uniqueUserIdentifier: UniqueUserIdentifier | string;
       password: string;
       error: null | unknown;
       serviceResolver: null | ServiceResolver;
     },
     input: {} as {
-      htmlElement: LifecycleCapableWebComponent;
+      htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
     },
     events: {} as
       | { type: 'formClear' }
@@ -85,6 +89,9 @@ const loginPageMachine = setup({
             assign({
               serviceResolver: ({ event }) => event.output,
             }),
+            ({ context }): void => {
+              context.htmlElement.onServiceResolverLoaded?.(context.serviceResolver!);
+            },
           ],
         },
         onError: {

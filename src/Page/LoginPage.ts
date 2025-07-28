@@ -1,18 +1,20 @@
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ActorRefFrom, SnapshotFrom } from 'xstate';
+import {i18n} from "i18next";
 
 import { withStateMachine } from '../Decorator/index.js';
-import { withUpdateOnLanguageChange } from '../Decorator/index.js';
+import { withTranslation } from '../Decorator/index.js';
 import { loginPageMachine, loginPageMachineTags } from '../Machine/Page/index.js';
-import { LanguageService } from '../Service/index.js';
 import { indexStyles } from '../Style/index.js';
 
 @customElement('ember-nexus-page-login')
-@withUpdateOnLanguageChange()
+@withTranslation()
 @withStateMachine(loginPageMachine)
 class LoginPage extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
+
+  i18n: i18n;
 
   state: SnapshotFrom<typeof loginPageMachine>;
   send: ActorRefFrom<typeof loginPageMachine>['send'];
@@ -75,31 +77,28 @@ class LoginPage extends LitElement {
       }
       errorBlock = html` <p class="text-error">${errorMessage}</p> `;
     }
-    const language =
-      this.state.context.serviceResolver
-        ?.getServiceOrFail<LanguageService>(LanguageService.identifier)
-        ?.getActiveLanguage() ?? 'unknown';
+    const t = this.i18n?.t;
     return html`
       <div class="card bg-base-100 w-full shadow-sm">
         <div class="card-body p-3">
-          <h2 class="card-title">Login (${language})</h2>
+          <h2 class="card-title">${t?.('page.login.title') ?? 'Login'}</h2>
           <fieldset class="fieldset">
-            <legend class="fieldset-legend">Email or username:</legend>
+            <legend class="fieldset-legend">${t?.('page.login.usernameLabel') ?? 'Email or username:'}</legend>
             <input
               type="text"
               class="input"
-              placeholder="Type here"
+              .placeholder="${t?.('page.login.usernamePlaceholder') ?? 'Type here:'}"
               .value="${this.state.context.uniqueUserIdentifier}"
               @input=${this.onUniqueUserIdentifierChange}
               ?disabled=${this.stateTag !== loginPageMachineTags.WaitingForFormEdit}
             />
           </fieldset>
           <fieldset class="fieldset">
-            <legend class="fieldset-legend">Password:</legend>
+            <legend class="fieldset-legend">${t?.('page.login.passwordLabel') ?? 'Password:'}</legend>
             <input
               type="password"
               class="input"
-              placeholder="Type here"
+              .placeholder="${t?.('page.login.passwordPlaceholder') ?? 'Type here:'}"
               .value="${this.state.context.password}"
               @input=${this.onPasswordChange}
               ?disabled=${this.stateTag !== loginPageMachineTags.WaitingForFormEdit}
@@ -112,7 +111,7 @@ class LoginPage extends LitElement {
                 : 'btn-disabled'}"
               @click=${this.onClear}
             >
-              Clear
+              ${t?.('page.login.actionClear') ?? 'Clear'}
             </button>
             <button
               class="btn btn-soft btn-success basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
@@ -120,7 +119,7 @@ class LoginPage extends LitElement {
                 : 'btn-disabled'}"
               @click=${this.onSubmit}
             >
-              Login
+              ${t?.('page.login.actionLogin') ?? 'Login'}
             </button>
           </div>
           ${errorBlock} ${loadingBar}

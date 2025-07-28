@@ -1,4 +1,11 @@
 {
     "description": "Sammlung experimenteller Komponenten.",
-    "name": "Experimental"
+    "name": "Experimental",
+    "page.login.title": "Login",
+    "page.login.usernameLabel": "E-Mail oder Benutzername:",
+    "page.login.passwordLabel": "Passwort:",
+    "page.login.usernamePlaceholder": "Hier eingeben",
+    "page.login.passwordPlaceholder": "Hier eingeben",
+    "page.login.actionClear": "Formular leeren",
+    "page.login.actionLogin": "Login"
 }

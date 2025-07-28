@@ -1,4 +1,11 @@
 {
     "description": "Raccolta di componenti sperimentali.",
-    "name": "Sperimentale"
+    "name": "Sperimentale",
+    "page.login.title": "Login",
+    "page.login.usernameLabel": "Email o nome utente:",
+    "page.login.passwordLabel": "Password:",
+    "page.login.usernamePlaceholder": "Scrivi qui",
+    "page.login.passwordPlaceholder": "Scrivi qui",
+    "page.login.actionClear": "Chiara",
+    "page.login.actionLogin": "Login"
 }

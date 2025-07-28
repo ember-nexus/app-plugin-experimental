@@ -9,12 +9,14 @@ updateTermRequest=$(curl -s -X POST https://api.poeditor.com/v2/projects/upload 
      -F updating="terms" \
      -F language="en" \
      -F sync_terms="1" \
-     -F file=@"./src/Asset/Translation/en.json")
+     -F file=@"../src/Asset/Translation/en.json")
 
 echo "Downloading list of available languages."
 languagesRequest=$(curl -s -X POST https://api.poeditor.com/v2/languages/list \
      -d api_token="${POEDITOR_API_KEY}" \
      -d id="${POEDITOR_PROJECT_ID}")
+
+echo $languagesRequest
 
 echo "Downloading language files for available languages"
 for language in $(echo $languagesRequest | jq -r '.result.languages[].code'); do

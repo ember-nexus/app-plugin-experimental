@@ -1,4 +1,11 @@
 {
     "description": "实验组件的收集。",
-    "name": "实验"
+    "name": "实验",
+    "page.login.title": "登录",
+    "page.login.usernameLabel": "电子邮件或用户名：",
+    "page.login.passwordLabel": "密码：",
+    "page.login.usernamePlaceholder": "在此处输入",
+    "page.login.passwordPlaceholder": "在此处输入",
+    "page.login.actionClear": "清除",
+    "page.login.actionLogin": "登录"
 }
