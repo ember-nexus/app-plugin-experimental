@@ -51,7 +51,7 @@ jobs:
           yarn config set -H enableImmutableInstalls false
           yarn install
       - name: Install dependencies
-        run: yarn install --dev
+        run: yarn install
       - name: Run syntax linter
         run: yarn cs
 
@@ -77,8 +77,13 @@ jobs:
           key: ${{ runner.os }}-node-v${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-v${{ matrix.node-version }}-
+      - name: Update yarn
+        run: |
+          corepack enable
+          yarn config set -H enableImmutableInstalls false
+          yarn install
       - name: Install dependencies
-        run: yarn install --dev
+        run: yarn install
       - name: Run unit tests
         run: yarn test:unit
 
