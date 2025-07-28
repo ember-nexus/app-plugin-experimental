@@ -154,8 +154,13 @@ jobs:
         with:
           node-version: '23'
       - uses: actions/checkout@v4
+      - name: Update yarn
+        run: |
+          corepack enable
+          yarn config set -H enableImmutableInstalls false
+          yarn install
       - name: Install dependencies
-        run: yarn install --dev
+        run: yarn install
       - name: Build app
         run: yarn build && yarn build-storybook
       - uses: actions/upload-artifact@v4
