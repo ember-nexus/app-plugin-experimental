@@ -1,4 +1,11 @@
 {
     "description": "실험적 구성요소의 수집.",
-    "name": "실험적"
+    "name": "실험적",
+    "page.login.title": "로그인",
+    "page.login.usernameLabel": "이메일 또는 사용자 이름:",
+    "page.login.passwordLabel": "비밀번호:",
+    "page.login.usernamePlaceholder": "여기에 입력하세요",
+    "page.login.passwordPlaceholder": "여기에 입력하세요",
+    "page.login.actionClear": "분명한",
+    "page.login.actionLogin": "로그인"
 }

@@ -1,4 +1,11 @@
 {
     "description": "Samling av eksperimentelle komponenter.",
-    "name": "Eksperimentell"
+    "name": "Eksperimentell",
+    "page.login.title": "Logg inn",
+    "page.login.usernameLabel": "E-post eller brukernavn:",
+    "page.login.passwordLabel": "Passord:",
+    "page.login.usernamePlaceholder": "Skriv her",
+    "page.login.passwordPlaceholder": "Skriv her",
+    "page.login.actionClear": "Klar",
+    "page.login.actionLogin": "Logg inn"
 }

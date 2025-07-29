@@ -1,4 +1,11 @@
 {
     "description": "Collection of experimental components.",
-    "name": "Experimental"
+    "name": "Experimental",
+    "page.login.title": "Login",
+    "page.login.usernameLabel": "Email or username:",
+    "page.login.passwordLabel": "Password:",
+    "page.login.usernamePlaceholder": "Type here",
+    "page.login.passwordPlaceholder": "Type here",
+    "page.login.actionClear": "Clear",
+    "page.login.actionLogin": "Login"
 }

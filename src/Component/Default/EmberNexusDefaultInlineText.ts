@@ -1,82 +1,39 @@
-import { Node, Relation, Uuid } from '@ember-nexus/web-sdk/Type/Definition';
-import { LitElement, TemplateResult, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { Actor, createActor } from 'xstate';
+import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { SnapshotFrom } from 'xstate';
 
-import { getNameOrFirstLettersFromIdFromElementOrId, getTitleFromElementOrId } from '../../Helper';
-import { singleElementMachine } from '../../Machine';
-import { inlineTextComponentStyle } from '../../Style';
+import { withGetElementMachine } from '../../Decorator/withGetElementMachine.js';
+import { getElementMachine, getElementMachineTags } from '../../Machine/index.js';
+import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-default-inline-text')
+@withGetElementMachine()
 class EmberNexusDefaultInlineText extends LitElement {
-  static styles = [inlineTextComponentStyle];
+  static styles = [unsafeCSS(indexStyles)];
+
+  state: SnapshotFrom<typeof getElementMachine>;
+
+  get stateTag(): getElementMachineTags {
+    return [...this.state.tags][0] as getElementMachineTags;
+  }
 
   @property({ type: String, attribute: 'element-id' })
   elementId: string;
 
-  @state()
-  protected _element: null | Node | Relation = null;
-
-  @state()
-  protected _error: null | string = null;
-
-  protected actor: Actor<typeof singleElementMachine>;
-
-  constructor() {
-    super();
-  }
-
-  setupActorSubscription(): void {
-    this.actor.subscribe((snapshot) => {
-      this._element = snapshot.context.element;
-      this._error = snapshot.context.error;
-      this.requestUpdate();
-    });
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.actor = createActor(singleElementMachine, {
-      input: {
-        elementId: this.elementId as Uuid,
-        htmlElement: this.renderRoot,
-      },
-    });
-    this.setupActorSubscription();
-    this.actor.start();
-  }
-
-  disconnectedCallback(): void {
-    this.actor.stop();
-    super.disconnectedCallback();
-  }
-
-  updated(changedProperties): void {
-    if (changedProperties.has('elementId')) {
-      this.actor.send({
-        type: 'reset',
-        elementId: this.elementId as Uuid,
-      });
-    }
-  }
-
   render(): TemplateResult {
-    let content: string;
-    switch (this.actor.getSnapshot().value) {
-      case 'Loaded':
-        content = getTitleFromElementOrId(this.elementId, this._element);
-        break;
-      case 'Error':
-        content = '[' + this._error + ']';
-        break;
-      default:
-        content = getNameOrFirstLettersFromIdFromElementOrId(this.elementId, this._element);
+    switch (this.stateTag) {
+      case getElementMachineTags.Error:
+        return html` <span title="${String(this.state.context?.error)}"> Error </span> `;
+      case getElementMachineTags.Loading:
+        return html` <span> Loading </span> `;
+      case getElementMachineTags.Loaded:
+        let name = this.state.context?.element?.data?.name;
+        if (!name) {
+          const namePart = (this.state.context?.element?.id ?? this.elementId).slice(0, 8);
+          name = html`<span class="font-mono text-xs">${namePart}</span> (${this.state.context?.element?.type})`;
+        }
+        return html` <span>${name}</span> `;
     }
-    return html`<span class="inline-text-component">
-      <slot name="prefix"></slot>
-      ${content}
-      <slot name="suffix"></slot>
-    </span>`;
   }
 }
 

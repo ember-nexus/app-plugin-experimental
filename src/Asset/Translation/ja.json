@@ -1,4 +1,11 @@
 {
     "description": "実験コンポーネントのコレクション。",
-    "name": "実験的"
+    "name": "実験的",
+    "page.login.title": "ログイン",
+    "page.login.usernameLabel": "メールアドレスまたはユーザー名:",
+    "page.login.passwordLabel": "パスワード：",
+    "page.login.usernamePlaceholder": "ここに入力してください",
+    "page.login.passwordPlaceholder": "ここに入力してください",
+    "page.login.actionClear": "クリア",
+    "page.login.actionLogin": "ログイン"
 }

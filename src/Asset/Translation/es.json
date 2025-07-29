@@ -1,4 +1,11 @@
 {
     "description": "Colección de componentes experimentales.",
-    "name": "Experimental"
+    "name": "Experimental",
+    "page.login.title": "Acceso",
+    "page.login.usernameLabel": "Correo electrónico o nombre de usuario:",
+    "page.login.passwordLabel": "Contraseña:",
+    "page.login.usernamePlaceholder": "Escribe aquí",
+    "page.login.passwordPlaceholder": "Escribe aquí",
+    "page.login.actionClear": "Clara",
+    "page.login.actionLogin": "Acceso"
 }

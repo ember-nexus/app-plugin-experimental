@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 
 function getTextDataString(name: string, description: string, color: null | string): string {
@@ -26,7 +26,7 @@ const meta: Meta = {
   title: 'Component/Default/Card',
   component: 'ember-nexus-default-card',
   render: () => html`
-    <div class="d-flex flex-column gap-2 card-width">
+    <div class="flex flex-col gap-2">
       ${texts.map((text) =>
         html`<div class="">
           <ember-nexus-mock-element-data-provider
