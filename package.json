@@ -22,7 +22,7 @@
     "prepare": "ts-patch install",
     "typedoc": "typedoc --tsconfig tsconfig.release.json",
     "storybook": "storybook dev -p 6006 -h 0.0.0.0",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build"
   },
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",

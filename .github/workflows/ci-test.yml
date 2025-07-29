@@ -162,7 +162,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build app
-        run: yarn build && yarn build-storybook
+        run: yarn build && yarn storybook:build
       - uses: actions/upload-artifact@v4
         name: storybook-static
         with:

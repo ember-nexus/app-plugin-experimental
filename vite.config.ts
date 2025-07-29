@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
 
 export default {
+  base: './',
   build: {
     outDir: 'dist/browser',
     sourcemap: true,
