@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Scrivi qui",
     "page.login.passwordPlaceholder": "Scrivi qui",
     "page.login.actionClear": "Chiara",
-    "page.login.actionLogin": "Login"
+    "page.login.actionLogin": "Login",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "mostra password",
+    "page.login.toggleIsPasswordRedacted.titleText": "nascondi password"
 }

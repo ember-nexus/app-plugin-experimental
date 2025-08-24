@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "在此处输入",
     "page.login.passwordPlaceholder": "在此处输入",
     "page.login.actionClear": "清除",
-    "page.login.actionLogin": "登录"
+    "page.login.actionLogin": "登录",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "显示密码",
+    "page.login.toggleIsPasswordRedacted.titleText": "隐藏密码"
 }

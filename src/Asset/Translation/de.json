@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Hier eingeben",
     "page.login.passwordPlaceholder": "Hier eingeben",
     "page.login.actionClear": "Formular leeren",
-    "page.login.actionLogin": "Login"
+    "page.login.actionLogin": "Login",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "zeige Passwort",
+    "page.login.toggleIsPasswordRedacted.titleText": "verstecke Passwort"
 }

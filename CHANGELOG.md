@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Refactor app plugin experimental to use app-core instead of web-sdk.
+- Improve login page, closes #57.
 
 ## 0.0.12 - 2024-12-16
 ### Added

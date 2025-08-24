@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "यहाँ टाइप करें",
     "page.login.passwordPlaceholder": "यहाँ टाइप करें",
     "page.login.actionClear": "स्पष्ट",
-    "page.login.actionLogin": "लॉग इन करें"
+    "page.login.actionLogin": "लॉग इन करें",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "पासवर्ड दिखाएँ",
+    "page.login.toggleIsPasswordRedacted.titleText": "पासवर्ड छिपाएँ"
 }

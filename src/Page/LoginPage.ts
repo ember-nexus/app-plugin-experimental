@@ -1,6 +1,8 @@
 import { i18n } from 'i18next';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { Eye, EyeOff } from 'lucide-static';
 import { ActorRefFrom, SnapshotFrom } from 'xstate';
 
 import { withStateMachine } from '../Decorator/index.js';
@@ -47,6 +49,12 @@ class LoginPage extends LitElement {
     });
   }
 
+  private toggleIsPasswordRedacted(): void {
+    this.send({
+      type: 'toggleIsPasswordRedacted',
+    });
+  }
+
   private onClear(event: Event): void {
     event.preventDefault();
     this.send({
@@ -78,6 +86,12 @@ class LoginPage extends LitElement {
       errorBlock = html` <p class="text-error">${errorMessage}</p> `;
     }
     const t = this.i18n?.t;
+    const isPasswordRedactedTitle =
+      t?.(
+        this.state.context.isPasswordRedacted
+          ? 'page.login.toggleIsPasswordRedacted.titleRedacted'
+          : 'page.login.toggleIsPasswordRedacted.titleText',
+      ) ?? 'toggle password visibility';
     return html`
       <div class="card bg-base-100 w-full shadow-sm">
         <div class="card-body p-3">
@@ -86,7 +100,8 @@ class LoginPage extends LitElement {
             <legend class="fieldset-legend">${t?.('page.login.usernameLabel') ?? 'Email or username:'}</legend>
             <input
               type="text"
-              class="input"
+              class="input w-full"
+              autocomplete="email"
               .placeholder="${t?.('page.login.usernamePlaceholder') ?? 'Type here:'}"
               .value="${this.state.context.uniqueUserIdentifier}"
               @input=${this.onUniqueUserIdentifierChange}
@@ -95,14 +110,24 @@ class LoginPage extends LitElement {
           </fieldset>
           <fieldset class="fieldset">
             <legend class="fieldset-legend">${t?.('page.login.passwordLabel') ?? 'Password:'}</legend>
-            <input
-              type="password"
-              class="input"
-              .placeholder="${t?.('page.login.passwordPlaceholder') ?? 'Type here:'}"
-              .value="${this.state.context.password}"
-              @input=${this.onPasswordChange}
-              ?disabled=${this.stateTag !== loginPageMachineTags.WaitingForFormEdit}
-            />
+            <div class="join w-full flex">
+              <input
+                type="${this.state.context.isPasswordRedacted ? 'password' : 'text'}"
+                class="input join-item flex-1"
+                autocomplete="current-password"
+                .placeholder="${t?.('page.login.passwordPlaceholder') ?? 'Type here:'}"
+                .value="${this.state.context.password}"
+                @input=${this.onPasswordChange}
+                ?disabled=${this.stateTag !== loginPageMachineTags.WaitingForFormEdit}
+              />
+              <button
+                class="btn btn-square join-item flex-none"
+                @click=${this.toggleIsPasswordRedacted}
+                title="${isPasswordRedactedTitle}"
+              >
+                ${unsafeHTML(this.state.context.isPasswordRedacted ? Eye : EyeOff)}
+              </button>
+            </div>
           </fieldset>
           <div class="flex gap-2">
             <button
@@ -114,7 +139,7 @@ class LoginPage extends LitElement {
               ${t?.('page.login.actionClear') ?? 'Clear'}
             </button>
             <button
-              class="btn btn-soft btn-success basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
+              class="btn btn-success basis-0 grow ${this.stateTag === loginPageMachineTags.WaitingForFormEdit
                 ? ''
                 : 'btn-disabled'}"
               @click=${this.onSubmit}

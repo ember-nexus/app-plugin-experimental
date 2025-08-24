@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "اكتب هنا",
     "page.login.passwordPlaceholder": "اكتب هنا",
     "page.login.actionClear": "واضح",
-    "page.login.actionLogin": "تسجيل الدخول"
+    "page.login.actionLogin": "تسجيل الدخول",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "إظهار كلمة المرور",
+    "page.login.toggleIsPasswordRedacted.titleText": "إخفاء كلمة المرور"
 }

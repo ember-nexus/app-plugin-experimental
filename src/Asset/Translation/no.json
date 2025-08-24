@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Skriv her",
     "page.login.passwordPlaceholder": "Skriv her",
     "page.login.actionClear": "Klar",
-    "page.login.actionLogin": "Logg inn"
+    "page.login.actionLogin": "Logg inn",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "vis passord",
+    "page.login.toggleIsPasswordRedacted.titleText": "skjul passord"
 }

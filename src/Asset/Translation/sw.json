@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Andika hapa",
     "page.login.passwordPlaceholder": "Andika hapa",
     "page.login.actionClear": "Wazi",
-    "page.login.actionLogin": "Ingia"
+    "page.login.actionLogin": "Ingia",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "onyesha nenosiri",
+    "page.login.toggleIsPasswordRedacted.titleText": "ficha nenosiri"
 }
