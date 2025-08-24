@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Введите здесь",
     "page.login.passwordPlaceholder": "Введите здесь",
     "page.login.actionClear": "Прозрачный",
-    "page.login.actionLogin": "Авторизоваться"
+    "page.login.actionLogin": "Авторизоваться",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "показать пароль",
+    "page.login.toggleIsPasswordRedacted.titleText": "скрыть пароль"
 }

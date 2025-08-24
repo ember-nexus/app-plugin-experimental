@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "ここに入力してください",
     "page.login.passwordPlaceholder": "ここに入力してください",
     "page.login.actionClear": "クリア",
-    "page.login.actionLogin": "ログイン"
+    "page.login.actionLogin": "ログイン",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "パスワードを表示",
+    "page.login.toggleIsPasswordRedacted.titleText": "パスワードを非表示"
 }

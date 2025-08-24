@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Tapez ici",
     "page.login.passwordPlaceholder": "Tapez ici",
     "page.login.actionClear": "Claire",
-    "page.login.actionLogin": "Se connecter"
+    "page.login.actionLogin": "Se connecter",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "afficher le mot de passe",
+    "page.login.toggleIsPasswordRedacted.titleText": "masquer le mot de passe"
 }

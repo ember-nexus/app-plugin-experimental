@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "여기에 입력하세요",
     "page.login.passwordPlaceholder": "여기에 입력하세요",
     "page.login.actionClear": "분명한",
-    "page.login.actionLogin": "로그인"
+    "page.login.actionLogin": "로그인",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "비밀번호 표시",
+    "page.login.toggleIsPasswordRedacted.titleText": "비밀번호 숨기기"
 }

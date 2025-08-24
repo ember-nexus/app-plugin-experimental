@@ -7,5 +7,7 @@
     "page.login.usernamePlaceholder": "Type here",
     "page.login.passwordPlaceholder": "Type here",
     "page.login.actionClear": "Clear",
-    "page.login.actionLogin": "Login"
+    "page.login.actionLogin": "Login",
+    "page.login.toggleIsPasswordRedacted.titleRedacted": "show password",
+    "page.login.toggleIsPasswordRedacted.titleText": "hide password"
 }

@@ -32,6 +32,7 @@ const loginPageMachine = setup({
       {
         uniqueUserIdentifier: UniqueUserIdentifier;
         password: string;
+        isPasswordRedacted: boolean;
         serviceResolver: ServiceResolver;
       }
     >(({ input }) => {
@@ -45,6 +46,7 @@ const loginPageMachine = setup({
       htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
       uniqueUserIdentifier: UniqueUserIdentifier | string;
       password: string;
+      isPasswordRedacted: boolean;
       error: null | unknown;
       serviceResolver: null | ServiceResolver;
     },
@@ -54,6 +56,7 @@ const loginPageMachine = setup({
     events: {} as
       | { type: 'formClear' }
       | { type: 'formUpdate'; uniqueUserIdentifier: UniqueUserIdentifier | string; password: string }
+      | { type: 'toggleIsPasswordRedacted' }
       | { type: 'formSubmit' },
   },
 }).createMachine({
@@ -62,6 +65,7 @@ const loginPageMachine = setup({
     htmlElement: input.htmlElement,
     uniqueUserIdentifier: '',
     password: '',
+    isPasswordRedacted: true,
     element: null,
     error: null,
     serviceResolver: null,
@@ -121,6 +125,12 @@ const loginPageMachine = setup({
           actions: assign({
             uniqueUserIdentifier: ({ event }) => event.uniqueUserIdentifier,
             password: ({ event }) => event.password,
+          }),
+          target: 'WaitingForFormUpdate',
+        },
+        toggleIsPasswordRedacted: {
+          actions: assign({
+            isPasswordRedacted: ({ context }) => !context.isPasswordRedacted,
           }),
           target: 'WaitingForFormUpdate',
         },
