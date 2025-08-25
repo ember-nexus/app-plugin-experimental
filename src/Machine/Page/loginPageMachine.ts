@@ -32,7 +32,6 @@ const loginPageMachine = setup({
       {
         uniqueUserIdentifier: UniqueUserIdentifier;
         password: string;
-        isPasswordRedacted: boolean;
         serviceResolver: ServiceResolver;
       }
     >(({ input }) => {
