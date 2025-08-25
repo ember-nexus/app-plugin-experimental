@@ -11,5 +11,7 @@
     "page.login.toggleIsPasswordRedacted.titleRedacted": "show password",
     "page.login.toggleIsPasswordRedacted.titleText": "hide password",
     "page.logout.title": "Logout",
-    "page.logout.actionConfirmLogout": "Logout"
+    "page.logout.actionConfirmLogout": "Logout",
+    "page.setting.title": "Settings",
+    "page.setting.actionSaveSettings": "Save settings"
 }

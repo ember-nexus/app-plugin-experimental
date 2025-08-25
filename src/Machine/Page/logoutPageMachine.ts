@@ -1,8 +1,8 @@
-import {ApiConfiguration, ServiceResolver} from '@ember-nexus/app-core/Service';
-import {assign, fromPromise, setup} from 'xstate';
+import { ApiConfiguration, ServiceResolver } from '@ember-nexus/app-core/Service';
+import { assign, fromPromise, setup } from 'xstate';
 
-import {resolveService} from '../../Decorator/index.js';
-import {LifecycleCapableWebComponent} from '../../Type/Definition/index.js';
+import { resolveService } from '../../Decorator/index.js';
+import { LifecycleCapableWebComponent } from '../../Type/Definition/index.js';
 
 type HTMLElementWithOptionalOnServiceResolverLoaded = LifecycleCapableWebComponent & {
   onServiceResolverLoaded?(serviceResolver: ServiceResolver): void;
@@ -23,15 +23,15 @@ const logoutPageMachine = setup({
       {
         htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
       }
-    >(({input}) => {
+    >(({ input }) => {
       return resolveService(input.htmlElement);
     }),
     logOut: fromPromise<
       void,
       {
-        serviceResolver: ServiceResolver
+        serviceResolver: ServiceResolver;
       }
-    >(({input}) => {
+    >(({ input }) => {
       const apiConfiguration = input.serviceResolver?.getServiceOrFail<ApiConfiguration>(ApiConfiguration.identifier);
       apiConfiguration?.setToken(null);
       return Promise.resolve();
@@ -46,12 +46,11 @@ const logoutPageMachine = setup({
     input: {} as {
       htmlElement: HTMLElementWithOptionalOnServiceResolverLoaded;
     },
-    events: {} as
-      | { type: 'confirmLogout' }
+    events: {} as { type: 'confirmLogout' },
   },
 }).createMachine({
   id: 'logout-page-machine',
-  context: ({input}) => ({
+  context: ({ input }) => ({
     htmlElement: input.htmlElement,
     error: null,
     serviceResolver: null,
@@ -70,16 +69,16 @@ const logoutPageMachine = setup({
       tags: [logoutPageMachineTags.Loading],
       invoke: {
         src: 'getServiceResolver',
-        input: ({context}) => ({
+        input: ({ context }) => ({
           htmlElement: context.htmlElement,
         }),
         onDone: {
           target: 'WaitingForLogoutConfirmation',
           actions: [
             assign({
-              serviceResolver: ({event}) => event.output,
+              serviceResolver: ({ event }) => event.output,
             }),
-            ({context}): void => {
+            ({ context }): void => {
               context.htmlElement.onServiceResolverLoaded?.(context.serviceResolver!);
             },
           ],
@@ -87,7 +86,7 @@ const logoutPageMachine = setup({
         onError: {
           target: 'UnrecoverableError',
           actions: assign({
-            error: ({event}) => event.error,
+            error: ({ event }) => event.error,
           }),
         },
       },
@@ -108,16 +107,16 @@ const logoutPageMachine = setup({
       invoke: {
         src: 'logOut',
         // @ts-expect-error error description
-        input: ({context}) => ({
-          serviceResolver: context.serviceResolver
+        input: ({ context }) => ({
+          serviceResolver: context.serviceResolver,
         }),
         onDone: {
-          target: 'LogoutSuccessful'
+          target: 'LogoutSuccessful',
         },
         onError: {
           target: 'WaitingForLogoutConfirmation',
           actions: assign({
-            error: ({event}) => event.error,
+            error: ({ event }) => event.error,
           }),
         },
       },
@@ -131,4 +130,4 @@ const logoutPageMachine = setup({
   },
 });
 
-export {logoutPageMachine, logoutPageMachineTags};
+export { logoutPageMachine, logoutPageMachineTags };
