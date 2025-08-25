@@ -9,5 +9,7 @@
     "page.login.actionClear": "Clear",
     "page.login.actionLogin": "Login",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "show password",
-    "page.login.toggleIsPasswordRedacted.titleText": "hide password"
+    "page.login.toggleIsPasswordRedacted.titleText": "hide password",
+    "page.logout.title": "Logout",
+    "page.logout.actionConfirmLogout": "Logout"
 }

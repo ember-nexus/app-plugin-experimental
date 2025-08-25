@@ -65,7 +65,6 @@ const loginPageMachine = setup({
     uniqueUserIdentifier: '',
     password: '',
     isPasswordRedacted: true,
-    element: null,
     error: null,
     serviceResolver: null,
   }),
