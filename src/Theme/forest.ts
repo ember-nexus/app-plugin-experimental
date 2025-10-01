@@ -1,0 +1,43 @@
+import { Theme } from '../Type/Definition/index.js';
+
+const forest: Theme = {
+  name: 'forest',
+  cssVariables: {
+    'color-base-100': '#4B5945',
+    'color-base-200': '#66785F',
+    'color-base-300': '#91AC8F',
+
+    'color-base-content': '#B2C9AD',
+    'color-primary': 'oklch(86.133% 0.141 139.549)',
+    'color-primary-content': 'oklch(17.226% 0.028 139.549)',
+    'color-secondary': 'oklch(73.375% 0.165 35.353)',
+    'color-secondary-content': 'oklch(14.675% 0.033 35.353)',
+    'color-accent': 'oklch(74.229% 0.133 311.379)',
+    'color-accent-content': 'oklch(14.845% 0.026 311.379)',
+    'color-neutral': 'oklch(24.731% 0.02 264.094)',
+    'color-neutral-content': '#B2C9AD',
+
+    'color-info': 'oklch(86.078% 0.142 206.182)',
+    'color-info-content': 'oklch(17.215% 0.028 206.182)',
+    'color-success': 'oklch(86.171% 0.142 166.534)',
+    'color-success-content': 'oklch(17.234% 0.028 166.534)',
+    'color-warning': 'oklch(86.163% 0.142 94.818)',
+    'color-warning-content': 'oklch(17.232% 0.028 94.818)',
+    'color-error': 'oklch(82.418% 0.099 33.756)',
+    'color-error-content': 'oklch(16.483% 0.019 33.756)',
+
+    'radius-selector': '1rem',
+    'radius-field': '0.5rem',
+    'radius-box': '1rem',
+    'size-selector': '0.25rem',
+    'size-field': '0.25rem',
+    border: '1px',
+    depth: '0',
+    noise: '0',
+
+    'color-code-background': '#4B5945',
+  },
+  shikiTheme: 'catppuccin-frappe',
+};
+
+export { forest };

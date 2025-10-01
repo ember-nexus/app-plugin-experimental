@@ -1,0 +1,14 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as DefaultStories from './Default.stories';
+
+<Meta of={DefaultStories} />
+
+# `ember-nexus-ui-search-result-item-alternative-query`
+
+A single result item used to display an alternative search phrase which can replace the user's current search query.
+
+As with all result items, the item can be selected via <kbd className="kbd kbd-sm">tab</kbd> and be triggered via
+<kbd className="kbd kbd-sm">space</kbd> or <kbd className="kbd kbd-sm">enter</kbd>.
+
+<Canvas of={DefaultStories.Default} />

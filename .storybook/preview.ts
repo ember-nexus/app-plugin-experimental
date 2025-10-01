@@ -87,6 +87,8 @@ const preview: Preview = {
         dark: 'dark',
         emerald: 'emerald',
         dim: 'dim',
+        dune: 'dune',
+        forest: 'forest',
       },
       defaultTheme: 'light',
       themeService: themeService

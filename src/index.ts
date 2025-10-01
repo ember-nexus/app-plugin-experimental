@@ -9,3 +9,4 @@ export * as Service from './Service/index.js';
 export * as Style from './Style/index.js';
 export * as Theme from './Theme/index.js';
 export * as Type from './Type/index.js';
+export * as UIComponent from './UIComponent/index.js';
