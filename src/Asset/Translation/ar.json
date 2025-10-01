@@ -9,5 +9,14 @@
     "page.login.actionClear": "واضح",
     "page.login.actionLogin": "تسجيل الدخول",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "إظهار كلمة المرور",
-    "page.login.toggleIsPasswordRedacted.titleText": "إخفاء كلمة المرور"
+    "page.login.toggleIsPasswordRedacted.titleText": "إخفاء كلمة المرور",
+    "page.logout.title": "تسجيل الخروج",
+    "page.logout.actionConfirmLogout": "تسجيل الخروج",
+    "page.setting.title": "إعدادات",
+    "page.setting.actionSaveSettings": "حفظ الإعدادات",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "تحديث نتائج البحث إلى هذا",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "تحتوي عناصر أخرى على هذه العبارة",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "من تاريخك",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "تصفية نتائج البحث ضمن هذه الفئة",
+    "ui.search.resultItem.element.actionHelp": "افتح هذا العنصر"
 }

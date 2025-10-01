@@ -9,5 +9,14 @@
     "page.login.actionClear": "Klar",
     "page.login.actionLogin": "Logg inn",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "vis passord",
-    "page.login.toggleIsPasswordRedacted.titleText": "skjul passord"
+    "page.login.toggleIsPasswordRedacted.titleText": "skjul passord",
+    "page.logout.title": "Logg ut",
+    "page.logout.actionConfirmLogout": "Logg ut",
+    "page.setting.title": "Innstillinger",
+    "page.setting.actionSaveSettings": "Lagre innstillinger",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "oppdater søket til dette",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "andre elementer inneholder denne frasen",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "fra historien din",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "filtrer resultater til denne kategorien",
+    "ui.search.resultItem.element.actionHelp": "åpne dette elementet"
 }

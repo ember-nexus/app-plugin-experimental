@@ -9,5 +9,14 @@
     "page.login.actionClear": "Chiara",
     "page.login.actionLogin": "Login",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "mostra password",
-    "page.login.toggleIsPasswordRedacted.titleText": "nascondi password"
+    "page.login.toggleIsPasswordRedacted.titleText": "nascondi password",
+    "page.logout.title": "Esci",
+    "page.logout.actionConfirmLogout": "Esci",
+    "page.setting.title": "Impostazioni",
+    "page.setting.actionSaveSettings": "Salva le impostazioni",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "aggiorna la ricerca a questo",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "altri elementi contengono questa frase",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "dalla tua storia",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "filtra i risultati per questa categoria",
+    "ui.search.resultItem.element.actionHelp": "apri questo elemento"
 }

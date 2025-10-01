@@ -9,5 +9,14 @@
     "page.login.actionClear": "Clara",
     "page.login.actionLogin": "Acceso",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "mostrar contraseña",
-    "page.login.toggleIsPasswordRedacted.titleText": "ocultar contraseña"
+    "page.login.toggleIsPasswordRedacted.titleText": "ocultar contraseña",
+    "page.logout.title": "Cerrar sesión",
+    "page.logout.actionConfirmLogout": "Cerrar sesión",
+    "page.setting.title": "Ajustes",
+    "page.setting.actionSaveSettings": "Guardar configuración",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "actualizar la búsqueda a esto",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "otros elementos contienen esta frase",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "desde tu historial",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "filtrar resultados por esta categoría",
+    "ui.search.resultItem.element.actionHelp": "abre este elemento"
 }

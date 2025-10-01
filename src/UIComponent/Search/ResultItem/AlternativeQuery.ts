@@ -1,13 +1,22 @@
+import { i18n } from 'i18next';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Ellipsis, History, Type } from 'lucide-static';
+import { SnapshotFrom } from 'xstate';
 
+import { withStateMachine, withTranslation } from '../../../Decorator/index.js';
+import { settingPageMachine } from '../../../Machine/Page/index.js';
 import { indexStyles } from '../../../Style/index.js';
 
 @customElement('ember-nexus-ui-search-result-item-alternative-query')
+@withTranslation()
+@withStateMachine(settingPageMachine)
 class AlternativeQuery extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
+
+  i18n: i18n;
+  state: SnapshotFrom<typeof settingPageMachine>;
 
   @query('button') buttonEl!: HTMLButtonElement;
 
@@ -43,9 +52,13 @@ class AlternativeQuery extends LitElement {
   }
 
   render(): TemplateResult {
+    const t = this.i18n?.t;
     let variantIcon = Ellipsis;
+    let variantTitle =
+      t?.('ui.search.resultItem.alternativeQuery.ellipsisHelp') ?? 'other elements contain this phrase';
     if (this.variant === 'history') {
       variantIcon = History;
+      variantTitle = t?.('ui.search.resultItem.alternativeQuery.historyHelp') ?? 'from your history';
     }
     return html`
       <button
@@ -62,13 +75,18 @@ class AlternativeQuery extends LitElement {
 "
       >
         <div class="w-10 shrink-0 flex justify-center items-center">
-          <ember-nexus-ui-icon>${unsafeHTML(variantIcon)}</ember-nexus-ui-icon>
+          <ember-nexus-ui-icon title="${variantTitle}"> ${unsafeHTML(variantIcon)} </ember-nexus-ui-icon>
         </div>
         <div class="justify-self-start grow shrink py-1 flex items-center truncate">
           <slot class="w-full flex"></slot>
         </div>
         <div class="shrink-0 flex justify-center items-center">
-          <ember-nexus-ui-icon class="shrink-0">${unsafeHTML(Type)}</ember-nexus-ui-icon>
+          <ember-nexus-ui-icon
+            class="shrink-0"
+            title="${t?.('ui.search.resultItem.alternativeQuery.actionHelp') ?? 'update search to this'}"
+          >
+            ${unsafeHTML(Type)}
+          </ember-nexus-ui-icon>
         </div>
       </button>
     `;

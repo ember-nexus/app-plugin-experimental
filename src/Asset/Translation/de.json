@@ -9,5 +9,14 @@
     "page.login.actionClear": "Formular leeren",
     "page.login.actionLogin": "Login",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "zeige Passwort",
-    "page.login.toggleIsPasswordRedacted.titleText": "verstecke Passwort"
+    "page.login.toggleIsPasswordRedacted.titleText": "verstecke Passwort",
+    "page.logout.title": "Abmelden",
+    "page.logout.actionConfirmLogout": "Abmelden",
+    "page.setting.title": "Einstellungen",
+    "page.setting.actionSaveSettings": "Einstellungen speichern",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "Suchtext auf diesen Wert ändern",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "andere Elemente enthalten diesen Ausdruck",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "aus deiner Historie",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "Ergebnisse auf diese Kategorie filtern",
+    "ui.search.resultItem.element.actionHelp": "dieses Element öffnen"
 }

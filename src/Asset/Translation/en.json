@@ -13,5 +13,10 @@
     "page.logout.title": "Logout",
     "page.logout.actionConfirmLogout": "Logout",
     "page.setting.title": "Settings",
-    "page.setting.actionSaveSettings": "Save settings"
+    "page.setting.actionSaveSettings": "Save settings",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "update search to this",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "other elements contain this phrase",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "from your history",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "filter results to this category",
+    "ui.search.resultItem.element.actionHelp": "open this element"
 }

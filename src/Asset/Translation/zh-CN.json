@@ -9,5 +9,14 @@
     "page.login.actionClear": "清除",
     "page.login.actionLogin": "登录",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "显示密码",
-    "page.login.toggleIsPasswordRedacted.titleText": "隐藏密码"
+    "page.login.toggleIsPasswordRedacted.titleText": "隐藏密码",
+    "page.logout.title": "注销",
+    "page.logout.actionConfirmLogout": "注销",
+    "page.setting.title": "设置",
+    "page.setting.actionSaveSettings": "保存设置",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "将搜索结果更新为以下内容",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "其他元素包含此短语",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "来自您的历史记录",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "按此类别筛选结果",
+    "ui.search.resultItem.element.actionHelp": "打开此元素"
 }

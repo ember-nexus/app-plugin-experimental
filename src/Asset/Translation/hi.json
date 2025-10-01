@@ -9,5 +9,14 @@
     "page.login.actionClear": "स्पष्ट",
     "page.login.actionLogin": "लॉग इन करें",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "पासवर्ड दिखाएँ",
-    "page.login.toggleIsPasswordRedacted.titleText": "पासवर्ड छिपाएँ"
+    "page.login.toggleIsPasswordRedacted.titleText": "पासवर्ड छिपाएँ",
+    "page.logout.title": "लॉग आउट",
+    "page.logout.actionConfirmLogout": "लॉग आउट",
+    "page.setting.title": "सेटिंग्स",
+    "page.setting.actionSaveSettings": "सेटिंग्स सेव करें",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "खोज को इसके अनुसार अपडेट करें",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "अन्य तत्वों में यह वाक्यांश शामिल है",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "आपके इतिहास से",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "परिणामों को इस श्रेणी के अनुसार फ़िल्टर करें",
+    "ui.search.resultItem.element.actionHelp": "इस तत्व को खोलें"
 }

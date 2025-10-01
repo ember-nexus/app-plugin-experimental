@@ -9,5 +9,14 @@
     "page.login.actionClear": "분명한",
     "page.login.actionLogin": "로그인",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "비밀번호 표시",
-    "page.login.toggleIsPasswordRedacted.titleText": "비밀번호 숨기기"
+    "page.login.toggleIsPasswordRedacted.titleText": "비밀번호 숨기기",
+    "page.logout.title": "로그아웃",
+    "page.logout.actionConfirmLogout": "로그아웃",
+    "page.setting.title": "설정",
+    "page.setting.actionSaveSettings": "설정 저장",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "이것으로 검색을 업데이트하세요",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "다른 요소에는 이 문구가 포함되어 있습니다.",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "당신의 역사에서",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "이 카테고리로 결과 필터링",
+    "ui.search.resultItem.element.actionHelp": "이 요소를 엽니다"
 }

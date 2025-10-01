@@ -9,5 +9,14 @@
     "page.login.actionClear": "クリア",
     "page.login.actionLogin": "ログイン",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "パスワードを表示",
-    "page.login.toggleIsPasswordRedacted.titleText": "パスワードを非表示"
+    "page.login.toggleIsPasswordRedacted.titleText": "パスワードを非表示",
+    "page.logout.title": "ログアウト",
+    "page.logout.actionConfirmLogout": "ログアウト",
+    "page.setting.title": "設定",
+    "page.setting.actionSaveSettings": "設定を保存する",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "検索結果をこれに更新する",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "他の要素にもこのフレーズが含まれています",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "あなたの履歴から",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "検索結果をこのカテゴリに絞り込む",
+    "ui.search.resultItem.element.actionHelp": "この要素を開く"
 }

@@ -9,5 +9,14 @@
     "page.login.actionClear": "Claire",
     "page.login.actionLogin": "Se connecter",
     "page.login.toggleIsPasswordRedacted.titleRedacted": "afficher le mot de passe",
-    "page.login.toggleIsPasswordRedacted.titleText": "masquer le mot de passe"
+    "page.login.toggleIsPasswordRedacted.titleText": "masquer le mot de passe",
+    "page.logout.title": "Déconnexion",
+    "page.logout.actionConfirmLogout": "Déconnexion",
+    "page.setting.title": "Paramètres",
+    "page.setting.actionSaveSettings": "Enregistrer les paramètres",
+    "ui.search.resultItem.alternativeQuery.actionHelp": "Modifier le texte de recherche avec cette valeur",
+    "ui.search.resultItem.alternativeQuery.ellipsisHelp": "d'autres éléments contiennent cette phrase",
+    "ui.search.resultItem.alternativeQuery.historyHelp": "à partir de votre historique",
+    "ui.search.resultItem.ownedByFilter.actionHelp": "filtrer les résultats par cette catégorie",
+    "ui.search.resultItem.element.actionHelp": "ouvrir cet élément"
 }
