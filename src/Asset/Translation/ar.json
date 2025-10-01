@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "تحتوي عناصر أخرى على هذه العبارة",
     "ui.search.resultItem.alternativeQuery.historyHelp": "من تاريخك",
     "ui.search.resultItem.ownedByFilter.actionHelp": "تصفية نتائج البحث ضمن هذه الفئة",
-    "ui.search.resultItem.element.actionHelp": "افتح هذا العنصر"
+    "ui.search.resultItem.element.actionHelp": "افتح هذا العنصر",
+    "ui.search.result.group.history.title": "استناداً إلى سجل عمليات البحث الخاصة بك:",
+    "ui.search.result.group.other.title": "نتائج أخرى:"
 }

@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "अन्य तत्वों में यह वाक्यांश शामिल है",
     "ui.search.resultItem.alternativeQuery.historyHelp": "आपके इतिहास से",
     "ui.search.resultItem.ownedByFilter.actionHelp": "परिणामों को इस श्रेणी के अनुसार फ़िल्टर करें",
-    "ui.search.resultItem.element.actionHelp": "इस तत्व को खोलें"
+    "ui.search.resultItem.element.actionHelp": "इस तत्व को खोलें",
+    "ui.search.result.group.history.title": "आपके सर्च इतिहास के आधार पर:",
+    "ui.search.result.group.other.title": "अन्य परिणाम:"
 }

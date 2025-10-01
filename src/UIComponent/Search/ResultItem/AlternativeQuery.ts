@@ -77,8 +77,8 @@ class AlternativeQuery extends LitElement {
         <div class="w-10 shrink-0 flex justify-center items-center">
           <ember-nexus-ui-icon title="${variantTitle}"> ${unsafeHTML(variantIcon)} </ember-nexus-ui-icon>
         </div>
-        <div class="justify-self-start grow shrink py-1 flex items-center truncate">
-          <slot class="w-full flex"></slot>
+        <div class="justify-self-start grow shrink py-1 flex items-center">
+          <slot class="w-full flex text-start"></slot>
         </div>
         <div class="shrink-0 flex justify-center items-center">
           <ember-nexus-ui-icon

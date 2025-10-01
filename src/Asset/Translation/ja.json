@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "他の要素にもこのフレーズが含まれています",
     "ui.search.resultItem.alternativeQuery.historyHelp": "あなたの履歴から",
     "ui.search.resultItem.ownedByFilter.actionHelp": "検索結果をこのカテゴリに絞り込む",
-    "ui.search.resultItem.element.actionHelp": "この要素を開く"
+    "ui.search.resultItem.element.actionHelp": "この要素を開く",
+    "ui.search.result.group.history.title": "あなたの検索履歴に基づいて：",
+    "ui.search.result.group.other.title": "その他の結果："
 }

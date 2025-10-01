@@ -11,7 +11,7 @@ class EmberNexusUISearch extends LitElement {
   @query('input') inputEl!: HTMLInputElement;
   @query('.ghost-input') ghostEl!: HTMLElement;
 
-  firstUpdated() {
+  firstUpdated(): void {
     // Sync input → ghost on typing
     this.inputEl.addEventListener('input', () => {
       this.ghostEl.textContent = this.inputEl.value;

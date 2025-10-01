@@ -1,13 +1,24 @@
+import { i18n } from 'i18next';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { ArrowRight } from 'lucide-static';
+import { ArrowLeft, ArrowRight } from 'lucide-static';
+import { SnapshotFrom } from 'xstate';
 
+import { withStateMachine, withTranslation } from '../../../Decorator/index.js';
+import { settingPageMachine } from '../../../Machine/Page/index.js';
+import { LanguageService } from '../../../Service/index.js';
 import { indexStyles } from '../../../Style/index.js';
 
 @customElement('ember-nexus-ui-search-result-item-element')
+@withTranslation()
+@withStateMachine(settingPageMachine)
 class Element extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
+
+  i18n: i18n;
+  languageService: LanguageService;
+  state: SnapshotFrom<typeof settingPageMachine>;
 
   @query('button') buttonEl!: HTMLButtonElement;
 
@@ -37,6 +48,11 @@ class Element extends LitElement {
   }
 
   render(): TemplateResult {
+    const t = this.i18n?.t;
+    let actionIcon = ArrowRight;
+    if (this.languageService?.isRtl()) {
+      actionIcon = ArrowLeft;
+    }
     return html`
       <button
         @keyup=${this.onKeyUp}
@@ -58,7 +74,12 @@ class Element extends LitElement {
           <slot class="w-full h-auto"></slot>
         </div>
         <div class="shrink-0 flex justify-center items-center">
-          <ember-nexus-ui-icon class="shrink-0">${unsafeHTML(ArrowRight)}</ember-nexus-ui-icon>
+          <ember-nexus-ui-icon
+            class="shrink-0"
+            title="${t?.('ui.search.resultItem.element.actionHelp') ?? 'open this element'}"
+          >
+            ${unsafeHTML(actionIcon)}
+          </ember-nexus-ui-icon>
         </div>
       </button>
     `;

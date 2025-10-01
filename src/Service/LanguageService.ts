@@ -23,6 +23,10 @@ class LanguageService {
   getActiveLanguage(): string {
     return this.activeLanguage;
   }
+
+  isRtl(): boolean {
+    return this.activeLanguage === 'ar';
+  }
 }
 
 export { LanguageService };

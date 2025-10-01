@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "andre elementer inneholder denne frasen",
     "ui.search.resultItem.alternativeQuery.historyHelp": "fra historien din",
     "ui.search.resultItem.ownedByFilter.actionHelp": "filtrer resultater til denne kategorien",
-    "ui.search.resultItem.element.actionHelp": "åpne dette elementet"
+    "ui.search.resultItem.element.actionHelp": "åpne dette elementet",
+    "ui.search.result.group.history.title": "Basert på søkehistorikken din:",
+    "ui.search.result.group.other.title": "Andre resultater:"
 }

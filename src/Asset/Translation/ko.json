@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "다른 요소에는 이 문구가 포함되어 있습니다.",
     "ui.search.resultItem.alternativeQuery.historyHelp": "당신의 역사에서",
     "ui.search.resultItem.ownedByFilter.actionHelp": "이 카테고리로 결과 필터링",
-    "ui.search.resultItem.element.actionHelp": "이 요소를 엽니다"
+    "ui.search.resultItem.element.actionHelp": "이 요소를 엽니다",
+    "ui.search.result.group.history.title": "검색 기록을 기준으로:",
+    "ui.search.result.group.other.title": "다른 결과:"
 }

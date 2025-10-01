@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "другие элементы содержат эту фразу",
     "ui.search.resultItem.alternativeQuery.historyHelp": "из вашей истории",
     "ui.search.resultItem.ownedByFilter.actionHelp": "фильтровать результаты по этой категории",
-    "ui.search.resultItem.element.actionHelp": "открыть этот элемент"
+    "ui.search.resultItem.element.actionHelp": "открыть этот элемент",
+    "ui.search.result.group.history.title": "На основе вашей истории поиска:",
+    "ui.search.result.group.other.title": "Другие результаты:"
 }

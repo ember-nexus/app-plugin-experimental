@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "其他元素包含此短语",
     "ui.search.resultItem.alternativeQuery.historyHelp": "来自您的历史记录",
     "ui.search.resultItem.ownedByFilter.actionHelp": "按此类别筛选结果",
-    "ui.search.resultItem.element.actionHelp": "打开此元素"
+    "ui.search.resultItem.element.actionHelp": "打开此元素",
+    "ui.search.result.group.history.title": "根据您的搜索历史记录：",
+    "ui.search.result.group.other.title": "其他结果："
 }

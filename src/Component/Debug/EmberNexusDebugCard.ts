@@ -91,7 +91,7 @@ class EmberNexusDebugCard extends LitElement {
                 ?.getActiveTheme()?.shikiTheme ?? ShikiJsonHighlighterService.defaultTheme,
           });
           renderedCode = unsafeHTML(
-            `<div class="text-xs overflow-x-auto p-3 rounded-md" style="background-color: var(--color-code-background)">${code}</div>`,
+            `<div class="text-xs overflow-x-auto p-3 rounded-md" dir="ltr" style="background-color: var(--color-code-background)">${code}</div>`,
           );
         }
         return html`

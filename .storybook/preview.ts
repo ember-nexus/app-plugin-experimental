@@ -97,6 +97,11 @@ const preview: Preview = {
       const { locale } = context.globals;
       // @ts-ignore
       languageService.applyLanguage(locale);
+      if (locale === "ar") {
+        document.body.dir = "rtl";
+      } else {
+        document.body.dir = "ltr";
+      }
       return story();
     }
   ],

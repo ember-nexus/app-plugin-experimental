@@ -2,7 +2,7 @@ import { EventDispatcher, ServiceResolver } from '@ember-nexus/app-core/Service'
 import { EventInterface } from '@ember-nexus/app-core/Type/Definition';
 
 import { LanguageChangeEvent } from '../Event/index.js';
-import { TranslationService } from '../Service/index.js';
+import { LanguageService, TranslationService } from '../Service/index.js';
 import { Constructor, TranslationCapableWebComponent } from '../Type/Definition/index.js';
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
@@ -17,6 +17,7 @@ function withTranslation(): <TBase extends Constructor<TranslationCapableWebComp
         this.i18n = serviceResolver
           .getServiceOrFail<TranslationService>(TranslationService.identifier)
           .getI18nInstance();
+        this.languageService = serviceResolver.getServiceOrFail<LanguageService>(LanguageService.identifier);
         super.onServiceResolverLoaded?.(serviceResolver);
       }
 

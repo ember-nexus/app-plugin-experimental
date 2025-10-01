@@ -1,13 +1,22 @@
+import { i18n } from 'i18next';
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Funnel } from 'lucide-static';
+import { SnapshotFrom } from 'xstate';
 
+import { withStateMachine, withTranslation } from '../../../Decorator/index.js';
+import { settingPageMachine } from '../../../Machine/Page/index.js';
 import { indexStyles } from '../../../Style/index.js';
 
 @customElement('ember-nexus-ui-search-result-item-owned-by-filter')
+@withTranslation()
+@withStateMachine(settingPageMachine)
 class OwnedByFilter extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
+
+  i18n: i18n;
+  state: SnapshotFrom<typeof settingPageMachine>;
 
   @query('button') buttonEl!: HTMLButtonElement;
 
@@ -37,6 +46,7 @@ class OwnedByFilter extends LitElement {
   }
 
   render(): TemplateResult {
+    const t = this.i18n?.t;
     return html`
       <button
         @keyup=${this.onKeyUp}
@@ -58,7 +68,12 @@ class OwnedByFilter extends LitElement {
           <slot class="w-full h-auto"></slot>
         </div>
         <div class="shrink-0 flex justify-center items-center">
-          <ember-nexus-ui-icon class="shrink-0">${unsafeHTML(Funnel)}</ember-nexus-ui-icon>
+          <ember-nexus-ui-icon
+            class="shrink-0"
+            title="${t?.('ui.search.resultItem.ownedByFilter.actionHelp') ?? 'filter results to this category'}"
+          >
+            ${unsafeHTML(Funnel)}
+          </ember-nexus-ui-icon>
         </div>
       </button>
     `;

@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "andere Elemente enthalten diesen Ausdruck",
     "ui.search.resultItem.alternativeQuery.historyHelp": "aus deiner Historie",
     "ui.search.resultItem.ownedByFilter.actionHelp": "Ergebnisse auf diese Kategorie filtern",
-    "ui.search.resultItem.element.actionHelp": "dieses Element öffnen"
+    "ui.search.resultItem.element.actionHelp": "dieses Element öffnen",
+    "ui.search.result.group.history.title": "Basierend auf deinem Suchverlauf:",
+    "ui.search.result.group.other.title": "Weitere Ergebnisse:"
 }

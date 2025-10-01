@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "other elements contain this phrase",
     "ui.search.resultItem.alternativeQuery.historyHelp": "from your history",
     "ui.search.resultItem.ownedByFilter.actionHelp": "filter results to this category",
-    "ui.search.resultItem.element.actionHelp": "open this element"
+    "ui.search.resultItem.element.actionHelp": "open this element",
+    "ui.search.result.group.history.title": "Based on your search history:",
+    "ui.search.result.group.other.title": "Other results:"
 }

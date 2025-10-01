@@ -18,5 +18,7 @@
     "ui.search.resultItem.alternativeQuery.ellipsisHelp": "vipengele vingine vina msemo huu",
     "ui.search.resultItem.alternativeQuery.historyHelp": "kutoka kwa historia yako",
     "ui.search.resultItem.ownedByFilter.actionHelp": "chujio matokeo ya aina hii",
-    "ui.search.resultItem.element.actionHelp": "fungua kipengele hiki"
+    "ui.search.resultItem.element.actionHelp": "fungua kipengele hiki",
+    "ui.search.result.group.history.title": "Kulingana na historia yako ya utafutaji:",
+    "ui.search.result.group.other.title": "Matokeo mengine:"
 }
