@@ -1,9 +1,9 @@
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
-import {customElement, property, query, state} from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { Ellipsis, History, Type } from 'lucide-static';
 
 import { indexStyles } from '../../../Style/index.js';
-import {unsafeHTML} from "lit/directives/unsafe-html.js";
-import {Type, History, Ellipsis} from "lucide-static";
 
 @customElement('ember-nexus-ui-search-result-item-alternative-query')
 class AlternativeQuery extends LitElement {
@@ -21,7 +21,7 @@ class AlternativeQuery extends LitElement {
   private isKeyDown: boolean = false;
 
   onKeyUp(event: KeyboardEvent): void {
-    if (event.key !== "Enter" && event.key !== " ") {
+    if (event.key !== 'Enter' && event.key !== ' ') {
       return;
     }
     this.isKeyDown = false;
@@ -30,7 +30,7 @@ class AlternativeQuery extends LitElement {
   }
 
   onKeyDown(event: KeyboardEvent): void {
-    if (event.key !== "Enter" && event.key !== " ") {
+    if (event.key !== 'Enter' && event.key !== ' ') {
       return;
     }
     this.isKeyDown = true;
@@ -62,13 +62,13 @@ class AlternativeQuery extends LitElement {
 "
       >
         <div class="w-10 shrink-0 flex justify-center items-center">
-          <ember-nexus-icon>${unsafeHTML(variantIcon)}</ember-nexus-icon>
+          <ember-nexus-ui-icon>${unsafeHTML(variantIcon)}</ember-nexus-ui-icon>
         </div>
         <div class="justify-self-start grow shrink py-1 flex items-center truncate">
           <slot class="w-full flex"></slot>
         </div>
         <div class="shrink-0 flex justify-center items-center">
-          <ember-nexus-icon class="shrink-0">${unsafeHTML(Type)}</ember-nexus-icon>
+          <ember-nexus-ui-icon class="shrink-0">${unsafeHTML(Type)}</ember-nexus-ui-icon>
         </div>
       </button>
     `;

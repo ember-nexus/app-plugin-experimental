@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import {unsafeHTML} from "lit/directives/unsafe-html.js";
-import { Tag } from 'lucide-static';
+import { Tag, Leaf } from 'lucide-static';
 
 const meta: Meta = {
   title: 'UI Component/Search/Result Item',
@@ -11,12 +11,19 @@ const meta: Meta = {
         <p class="truncate">Lily</p>
       </ember-nexus-ui-search-result-item-alternative-query>
       <ember-nexus-ui-search-result-item-owned-by-filter>
-        <ember-nexus-icon slot="thumbnail" title="Tag">${unsafeHTML(Tag)}</ember-nexus-icon>
+        <ember-nexus-ui-icon slot="thumbnail" title="Tag">${unsafeHTML(Tag)}</ember-nexus-ui-icon>
         <div class="w-full">
           <p class="w-full truncate">Lily</p>
           <p class="w-full truncate text-sm">flowering plants in the <strong>lily</strong> family</p>
         </div>
       </ember-nexus-ui-search-result-item-owned-by-filter>
+      <ember-nexus-ui-search-result-item-element>
+        <ember-nexus-ui-icon slot="thumbnail" title="Plant">${unsafeHTML(Leaf)}</ember-nexus-ui-icon>
+        <div class="w-full">
+          <p class="w-full truncate">Lily</p>
+          <p class="w-full truncate text-sm">a specific plant in the <strong>lily</strong> family</p>
+        </div>
+      </ember-nexus-ui-search-result-item-element>
     </div>
   `,
 };

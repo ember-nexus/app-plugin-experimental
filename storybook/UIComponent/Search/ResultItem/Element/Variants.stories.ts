@@ -1,0 +1,32 @@
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
+import {unsafeHTML} from "lit/directives/unsafe-html.js";
+import { Leaf, History } from 'lucide-static';
+
+const meta: Meta = {
+  title: 'UI Component/Search/Result Item/Element',
+  component: 'ember-nexus-ui-search-result-item-element',
+  render: () => html`
+    <div class="card bg-base-100 w-sm shadow-sm p-3 gap-2">
+      <ember-nexus-ui-search-result-item-element>
+        <ember-nexus-ui-icon slot="thumbnail" title="Plant">${unsafeHTML(History)}</ember-nexus-ui-icon>
+        <div class="w-full">
+          <p class="w-full truncate">Lily</p>
+          <p class="w-full truncate text-sm">a specific plant in the <strong>lily</strong> family</p>
+        </div>
+      </ember-nexus-ui-search-result-item-element>
+      <ember-nexus-ui-search-result-item-element>
+        <ember-nexus-ui-icon slot="thumbnail" title="Plant">${unsafeHTML(Leaf)}</ember-nexus-ui-icon>
+        <div class="w-full">
+          <p class="w-full truncate">Lily</p>
+          <p class="w-full truncate text-sm">Long text: Lorem <strong>lily</strong> ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+        </div>
+      </ember-nexus-ui-search-result-item-element>
+    </div>
+  `,
+};
+
+export default meta;
+type Story = StoryObj;
+
+export const Variants: Story = {};

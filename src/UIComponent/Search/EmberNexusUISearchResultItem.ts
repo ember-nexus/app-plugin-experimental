@@ -8,7 +8,6 @@ class EmberNexusUISearchResultItem extends LitElement {
   static styles = [unsafeCSS(indexStyles)];
 
   render(): TemplateResult {
-
     return html`
       <button class="btn btn-ghost w-full justify-between px-0 text-start gap-3 h-auto font-normal">
         <div class="shrink-0 w-10 flex justify-center aspect-square items-center">

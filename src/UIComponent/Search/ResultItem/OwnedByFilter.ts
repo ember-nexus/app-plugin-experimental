@@ -1,9 +1,9 @@
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
-import {customElement, query, state} from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { Funnel } from 'lucide-static';
 
 import { indexStyles } from '../../../Style/index.js';
-import {unsafeHTML} from "lit/directives/unsafe-html.js";
-import {Funnel} from "lucide-static";
 
 @customElement('ember-nexus-ui-search-result-item-owned-by-filter')
 class OwnedByFilter extends LitElement {
@@ -15,7 +15,7 @@ class OwnedByFilter extends LitElement {
   private isKeyDown: boolean = false;
 
   onKeyUp(event: KeyboardEvent): void {
-    if (event.key !== "Enter" && event.key !== " ") {
+    if (event.key !== 'Enter' && event.key !== ' ') {
       return;
     }
     this.isKeyDown = false;
@@ -24,7 +24,7 @@ class OwnedByFilter extends LitElement {
   }
 
   onKeyDown(event: KeyboardEvent): void {
-    if (event.key !== "Enter" && event.key !== " ") {
+    if (event.key !== 'Enter' && event.key !== ' ') {
       return;
     }
     this.isKeyDown = true;
@@ -58,7 +58,7 @@ class OwnedByFilter extends LitElement {
           <slot class="w-full h-auto"></slot>
         </div>
         <div class="shrink-0 flex justify-center items-center">
-          <ember-nexus-icon class="shrink-0">${unsafeHTML(Funnel)}</ember-nexus-icon>
+          <ember-nexus-ui-icon class="shrink-0">${unsafeHTML(Funnel)}</ember-nexus-ui-icon>
         </div>
       </button>
     `;

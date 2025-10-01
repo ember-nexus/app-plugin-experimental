@@ -1,7 +1,7 @@
 import { ServiceResolver } from '@ember-nexus/app-core/Service';
 
 import { LanguageService, ShikiJsonHighlighterService, ThemeService, TranslationService } from './Service/index.js';
-import { dark, dim, emerald, light, dune, forest } from './Theme/index.js';
+import { dark, dim, dune, emerald, forest, light } from './Theme/index.js';
 
 function init(serviceResolver: ServiceResolver): void {
   const services = [ShikiJsonHighlighterService, ThemeService, LanguageService, TranslationService];

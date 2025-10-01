@@ -1,8 +1,8 @@
 import { LitElement, TemplateResult, html, unsafeCSS } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 
-import { indexStyles } from '../../Style/index.js';
 import highlightStyles from './highlight.css?inline';
+import { indexStyles } from '../../Style/index.js';
 
 @customElement('ember-nexus-ui-search')
 class EmberNexusUISearch extends LitElement {
@@ -24,7 +24,6 @@ class EmberNexusUISearch extends LitElement {
   }
 
   render(): TemplateResult {
-
     return html`
       <div class="card bg-base-100 w-full border-warning border-2 border-solid shadow-sm">
         <div class="relative card-body p-3">
@@ -32,7 +31,10 @@ class EmberNexusUISearch extends LitElement {
           <div class="ghost-input-wrapper">
             <p class="input ghost-input">
               <span class="single-flex-child">
-                <span class="highlight-span"><span class="highlight-background bg-fuchsia-300"></span>!t</span> <span class="highlight-span"><span class="highlight-background bg-emerald-300"></span>type:Plant</span> <span class="highlight-span"><span class="highlight-background bg-lime-300"></span>type:Taxon</span> Jacaranda
+                <span class="highlight-span"><span class="highlight-background bg-fuchsia-300"></span>!t</span>
+                <span class="highlight-span"><span class="highlight-background bg-emerald-300"></span>type:Plant</span>
+                <span class="highlight-span"><span class="highlight-background bg-lime-300"></span>type:Taxon</span>
+                Jacaranda
               </span>
             </p>
             <input type="text" placeholder="search" class="input" value="!t type:Plant type:Taxon Jacaranda" />
